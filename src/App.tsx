@@ -1,11 +1,10 @@
-import './App.css'
+import { LoginSignUp } from "./pages/login-signup/LoginSignUp"
 
-function App() {
-
+const App = () => {
   return (
-    <>
-
-    </>
+    <div>
+      <LoginSignUp />
+    </div>
   )
 }
 
