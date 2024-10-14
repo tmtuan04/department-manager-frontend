@@ -1,0 +1,44 @@
+body {
+    background-color: #c9d6ff;
+    background: linear-gradient(to right, #e2e2e2, #c9d6ff); /* Tạo gradient nền từ màu xám (#e2e2e2) sang màu xanh nhạt (#c9d6ff) */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Đặt chiều cao của body bằng chiều cao của viewport (100% chiều cao của màn hình) */
+}
+
+.container {
+    background-color: #fff;
+    border-radius: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+
+    /* Đặt vị trí của container là tương đối, cho phép các phần tử con tuyệt đối nằm trong nó */
+    position: relative; 
+    /* Ẩn các phần tử con nằm ngoài vùng hiển thị của container */
+    overflow: hidden;
+
+    width: 840px;
+    height: 560px;
+    max-width: 100%; /* Đảm bảo container không vượt quá 100% chiều rộng của màn hình */
+    min-height: 480px; /* Đặt chiều cao tối thiểu của container là 480px */
+}
+
+.container p {
+   font-size: 14px; 
+   line-height: 20px; /* Đặt khoảng cách giữa các dòng văn bản là 20 pixel, giúp tăng tính dễ đọc */
+   /* Đặt khoảng cách giữa các chữ cái là 0.3 pixel, giúp văn bản không bị chật chội */
+   letter-spacing: 0.3px;
+   margin: 20px 0;
+}
+
+.container span {
+    font-size: 12px;
+}
+
+.container a {
+    color: #333;
+    font-size: 13px;
+    text-decoration: none;
+    margin: 15px 0 10px;
+}
+
