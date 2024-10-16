@@ -1,85 +1,98 @@
-// Import các file và hình ảnh cần thiết => Nên tạo file js để lưu ảnh thì đỡ phải import nhiều
 import "../../styles/LoginSignUp.css";
-import user_icon from "../../assets/person.png";
-import email_icon from "../../assets/email.png";
-import password_icon from "../../assets/password.png";
+import { assets } from "../../assets/assets"; // Import file assets.ts, file này lưu trữ hình ảnh
 import { useState } from "react";
+import Button from "../../components/Button"; // Import Button từ components
 
-
-// Component LoginSignUp dùng để hiển thị giao diện đăng nhập và đăng ký
+// Component LoginSignUp dùng để hiển thị các form đăng nhập và đăng ký
 export const LoginSignUp = () => {
-  // State để quản lý chế độ hiện tại là "Login" hay "Sign Up"
-  const [action, setAction] = useState("Sign Up");
-  
-  // State để quản lý giá trị của các input
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  // State: True - Đăng ký, False - Đăng nhập
+  // Mặc định là false tức là nó luôn hiển thị form đăng nhập trước
+  const [isSignUpActive, setIsSignUpActive] = useState(false);
 
-  // Hàm này sẽ được gọi mỗi khi chuyển đổi giữa "Login" và "Sign Up"
-  const handleSwitchAction = (newAction: string) => {
-    // Cập nhật lại action (chuyển đổi giữa "Login" và "Sign Up")
-    setAction(newAction);
-    // Xóa hết giá trị của các input mỗi khi chuyển đổi
-    setUsername("");
-    setEmail("");
-    setPassword("");
+  // Hàm để chuyển đổi giữa đăng ký và đăng nhập
+  const handleToggle = (type: "login" | "register") => {
+    // Logic: Nếu type là "register", state isSignUpActive sẽ được cập nhật thành true làm cho form đăng ký hiển thị
+    // Nếu type là "login" thì nó sẽ trở về false
+    setIsSignUpActive(type === "register");
   };
 
   return (
-    <div className="container">
-      <div className="header">
-        <div className="text">{action}</div>
-        <div className="underline"></div>
+    // className "active" sẽ được thêm vào nếu isSignUpActive là true
+    <div className={`container ${isSignUpActive ? "active" : ""}`} id="container">
+      {/* Sign Up Form */}
+      <div className="form-container sign-up">
+        <form action="">
+          <div className="header">
+            <h1 className="text">Create Account</h1>
+            <div className="underline"></div>
+          </div>
+          <div className="inputs">
+            <div className="input">
+              <img src={assets.person} alt="" />
+              <input type="text" placeholder="Username" />
+            </div>
+            <div className="input">
+              <img src={assets.email} alt="" />
+              <input type="email" placeholder="Email" />
+            </div>
+            <div className="input">
+              <img src={assets.password} alt="" />
+              <input type="password" placeholder="Password" />
+            </div>
+            <div className="input">
+              <img src={assets.password} alt="" />
+              <input type="password" placeholder="Confirm password" />
+            </div>
+          </div>
+          <Button text="Sign Up" type="submit"></Button>
+        </form>
       </div>
 
-      <div className="inputs">
-        {/* Nếu action là "Login" thì ẩn input "Username" */}
-        {action === "Login" ? "" :
-        <div className="input">
-          <img src={user_icon} alt="" />
-          <input
-            type="text"
-            placeholder="Username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)} // Update state on input change
-          />
-        </div>}
-        <div className="input">
-          <img src={email_icon} alt="" />
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)} // Update state on input change
-          />
-        </div>
-        <div className="input">
-          <img src={password_icon} alt="" />
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)} // Update state on input change
-          />
-        </div>
+      {/* Sign In Form */}
+      <div className="form-container sign-in">
+        <form action="">
+          <div className="header">
+            <h1 className="text">Sign In</h1>
+            <div className="underline"></div>
+          </div>
+          <div className="inputs">
+            <div className="input">
+              <img src={assets.person} alt="" />
+              <input type="text" placeholder="Username" />
+            </div>
+            <div className="input">
+              <img src={assets.password} alt="" />
+              <input type="password" placeholder="Password" />
+            </div>
+          </div>
+          <a href="#">Forgot Your Password?</a>
+          <Button text="Sign In" type="submit"></Button>
+        </form>
       </div>
 
-      {action === "Sign Up" ? " " :
-      <div className="forgot-password">Forgot Password? <span>Click Here!</span></div>}
-
-      <div className="submit-container">
-        <div
-          className={action === "Login" ? "submit gray" : "submit"}
-          onClick={() => handleSwitchAction("Sign Up")} // Use handleSwitchAction to switch action and clear inputs
-        >
-          Sign Up
-        </div>
-        <div
-          className={action === "Sign Up" ? "submit gray" : "submit"}
-          onClick={() => handleSwitchAction("Login")} // Use handleSwitchAction to switch action and clear inputs
-        >
-          Login
+      {/* Khung chuyển đổi giữa Đăng Ký và Đăng Nhập */}
+      <div className="toggle-container">
+        <div className="toggle">
+          <div className="toggle-panel toggle-left">
+            <h1>Welcome Back!</h1>
+            <p>Demo text.</p>
+            <Button
+              text="Sign In"
+              className="hidden"
+              id="login"
+              onClick={() => handleToggle("login")}
+            ></Button>
+          </div>
+          <div className="toggle-panel toggle-right">
+            <h1>Hello Friend!</h1>
+            <p>Demo text.</p>
+            <Button
+              text="Sign Up"
+              className="hidden"
+              id="register"
+              onClick={() => handleToggle("register")}
+            ></Button>
+          </div>
         </div>
       </div>
     </div>
