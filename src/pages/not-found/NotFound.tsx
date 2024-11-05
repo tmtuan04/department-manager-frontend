@@ -1,6 +1,6 @@
 // import React from 'react'
 import { assets } from "../../assets/assets";
-import "../../styles/NotFound.css";
+import "./NotFound.css";
 
 export const NotFound = () => {
   return (

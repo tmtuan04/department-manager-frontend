@@ -1,12 +1,10 @@
-// import { LoginSignUp } from "./pages/login-signup/LoginSignUp"
-import { NotFound } from "./pages/not-found/NotFound"
+import './App.css'
+import DashBoard from './pages/dashboard/DashBoard'
+import { LoginSignUp } from './pages/login-signup/LoginSignUp'
 
 const App = () => {
   return (
-    <div>
-      {/* <LoginSignUp /> */}
-      <NotFound />
-    </div>
+    <DashBoard />
   )
 }
 

@@ -13,8 +13,6 @@ body {
 }
 
 /* 2. container
-- Màu nền: #fff, tạo một khối màu trắng cho phần form.
-- Độ bo góc: border-radius: 30px giúp container có góc tròn mềm mại.
 - Shadow: box-shadow tạo hiệu ứng đổ bóng.
 - Kích thước: Chiều rộng 920px với chiều cao 620px, nhưng có thể co giãn theo màn hình với max-width: 100% và min-height: 480px.
 - Position: Container được đặt ở vị trí tương đối để chứa các phần tử con với vị trí tuyệt đối.
