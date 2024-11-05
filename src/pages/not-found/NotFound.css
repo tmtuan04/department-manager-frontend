@@ -1,0 +1,61 @@
+body {
+    height: 100vh;
+    background-color: #263450;
+    display: flex;
+    align-items: center;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+img {
+    width: 33%;
+    margin-right: 50px;
+}
+
+.text-section {
+    margin-right: 80px;
+}
+
+h1, p {
+    color: #fff;
+}
+
+.oops-text {
+    font-weight: 800;
+    font-size: 4rem;
+    margin: 0px 0 10px;
+    letter-spacing: 0.5px;
+}
+
+
+.text {
+    font-size: 1.5rem;
+}
+
+.text1 {
+    font-weight: 500;
+}
+
+.text2 {
+    font-weight: 300;
+    margin-top: 60px;
+}
+
+.buttons {
+    margin: 30px 0 0 20px;
+}
+
+.button {
+    margin-right: 25px;
+    text-decoration: none;
+    padding: 5px 18px;
+    color: #000;
+    font-weight: 600;
+    background-color: #fff;
+    border-radius: 12px;
+    cursor: pointer;
+}
