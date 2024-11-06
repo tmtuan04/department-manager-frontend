@@ -8,6 +8,7 @@
 }
 
 #root {
+    /* Cmt: min-height để thấy sự thay đổi nhé. */
     min-height: 100vh;
     display: flex;
 }
