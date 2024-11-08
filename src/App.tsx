@@ -1,10 +1,9 @@
 import './App.css'
-import DashBoard from './pages/dashboard/DashBoard'
-import { LoginSignUp } from './pages/login-signup/LoginSignUp'
+import HomePage from './pages/home-page/HomePage'
 
 const App = () => {
   return (
-    <DashBoard />
+    <HomePage />
   )
 }
 
