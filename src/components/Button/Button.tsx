@@ -1,6 +1,9 @@
 import React from 'react'
 import "./Button.css"
 
+
+// Phần này chỉ là test thôi nhé, không cần thiết lắm
+
 interface ButtonProps {
     text: string;
     // onClick?: () => void: Thuộc tính onClick là tùy chọn (?), là một hàm không nhận tham số và không trả về giá trị (kiểu void)

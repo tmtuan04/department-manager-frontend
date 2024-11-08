@@ -62,7 +62,6 @@ body {
     line-height: 50px;
     transform: translateX(-50%);
     cursor: pointer;
-    /* border-radius: 50%; */
 }
 
 #btn:hover {
@@ -87,8 +86,6 @@ body {
     line-height: 50px;
     margin-bottom: 16px;
 }
-
-
 
 .sidebar ul li .tooltip {
     position: absolute;
@@ -193,7 +190,6 @@ body {
 .sidebar .profile_content .profile {
     position: relative;
     padding: 8px 12px;
-    /* height: 50px; */
     background: #31363F;
 }
 

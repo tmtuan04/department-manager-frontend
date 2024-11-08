@@ -1,11 +1,9 @@
-// import React from 'react'
 import { assets } from "../../assets/assets";
 import "./NotFound.css";
 
 export const NotFound = () => {
   return (
     <div className="container">
-      {/* <div className="header"></div> */}
       <img src= {assets.error} alt="Error Image" />
       <div className="text-section">
         <h1 className="oops-text">Oops!</h1>
