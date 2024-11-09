@@ -5,7 +5,7 @@ import DashBoard from './pages/dashboard/DashBoard'
 
 const App = () => {
   return (
-    <DashBoard />
+    <HomePage />
   )
 }
 
