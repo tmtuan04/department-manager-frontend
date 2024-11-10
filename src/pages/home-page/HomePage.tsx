@@ -15,10 +15,10 @@ const HomePage = () => {
                         </div>
                         <div className="header__menu">
                             <ul className='inner-menu'>
-                                <li>Home</li>
-                                <li>About</li>
-                                <li>Our Team</li>
-                                <li>Contact</li>
+                                <li className='active'><a href="#">Home</a></li>
+                                <li><a href="#">About</a></li>
+                                <li><a href="#">Our Team</a></li>
+                                <li><a href="#">Contact</a></li>
                             </ul>
                         </div>
                     </div>
@@ -49,7 +49,7 @@ const HomePage = () => {
                     </div>
                     {/* End Main */}
 
-                    {/* Footer */}
+                    {/* Tech */}
                     <div className="home-page__tech">
                         <div className="desc">Technology used</div>
                         <div className="tech__main">
@@ -99,9 +99,13 @@ const HomePage = () => {
                             </div>
                         </div>
                     </div>
-                    {/* End Footer */}
+                    {/* End Tech */}
+                    
                 </div>
             </div>
+
+
+            
         </>
     )
 }
