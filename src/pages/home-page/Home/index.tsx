@@ -5,7 +5,7 @@ import './Home.css'
 const Home = () => {
     return (
         <>
-            <div className='home'>
+            <section className='home' id="home">
                 <div className='container full-height-page'>
                     {/* Main */}
                     <div className="home__main">
@@ -35,7 +35,7 @@ const Home = () => {
                     <TechMarquee />
                     {/* End Tech */}
                 </div>
-            </div>
+            </section>
 
         </>
     )

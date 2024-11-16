@@ -10,10 +10,10 @@ const Header = () => {
                     </div>
                     <div className="header__menu">
                         <ul className='inner-menu'>
-                            <li className='active'><a href="#">Home</a></li>
-                            <li><a href="#">About</a></li>
-                            <li><a href="#">Our Team</a></li>
-                            <li><a href="#">Contact</a></li>
+                            <li className='item-menu active'><a href="#home">Home</a></li>
+                            <li className='item-menu'><a href="#about-us">About</a></li>
+                            <li className='item-menu'><a href="#our-team">Our Team</a></li>
+                            <li className='item-menu'><a href="#contact-us">Contact</a></li>
                         </ul>
                     </div>
                 </div>

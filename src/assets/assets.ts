@@ -11,7 +11,8 @@ import firebase from './firebase.webp'
 import rest_api from './restapi.png'
 import java from './java.png'
 import typescript from './typescript.webp'
-
+import about_us from './aboutus.png'
+import test_image from './TranTrongNguyen_20225216.jpg'
 export const assets = {
     email,
     person,
@@ -25,5 +26,7 @@ export const assets = {
     firebase,
     rest_api,
     java,
-    typescript
+    typescript,
+    about_us,
+    test_image
 }
