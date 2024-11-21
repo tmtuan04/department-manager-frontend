@@ -1,6 +1,6 @@
 .contact-us {
     background-color: #E6E0E2;
-    padding: 150px 0 0 0;
+    padding: 100px 0 0 0;
     min-height: 100vh;
     
 }
@@ -19,7 +19,7 @@
     position: relative;
     width: max-content;
     text-align: center;
-    margin-bottom: 150px;
+    margin-bottom: 80px;
 }
 
 .contact-us__title::before {
@@ -48,7 +48,7 @@
 .contact-us .body__left .left__item {
     display: flex;
     gap: 10px;
-    padding: 20px 10px;
+    padding: 17px 10px;
     align-items: center;
 }
 
@@ -75,6 +75,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 20px;
     gap: 20px;
 }
 
