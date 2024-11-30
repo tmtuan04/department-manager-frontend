@@ -1,12 +1,8 @@
-import './App.css'
+import "./App.css";
+import HomePage from "./pages/home-page/HomePage";
 
-function App() {
+const App: React.FC = () => {
+  return <HomePage />;
+};
 
-  return (
-    <>
-
-    </>
-  )
-}
-
-export default App
+export default App;
