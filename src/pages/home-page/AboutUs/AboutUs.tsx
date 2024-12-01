@@ -17,30 +17,30 @@ const AboutUs = () => {
               <div className="right__title">About Us</div>
 
               <div className="right__desc">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Delectus molestiae repellat debitis facilis voluptates fugiat
-                nemo, velit, maiores commodi officiis quis nisi quo? Deleniti
-                rem eos cum beatae nobis atque . Lorem ipsum dolor sit amet
-                consectetur adipisicing elit. Alias deserunt saepe fugiat?
-                Consectetur ipsum sunt laboriosam delectus illum aut fugit
-                cupiditate est, perspiciatis accusantium rerum sequi quasi et,
-                doloribus non!
+                At HustCity, we are dedicated to providing exceptional services
+                with a focus on reliability, innovation, and customer
+                satisfaction. Our team is committed to exceeding expectations by
+                creating personalized experiences that meet your unique needs.
+                We prioritize transparency, integrity, and the highest quality
+                standards in everything we do. Whether you're looking for
+                tailored solutions or expert advice, we're here to support you
+                every step of the way.
               </div>
 
               <div className="right__icon">
                 <ul className="list-icon">
                   <li>
-                    <a href="#">
+                    <a href="https://github.com/">
                       <i className="bx bxl-github"></i>
                     </a>
                   </li>
                   <li>
-                    <a href="#">
+                    <a href="https://www.linkedin.com/">
                       <i className="bx bxl-linkedin-square"></i>
                     </a>
                   </li>
                   <li>
-                    <a href="#">
+                    <a href="https://www.facebook.com/">
                       <i className="bx bxl-facebook-square"></i>
                     </a>
                   </li>

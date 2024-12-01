@@ -12,7 +12,13 @@ import rest_api from './restapi.png'
 import java from './java.png'
 import typescript from './typescript.webp'
 import about_us from './aboutus.png'
-import test_image from './TranTrongNguyen_20225216.jpg'
+import Hung from './Hung.jpg'
+import Huy from './Huy.jpg'
+import Tuan from './Tuan.jpg'
+import Trong from './Trong.jpg'
+import Hai from './Hai.jpg'
+import Nguyen from './Nguyen.jpg'
+
 export const assets = {
     email,
     person,
@@ -28,5 +34,10 @@ export const assets = {
     java,
     typescript,
     about_us,
-    test_image
+    Tuan,
+    Hai,
+    Huy,
+    Hung,
+    Trong,
+    Nguyen,
 }

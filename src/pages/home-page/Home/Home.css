@@ -66,6 +66,7 @@
 }
 
 .home__main .left__button {
+    /* position: fixed; */
     width: 100%;
     display: flex;
     justify-content: space-between;

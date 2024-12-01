@@ -1,4 +1,4 @@
-import Members from "../partials/Members";
+import Members from "../partials/Members/Members";
 import "./our-team.css";
 
 const OurTeam = () => {
