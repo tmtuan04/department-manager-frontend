@@ -1,26 +1,22 @@
 import "./LoginSignUp.css";
-import { assets } from "../../assets/assets"; // Import file assets.ts, file này lưu trữ hình ảnh
+import { assets } from "../../assets/assets";
 import { useState } from "react";
-import Button from "../../components/Button/Button"; // Import Button từ components
-import axios from "axios"; // Import Axios
+import Button from "../../components/Button/Button";
+import axios from "axios";
 import { AuthService } from "../../services/AuthService";
 
-// Component LoginSignUp dùng để hiển thị các form đăng nhập và đăng ký
 export const LoginSignUp = () => {
-  // State: True - Đăng ký, False - Đăng nhập
   const [isSignUpActive, setIsSignUpActive] = useState(false);
   const [loginData, setLoginData] = useState({ username: "", password: "" });
   const [error, setError] = useState("");
 
-  // Hàm để chuyển đổi giữa đăng ký và đăng nhập
   const handleToggle = (type: "login" | "register") => {
     setIsSignUpActive(type === "register");
   };
 
-  // Hàm để xử lý đăng nhập
   const handleLogin = async (e: any) => {
     e.preventDefault();
-    setError(""); // Reset error trước khi gửi yêu cầu
+    setError("");
 
     try {
       const response = await axios.post("http://localhost:8080/api/v1/auth/login", {
@@ -29,7 +25,6 @@ export const LoginSignUp = () => {
       });
       alert("Login successful");
       console.log("Login successful:", response.data);
-      // Handle successful login, e.g., redirect or save token
     } catch (error) {
       setError("Login failed. Please check your credentials.");
       console.error("Login error:", error);
@@ -45,7 +40,6 @@ export const LoginSignUp = () => {
     }
   };
 
-  // Hàm để cập nhật giá trị của input
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
     setLoginData((prev) => ({ ...prev, [name]: value }));
