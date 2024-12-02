@@ -1,0 +1,21 @@
+.home-page .footer {
+    background-color: #000;
+    color: #fff;
+    display: flex;
+    padding: 20px 0;
+}
+
+.home-page .footer .container {
+    width: 100%;
+}
+
+.home-page .footer .inner-footer {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.home-page .footer .inner-footer .footer__left {
+    display: flex;
+    align-items: center;
+}

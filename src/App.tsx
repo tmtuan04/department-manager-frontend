@@ -1,7 +1,7 @@
 import "./App.css";
 import HomePage from "./pages/home-page/HomePage";
 
-const App: React.FC = () => {
+const App = () => {
   return <HomePage />;
 };
 
