@@ -5,7 +5,9 @@ import Button from "../../components/Button/Button";
 import axios from "axios";
 import { AuthService } from "../../services/AuthService";
 
-export const LoginSignUp = () => {
+// Component LoginSignUp dùng để hiển thị các form đăng nhập và đăng ký
+const LoginSignUp = () => {
+  // State: True - Đăng ký, False - Đăng nhập
   const [isSignUpActive, setIsSignUpActive] = useState(false);
   const [loginData, setLoginData] = useState({ username: "", password: "" });
   const [error, setError] = useState("");
@@ -136,3 +138,5 @@ export const LoginSignUp = () => {
     </div>
   );
 };
+
+export default LoginSignUp;
