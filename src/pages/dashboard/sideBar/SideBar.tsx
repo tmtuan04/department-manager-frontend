@@ -13,7 +13,11 @@ const SideBar = () => {
           <img src={assets.logo} alt="" />
           <div className="logo_name">Tuan Inc.</div>
         </div>
-        <i className="bx bx-menu" id="btn" onClick={() => setExtended(prev => !prev)}></i>
+        <i
+          className="bx bx-menu"
+          id="btn"
+          onClick={() => setExtended((prev) => !prev)}
+        ></i>
       </div>
       <ul className="nav_list">
         <li>
@@ -21,42 +25,42 @@ const SideBar = () => {
             <i className="bx bx-search"></i>
             <input type="text" placeholder="Search..." />
           </a>
-          <span className='tooltip'>Search</span>
+          <span className="tooltip">Search</span>
         </li>
         <li>
           <a href="#">
             <i className="bx bxs-grid-alt"></i>
-            <span className="links_name" >Dashboard</span>
+            <span className="links_name">Dashboard</span>
           </a>
-          <span className='tooltip'>Dashboard</span>
+          <span className="tooltip">Dashboard</span>
         </li>
         <li>
-          <a href="#">
+          <a href="http://localhost:5173/dashboard/residents">
             <i className="bx bx-user"></i>
             <span className="links_name">User</span>
           </a>
-          <span className='tooltip'>User</span>
+          <span className="tooltip">User</span>
         </li>
         <li>
-          <a href="#">
+          <a href="http://localhost:5173/dashboard/apartments">
             <i className="bx bx-chat"></i>
             <span className="links_name">Messages</span>
           </a>
-          <span className='tooltip'>Messages</span>
+          <span className="tooltip">Messages</span>
         </li>
         <li>
           <a href="#">
             <i className="bx bx-folder"></i>
             <span className="links_name">File Manager</span>
           </a>
-          <span className='tooltip'>File Manager</span>
+          <span className="tooltip">File Manager</span>
         </li>
         <li>
           <a href="#">
             <i className="bx bxs-cog"></i>
             <span className="links_name">Setting</span>
           </a>
-          <span className='tooltip'>Setting</span>
+          <span className="tooltip">Setting</span>
         </li>
       </ul>
       <div className="profile_content">
