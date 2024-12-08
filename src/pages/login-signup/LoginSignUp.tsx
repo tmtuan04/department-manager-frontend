@@ -31,7 +31,6 @@ const LoginSignUp = () => {
       // Handle successful login, e.g., redirect or save token
     } catch (error) {
       setError("Login failed. Please check your credentials.");
-      console.error("Login error:", error);
     }
   };
 
@@ -42,7 +41,7 @@ const LoginSignUp = () => {
   };
 
   return (
-    <div className={`container ${isSignUpActive ? "active" : ""}`} id="container">
+    <div className={`container-dn ${isSignUpActive ? "active" : ""}`} id="container">
       {/* Sign Up Form */}
       <div className="form-container sign-up">
         <form action="">
@@ -52,23 +51,19 @@ const LoginSignUp = () => {
           </div>
           <div className="inputs">
             <div className="input">
-              <img src={assets.person} alt="" />
-              <input type="text" placeholder="Username" />
+              <input className="w-full outline-blue-500 border-2 border-gray-400 rounded-xl p-3 mt-1 bg-transparent" type="text" placeholder="Username" />
             </div>
             <div className="input">
-              <img src={assets.email} alt="" />
-              <input type="email" placeholder="Email" autoComplete="username"/>
+              <input className="w-full outline-blue-500 border-2 border-gray-400 rounded-xl p-3 mt-1 bg-transparent" type="email" placeholder="Email" autoComplete="username"/>
             </div>
             <div className="input">
-              <img src={assets.password} alt="" />
-              <input type="password" placeholder="Password" autoComplete="new-password"/>
+              <input className="w-full outline-blue-500 border-2 border-gray-400 rounded-xl p-3 mt-1 bg-transparent" type="password" placeholder="Password" autoComplete="new-password"/>
             </div>
             <div className="input">
-              <img src={assets.password} alt="" />
-              <input type="password" placeholder="Confirm password" autoComplete="new-password"/>
+              <input className="w-full outline-blue-500 border-2 border-gray-400 rounded-xl p-3 mt-1 bg-transparent" type="password" placeholder="Confirm password" autoComplete="new-password"/>
             </div>
           </div>
-          <Button text="Sign Up" type="submit"></Button>
+          <button className="btn-tdn" type="submit">Sign Up</button>
         </form>
       </div>
 
@@ -81,9 +76,9 @@ const LoginSignUp = () => {
           </div>
           <div className="inputs">
             <div className="input">
-              <img src={assets.person} alt="" />
               <input
                 type="text"
+                className="w-full outline-blue-500 border-2 border-gray-400 rounded-xl p-3 mt-1 bg-transparent"
                 placeholder="Username"
                 name="username"
                 value={loginData.username}
@@ -92,9 +87,9 @@ const LoginSignUp = () => {
               />
             </div>
             <div className="input">
-              <img src={assets.password} alt="" />
               <input
                 type="password"
+                className="w-full outline-blue-500 border-2 border-gray-400 rounded-xl p-3 mt-1 bg-transparent"
                 placeholder="Password"
                 name="password"
                 value={loginData.password}
@@ -105,7 +100,7 @@ const LoginSignUp = () => {
           </div>
           {error && <p className="error">{error}</p>}
           <a href="#">Forgot Your Password?</a>
-          <Button text="Sign In" type="submit"></Button>
+          <button className="btn-tdn" type="submit">Sign In</button>
         </form>
       </div>
 
@@ -113,7 +108,7 @@ const LoginSignUp = () => {
       <div className="toggle-container">
         <div className="toggle">
           <div className="toggle-panel toggle-left">
-            <h1>Welcome Back!</h1>
+            <h1 className="text-tdn">Welcome Back!</h1>
             <p>Demo text.</p>
             <Button
               text="Sign In"
@@ -121,16 +116,12 @@ const LoginSignUp = () => {
               id="login"
               onClick={() => handleToggle("login")}
             ></Button>
+            <button id="login" className="btn-tdn-2" onClick={() => handleToggle("login")}>Sign In</button>
           </div>
           <div className="toggle-panel toggle-right">
-            <h1>Hello Friend!</h1>
+            <h1 className="text-tdn">Hello Friend!</h1>
             <p>Demo text.</p>
-            <Button
-              text="Sign Up"
-              className="hidden"
-              id="register"
-              onClick={() => handleToggle("register")}
-            ></Button>
+            <button id="register" className="btn-tdn-2" onClick={() => handleToggle("register")}>Sign In</button>
           </div>
         </div>
       </div>

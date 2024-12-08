@@ -1,9 +1,8 @@
-.home{
-    
+.home {
     width: 100%;
     color: #fff;
     position: relative;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 .home::before {
@@ -40,13 +39,16 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    min-width: 100vw;
 }
 
 .home__main {
-    padding-top: 150px;
+    /* padding-top: 150px; */
+    margin: 100px 0;
     display: flex;
     flex: 1;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
 }
 
 .home__main .main__left {
@@ -67,7 +69,7 @@
 
 .home__main .left__button {
     /* position: fixed; */
-    width: 100%;
+    width: 70%;
     display: flex;
     justify-content: space-between;
 }
@@ -96,19 +98,18 @@
     border: #8D8CDA;
 }
 
-
-.home__main .main__right {
-    width: 50%;
-}
+/* .home__main .main__right {
+    margin-left: 40px;
+} */
 
 .home__main .right__img {
-    width: 100%;
+    margin-left: 140px;
+    /* width: 100%; */
     aspect-ratio: 4/3;
     text-align: right;
 }
 
 .home__main .right__img img {
-    width: 80%;
-    height: 100%;
+    width: 100%;
     object-fit: cover;
 }

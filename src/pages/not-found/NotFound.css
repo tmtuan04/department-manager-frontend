@@ -1,14 +1,10 @@
-body {
-    height: 100vh;
+.nf-container {
     background-color: #263450;
-    display: flex;
-    align-items: center;
-}
-
-.container {
     display: flex;
     justify-content: center;
     align-items: center;
+    min-height: 100vh;
+    min-width: 100vw;
 }
 
 img {
@@ -32,7 +28,7 @@ h1, p {
 }
 
 
-.text {
+.text-dn {
     font-size: 1.5rem;
 }
 

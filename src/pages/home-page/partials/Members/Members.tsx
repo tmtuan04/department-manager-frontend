@@ -81,8 +81,9 @@ const Members = () => {
   };
   return (
     <>
-      <div className="container">
+      <div className="container-tdn">
         <div className="slider-container">
+          {/* Đang báo lỗi ở dòng 86 này */}
           <Slider {...settings}>
             {member.map((item, index) => {
               return (
