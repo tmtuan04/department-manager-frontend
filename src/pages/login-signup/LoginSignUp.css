@@ -218,6 +218,7 @@ body {
     margin-top: 10px;
     padding: 8px 30px;
     border: 2px solid #fff;
+    border-radius: 8px;
 }
 
 /* Hiệu ứng hover cho nút bình thường */
