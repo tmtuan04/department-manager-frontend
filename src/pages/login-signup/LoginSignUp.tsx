@@ -1,8 +1,9 @@
 import "./LoginSignUp.css";
-import { assets } from "../../assets/assets"; // Import file assets.ts, file này lưu trữ hình ảnh
+import { assets } from "../../assets/assets";
 import { useState } from "react";
-import Button from "../../components/Button/Button"; // Import Button từ components
-import axios from "axios"; // Import Axios
+import Button from "../../components/Button/Button";
+import axios from "axios";
+import { AuthService } from "../../services/AuthService";
 
 // Component LoginSignUp dùng để hiển thị các form đăng nhập và đăng ký
 const LoginSignUp = () => {
@@ -11,30 +12,35 @@ const LoginSignUp = () => {
   const [loginData, setLoginData] = useState({ username: "", password: "" });
   const [error, setError] = useState("");
 
-  // Hàm để chuyển đổi giữa đăng ký và đăng nhập
   const handleToggle = (type: "login" | "register") => {
     setIsSignUpActive(type === "register");
   };
 
-  // Hàm để xử lý đăng nhập
-  const handleLogin = async (e : any) => {
+  const handleLogin = async (e: any) => {
     e.preventDefault();
-    setError(""); // Reset error trước khi gửi yêu cầu
+    setError("");
 
     try {
-      const response = await axios.post("http://localhost:8080/department-system/api/v1/auth/login", {
+      const response = await axios.post("http://localhost:8080/api/v1/auth/login", {
         username: loginData.username,
         password: loginData.password,
       });
       alert("Login successful");
       console.log("Login successful:", response.data);
-      // Handle successful login, e.g., redirect or save token
     } catch (error) {
       setError("Login failed. Please check your credentials.");
     }
   };
 
-  // Hàm để cập nhật giá trị của input
+  const loginWithGoogle = async () => {
+    try {
+      const url = await AuthService.authenticate("google");
+      window.location.href = url;
+    } catch (error: any) {
+      console.error("Lỗi xác thực với Google: ", error?.response?.data?.message || "");
+    }
+  };
+
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
     setLoginData((prev) => ({ ...prev, [name]: value }));
@@ -94,13 +100,18 @@ const LoginSignUp = () => {
                 name="password"
                 value={loginData.password}
                 onChange={handleInputChange}
-                autoComplete="current-passwordx"
+                autoComplete="current-password"
               />
             </div>
           </div>
           {error && <p className="error">{error}</p>}
           <a href="#">Forgot Your Password?</a>
           <button className="btn-tdn" type="submit">Sign In</button>
+
+          {/* Login with Google Button */}
+          <div className="social-login">
+            <Button text="Login with Google" type="button" onClick={loginWithGoogle} className="google-login-btn" />
+          </div>
         </form>
       </div>
 
@@ -116,7 +127,6 @@ const LoginSignUp = () => {
               id="login"
               onClick={() => handleToggle("login")}
             ></Button>
-            <button id="login" className="btn-tdn-2" onClick={() => handleToggle("login")}>Sign In</button>
           </div>
           <div className="toggle-panel toggle-right">
             <h1 className="text-tdn">Hello Friend!</h1>
