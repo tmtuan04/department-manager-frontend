@@ -8,10 +8,9 @@
     font-family: 'Poppins', sans-serif;
 }
 
-#root {
-   
+/* #root {
     background-color: inherit;
     display: flex;
     align-items: center;
-
-}
+    justify-content: center;
+} */

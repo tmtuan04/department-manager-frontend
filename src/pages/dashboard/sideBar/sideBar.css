@@ -9,7 +9,8 @@ body {
     position: relative;
     top: 0;
     left: 0;
-    height: 100%;
+    /* height: 100%; */
+    min-height: 100vh;
     width: 78px;
     padding: 6px 14px;
     background-color:#1E201E;
@@ -17,7 +18,7 @@ body {
 }
 
 .sidebar.active {
-    width: 240px;
+    width: 280px;
     transition: all 0.4s ease;
 }
 
@@ -40,14 +41,10 @@ body {
     pointer-events: none;
 }
 
-.logo_content .logo img {
-    height: 40px;
-    margin-right: 10px;
-}
-
 .logo_content .logo .logo_name {
-    font-size: 16px;
-    font-weight: 500;
+    margin-left: 20px;
+    font-size: 18px;
+    font-weight: 700;
 }
 
 .sidebar #btn {
@@ -96,10 +93,10 @@ body {
     top: 50%;
     transform: translate(-50%, -50%);
     border-radius: 6px;
-    height: 35px;
+    height: 43px;
     width: 122px;
     background-color: #fff;
-    line-height: 35px;
+    line-height: 20px;
     text-align: center;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
     transition: 0s;
@@ -172,6 +169,7 @@ body {
 }
 
 .sidebar .links_name {
+    font-size: 15px;
     opacity: 0;
     pointer-events: none;
     transition: all 0.4s ease;
@@ -219,7 +217,7 @@ body {
 }
 
 .sidebar .profile_details .name_role {
-    margin-left: 10px;
+    margin-left: -40px;
 }
 
 .sidebar .profile_details .name {
