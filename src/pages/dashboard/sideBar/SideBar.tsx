@@ -1,6 +1,6 @@
 import "./sideBar.css";
-import { assets } from "../../../assets/assets";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const SideBar = () => {
   const [extended, setExtended] = useState(false);
@@ -10,8 +10,8 @@ const SideBar = () => {
     <div className={extended ? "sidebar active" : "sidebar"}>
       <div className="logo_content">
         <div className="logo">
-          <img src={assets.logo} alt="" />
-          <div className="logo_name">Tuan Inc.</div>
+          {/* <img src={assets.logo} alt="" /> */}
+          <div className="logo_name">HustCity.</div>
         </div>
         <i
           className="bx bx-menu"
@@ -35,25 +35,39 @@ const SideBar = () => {
           <span className="tooltip">Dashboard</span>
         </li>
         <li>
-          <a href="http://localhost:5173/dashboard/residents">
-            <i className="bx bx-user"></i>
-            <span className="links_name">User</span>
-          </a>
-          <span className="tooltip">User</span>
+          <Link to="/dashboard/residents">
+            <i className="bx bxs-grid-alt"></i>
+            <span className="links_name">Resident Management</span>
+          </Link>
+          <span className="tooltip">Resident Management</span>
         </li>
         <li>
-          <a href="http://localhost:5173/dashboard/apartments">
+          <Link to="/dashboard/apartments">
+            <i className="bx bxs-grid-alt"></i>
+            <span className="links_name">Apartment Management</span>
+          </Link>
+          <span className="tooltip">Apartment Management</span>
+        </li>
+        <li>
+          <Link to="/dashboard/vehicles">
+            <i className="bx bx-user"></i>
+            <span className="links_name">Vehicle Management</span>
+          </Link>
+          <span className="tooltip">Vehicle Management</span>
+        </li>
+        <li>
+          <Link to="/dashboard/fee-and-fund">
             <i className="bx bx-chat"></i>
-            <span className="links_name">Messages</span>
-          </a>
-          <span className="tooltip">Messages</span>
+            <span className="links_name">Fee and Fund</span>
+          </Link>
+          <span className="tooltip">Fee and Fund</span>
         </li>
         <li>
           <a href="#">
             <i className="bx bx-folder"></i>
-            <span className="links_name">File Manager</span>
+            <span className="links_name">Statistics</span>
           </a>
-          <span className="tooltip">File Manager</span>
+          <span className="tooltip">Statistics</span>
         </li>
         <li>
           <a href="#">
