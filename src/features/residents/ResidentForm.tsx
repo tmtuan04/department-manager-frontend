@@ -1,65 +1,39 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Form from "../../components/Form";
 import FormField from "../../components/FormField";
-import Selector from "../../components/Selector";
 import Button from "../../components/Button";
+import Selector from "../../components/Selector";
 import { HiOutlinePlusCircle, HiPencil, HiTrash } from "react-icons/hi2";
-import useAddResident from "./useAddResident";
-import useUpdateResident from "./useUpdateResident";
 
-export default function ResidentForm({ resident, onCloseModal }) {
-  const genderOptions = ["male", "female", "other"];
-  const statusOptions = ["active", "moved"];
-
-  const [formData, setFormData] = useState({
+export default function ResidentForm({ resident, onCloseModal }: any) {
+  const [formValues, setFormValues] = useState({
     name: resident?.name || "",
     cic: resident?.cic || "",
     dob: resident?.dob || "",
-    roomId: resident?.room || null,
+    room: resident?.room || "",
     gender: resident?.gender || "",
     status: resident?.status || "",
   });
 
-  console.log(formData);
+  const genderOptions = ["male", "female", "other"];
+  const statusOptions = ["active", "moved"];
 
-  const isDetailsSession = Boolean(resident?.id);
+  const handleChange = (e: any) => {
+    const { id, value } = e.target;
+    setFormValues((prevValues) => ({
+      ...prevValues,
+      [id]: value,
+    }));
+  };
 
-  const { addResident, isAdding } = useAddResident();
-  const { updateResident, isUpdating } = useUpdateResident();
-
-  function handleChange(event) {
-    const { id, value } = event.target;
-    console.log(id, value);
-    setFormData((prev) => ({ ...prev, [id]: value }));
-  }
-
-  function handleSubmit(e) {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
-    console.log("Submitted data:", formData);
-
-    if (!isDetailsSession) {
-      addResident(
-        { ...formData },
-        {
-          onSuccess: (formData) => {
-            onCloseModal?.();
-          },
-        }
-      );
-    } else {
-      updateResident(
-        { newResident: { ...formData }, id: resident.id },
-        {
-          onSuccess: (formData) => {
-            onCloseModal?.();
-          },
-        }
-      );
-    }
-  }
+    console.log(formValues);
+    // Add submit logic here
+  };
 
   return (
-    <Form width="400px" onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit} width="400px">
       <div>
         <label>Information:</label>
         <Form.Fields>
@@ -67,7 +41,8 @@ export default function ResidentForm({ resident, onCloseModal }) {
             <FormField.Label label={"Name"} />
             <FormField.Input
               id="name"
-              value={formData.name}
+              type="name"
+              value={formValues.name}
               onChange={handleChange}
             />
           </FormField>
@@ -75,8 +50,9 @@ export default function ResidentForm({ resident, onCloseModal }) {
           <FormField>
             <FormField.Label label={"CIC"} />
             <FormField.Input
+              type="cic"
               id="cic"
-              value={formData.cic}
+              value={formValues.cic}
               onChange={handleChange}
             />
           </FormField>
@@ -86,7 +62,7 @@ export default function ResidentForm({ resident, onCloseModal }) {
             <FormField.Input
               id="dob"
               type="date"
-              value={formData.dob}
+              value={formValues.dob}
               onChange={handleChange}
             />
           </FormField>
@@ -95,16 +71,11 @@ export default function ResidentForm({ resident, onCloseModal }) {
 
       <Selector
         id="gender"
-        value={formData.gender}
-        onChange={(e) => handleChange(e)}
+        value={formValues.gender}
+        onChange={(e: any) => handleChange(e)}
         options={genderOptions}
         label={"Gender:"}
-      >
-        {/* <label>Gender:</label>
-        {genderOptions.map((option, index) => (
-          <Selector.Option option={option} key={index} />
-        ))} */}
-      </Selector>
+      />
 
       <div>
         <label>Room:</label>
@@ -112,9 +83,9 @@ export default function ResidentForm({ resident, onCloseModal }) {
           <FormField>
             <FormField.Label label={"Room"} />
             <FormField.Input
-              id="roomId"
+              id="room"
               type="search"
-              value={formData.room}
+              value={formValues.room}
               onChange={handleChange}
             />
           </FormField>
@@ -124,27 +95,22 @@ export default function ResidentForm({ resident, onCloseModal }) {
             <FormField.Select
               id="status"
               options={statusOptions}
-              value={formData.status}
+              value={formValues.status}
               onChange={handleChange}
             />
           </FormField>
         </Form.Fields>
       </div>
 
-      {isDetailsSession ? (
+      {resident ? (
         <Form.Buttons>
-          <Button id="delete" variation="danger" type="submit">
+          <Button variation="danger" size="medium">
             Delete
             <span>
               <HiTrash />
             </span>
           </Button>
-          <Button
-            id="update"
-            variation="secondary"
-            type="submit"
-            disabled={isUpdating}
-          >
+          <Button variation="secondary" size="medium">
             Update
             <span>
               <HiPencil />
@@ -153,13 +119,7 @@ export default function ResidentForm({ resident, onCloseModal }) {
         </Form.Buttons>
       ) : (
         <Form.Buttons>
-          <Button
-            id="add"
-            size="medium"
-            variation="primary"
-            type="submit"
-            disabled={isAdding}
-          >
+          <Button size="medium" variation="primary" type="submit">
             Add
             <span>
               <HiOutlinePlusCircle />

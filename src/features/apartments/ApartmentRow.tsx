@@ -1,11 +1,10 @@
-import React from "react";
 import Tag from "../../components/Tag";
 import { capitalize } from "../../utils/helpers";
 import Table from "../../components/Table";
 import Modal from "../../components/Modal";
 import ApartmentForm from "./ApartmentForm";
 
-export default function ApartmentRow({ apartment }) {
+export default function ApartmentRow({ apartment }: any) {
   const { room, ownerName, contact, residentCount, status } = apartment;
 
   const statusStyled = {
@@ -19,7 +18,9 @@ export default function ApartmentRow({ apartment }) {
       <div>{ownerName}</div>
       <div>{contact}</div>
       <div>{residentCount}</div>
-      <Tag type={statusStyled[status]}>{capitalize(status)}</Tag>
+      <Tag type={statusStyled[status as "occupied" | "available"]}>
+        {capitalize(status)}
+      </Tag>
       <Modal>
         <Modal.Open id="details">
           <button>Details</button>

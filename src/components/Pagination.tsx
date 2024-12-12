@@ -2,6 +2,7 @@ import { HiChevronDoubleLeft } from "react-icons/hi";
 import { HiChevronDoubleRight } from "react-icons/hi2";
 import { useSearchParams } from "react-router";
 import styled from "styled-components";
+
 const PAGE_SIZE = 10;
 
 const StyledPagination = styled.div`
@@ -11,14 +12,14 @@ const StyledPagination = styled.div`
   justify-content: space-between;
 `;
 
-const P = styled.p`
-  font-size: 14px;
-  margin-left: 8px;
+// const P = styled.p`
+//   font-size: 14px;
+//   margin-left: 8px;
 
-  & span {
-    font-weight: 600;
-  }
-`;
+//   & span {
+//     font-weight: 600;
+//   }
+// `;
 
 const Buttons = styled.div`
   display: flex;
@@ -61,25 +62,30 @@ const PaginationButton = styled.button`
   }
 `;
 
-export default function Pagination({ count }) {
+interface PaginationProps {
+  count: number;
+}
+
+export default function Pagination({ count }: PaginationProps) {
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const currentPage = !searchParams.get("page")
-    ? 1
-    : Number(searchParams.get("page"));
-
+  const currentPage = Number(searchParams.get("page")) || 1;
   const pageCount = Math.ceil(count / PAGE_SIZE);
 
   function nextPage() {
-    const next = currentPage === pageCount ? currentPage : currentPage + 1;
-    searchParams.set("page", next);
-    setSearchParams(searchParams);
+    if (currentPage < pageCount) {
+      const next = currentPage + 1;
+      searchParams.set("page", next.toString());
+      setSearchParams(searchParams);
+    }
   }
 
   function prevPage() {
-    const prev = currentPage === 1 ? currentPage : currentPage - 1;
-    searchParams.set("page", prev);
-    setSearchParams(searchParams);
+    if (currentPage > 1) {
+      const prev = currentPage - 1;
+      searchParams.set("page", prev.toString());
+      setSearchParams(searchParams);
+    }
   }
 
   if (pageCount <= 1) return null;
@@ -91,19 +97,22 @@ export default function Pagination({ count }) {
         <span>
           {currentPage * PAGE_SIZE > count ? count : currentPage * PAGE_SIZE}
         </span>
-        {" of"} <span> {count} </span> results.
-        {/* Showing <span> 1 </span> to <span> 20 </span> {" of"}{" "} */}
-        {/* <span>{count} </span> results. */}
+        {" of"} <span>{count}</span> results.
       </p>
 
       <Buttons>
-        <PaginationButton onClick={prevPage} disabled={currentPage == 1}>
+        <PaginationButton
+          onClick={prevPage}
+          disabled={currentPage === 1}
+          aria-label="Previous page"
+        >
           <HiChevronDoubleLeft /> <span>Previous</span>
         </PaginationButton>
 
         <PaginationButton
           onClick={nextPage}
-          disabled={currentPage == pageCount}
+          disabled={currentPage === pageCount}
+          aria-label="Next page"
         >
           <span>Next</span>
           <HiChevronDoubleRight />

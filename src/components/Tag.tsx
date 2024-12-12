@@ -1,12 +1,16 @@
 import styled from "styled-components";
 
-const Tag = styled.span`
+interface TagProps {
+  type: string;
+}
+
+const Tag = styled.span<TagProps>`
   width: fit-content;
   text-align: center;
   margin: auto;
   font-weight: 600;
 
-  //Dynamic status based on received prop
+  // Dynamic status based on received prop
   color: var(--color-${(props) => props.type}-500);
 `;
 

@@ -1,8 +1,38 @@
 import styled, { css } from "styled-components";
+import React, {
+  createContext,
+  useContext,
+  ReactNode,
+  ReactElement,
+} from "react";
+
+type CommonRowProps = {
+  columns?: string;
+  size?: "small" | "normal";
+};
+
+type TableProps = {
+  columns: string;
+  children: ReactNode;
+};
+
+type HeaderProps = {
+  size?: "small" | "normal";
+  children: ReactNode;
+};
+
+type RowProps = {
+  size?: "small" | "normal";
+  children: ReactNode;
+};
+
+type BodyProps<T> = {
+  data: T[];
+  render: (item: T, index: number) => ReactElement;
+};
 
 const StyledTable = styled.div`
   border: 1px solid var(--color-grey-200);
-
   font-size: 14px;
   background-color: var(--color-grey-0);
   border-radius: 7px;
@@ -10,7 +40,7 @@ const StyledTable = styled.div`
   text-align: center;
 `;
 
-const CommonRow = styled.div`
+const CommonRow = styled.div<CommonRowProps>`
   display: grid;
   grid-template-columns: ${(props) => props.columns};
   column-gap: 24px;
@@ -18,7 +48,7 @@ const CommonRow = styled.div`
   transition: none;
 `;
 
-const StyledHeader = styled(CommonRow)`
+const StyledHeader = styled(CommonRow)<CommonRowProps>`
   ${(props) =>
     props.size === "small" &&
     css`
@@ -31,10 +61,8 @@ const StyledHeader = styled(CommonRow)`
       padding: 12px 24px;
     `}
 
-
   background-color: var(--color-grey-700);
   border-bottom: 1px solid var(--color-grey-100);
-  /* text-transform: uppercase; */
   letter-spacing: 0.4px;
   font-weight: 600;
   color: var(--color-grey-0);
@@ -46,7 +74,7 @@ StyledHeader.defaultProps = {
   size: "normal",
 };
 
-const StyledRow = styled(CommonRow)`
+const StyledRow = styled(CommonRow)<CommonRowProps>`
   ${(props) =>
     props.size === "small" &&
     css`
@@ -81,7 +109,6 @@ const Footer = styled.footer`
   justify-content: center;
   padding: 12px;
 
-  /* This will hide the footer when it contains no child elements. Possible thanks to the parent selector :has 🎉 */
   &:not(:has(*)) {
     display: none;
   }
@@ -94,11 +121,9 @@ const Empty = styled.p`
   margin: 24px;
 `;
 
-import React, { createContext, useContext } from "react";
+const TableContext = createContext<{ columns?: string }>({});
 
-const TableContext = createContext();
-
-export default function Table({ columns, children }) {
+export default function Table({ columns, children }: TableProps) {
   return (
     <TableContext.Provider value={{ columns }}>
       <StyledTable role="table" as="header">
@@ -108,7 +133,7 @@ export default function Table({ columns, children }) {
   );
 }
 
-function Header({ children, size }) {
+function Header({ children, size }: HeaderProps) {
   const { columns } = useContext(TableContext);
   return (
     <StyledHeader role="row" columns={columns} size={size}>
@@ -116,7 +141,8 @@ function Header({ children, size }) {
     </StyledHeader>
   );
 }
-function Row({ children, size }) {
+
+function Row({ children, size }: RowProps) {
   const { columns } = useContext(TableContext);
   return (
     <StyledRow role="row" columns={columns} size={size}>
@@ -124,7 +150,8 @@ function Row({ children, size }) {
     </StyledRow>
   );
 }
-function Body({ data, render }) {
+
+function Body<T>({ data, render }: BodyProps<T>) {
   if (!data.length) return <Empty>No data at the moment</Empty>;
   return <StyledBody>{data.map(render)}</StyledBody>;
 }

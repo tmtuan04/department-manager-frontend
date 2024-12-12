@@ -48,6 +48,7 @@ export const AuthCallbackComponent: React.FC = () => {
   return (
     <div>
       {userResponse ? (
+        // todo: fix -> trả về trang chủ với thông tin đã đăng nhập
         <div>
           <h2>Chào mừng bạn đến với trang chủ BlueMoon {userResponse.name}</h2>
         </div>

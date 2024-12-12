@@ -92,7 +92,7 @@ export default function Selector({ options, onChange, id, value, label }) {
         <StyledOption key={option}>
           <StyledInput
             type="radio"
-            id="gender"
+            id={id}
             name={id}
             value={option}
             checked={value === option}

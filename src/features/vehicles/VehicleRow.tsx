@@ -1,11 +1,8 @@
-import styled from "styled-components";
 import Table from "../../components/Table";
-import Tag from "../../components/Tag";
-import { capitalize } from "../../utils/helpers";
 import Modal from "../../components/Modal";
 import VehicleForm from "./VehicleForm";
 
-export default function VehicleRow({ vehicle }) {
+export default function VehicleRow({ vehicle }: any) {
   const { id, vehicleNumber, ownerName, room, type, registrationDate } =
     vehicle;
 

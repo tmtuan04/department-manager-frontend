@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-//Reuse CSS blocks depend on received prop
+// Reuse CSS blocks depend on received prop
 const sizes = {
   small: css`
     font-size: 14px;
@@ -53,7 +53,14 @@ const variations = {
     }
   `,
 };
-const Button = styled.button`
+
+// Define types for the Button props
+interface ButtonProps {
+  size: "small" | "medium" | "large";
+  variation: "primary" | "secondary" | "danger";
+}
+
+const Button = styled.button<ButtonProps>`
   display: flex;
   align-items: center;
   justify-content: center;

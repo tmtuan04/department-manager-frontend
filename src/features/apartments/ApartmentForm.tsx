@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import Form from "../../components/Form";
 import FormField from "../../components/FormField";
 import Selector from "../../components/Selector";
@@ -6,8 +6,13 @@ import Button from "../../components/Button";
 import { HiOutlinePlusCircle, HiPencil, HiTrash } from "react-icons/hi2";
 import Table from "../../components/Table";
 
-export default function ApartmentForm({ apartment }) {
-  const { room, status, roomArea, ownerName } = apartment ?? {};
+export default function ApartmentForm({ apartment }: any) {
+  const [formValues, setFormValues] = useState({
+    room: apartment?.room || "",
+    status: apartment?.status || "",
+    roomArea: apartment?.roomArea || "",
+    ownerName: apartment?.ownerName || "",
+  });
   const residents = [
     {
       name: "Nguyen Thi A",
@@ -15,28 +20,58 @@ export default function ApartmentForm({ apartment }) {
     },
   ];
 
-  const vehicles = [];
+  const handleChange = (e: any) => {
+    const { id, value } = e.target;
+    setFormValues((prevValues) => ({
+      ...prevValues,
+      [id]: value,
+    }));
+  };
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    console.log(formValues);
+    // Add submit logic here
+  };
+
+  const vehicles = [
+    { ownerName: "Nguyen Thi A", number: "123ABC", type: "Car" },
+    { ownerName: "Nguyen Thi B", number: "456XYZ", type: "Motorbike" },
+  ];
+
   const statusOptions = ["available", "occupied"];
+
   return (
-    <Form width="800px">
+    <Form width="800px" onSubmit={handleSubmit}>
       <label>Room:</label>
       <Form.Fields type="horizontal">
         <FormField>
           <FormField.Label label={"Room"} />
-          <FormField.Input type="search" value={room ?? ""} />
+          <FormField.Input
+            id="room"
+            type="search"
+            value={formValues.room}
+            onChange={handleChange}
+          />
         </FormField>
 
         <FormField>
           <FormField.Label label={"Room Area"} />
-          <FormField.Input value={roomArea ?? ""} />
+          <FormField.Input
+            id="roomArea"
+            type="text"
+            value={formValues.roomArea}
+            onChange={handleChange}
+          />
         </FormField>
       </Form.Fields>
 
       <Selector
         id="status"
-        value={status ?? ""}
+        value={formValues.status}
+        onChange={(e: any) => handleChange(e)}
         options={statusOptions}
-        label="Status"
+        label={"Status"}
       ></Selector>
 
       {apartment && (
@@ -53,7 +88,9 @@ export default function ApartmentForm({ apartment }) {
               <Table.Row size="small">
                 <div>{resident.name}</div>
                 <div>{resident.dob}</div>
-                <div>{resident.name === ownerName ? "Owner" : "Member"}</div>
+                <div>
+                  {resident.name === apartment.ownerName ? "Owner" : "Member"}
+                </div>
               </Table.Row>
             ))}
           </Table>
@@ -83,13 +120,13 @@ export default function ApartmentForm({ apartment }) {
 
       {apartment ? (
         <Form.Buttons>
-          <Button variation="danger">
+          <Button variation="danger" size="medium">
             Delete
             <span>
               <HiTrash />
             </span>
           </Button>
-          <Button variation="secondary">
+          <Button variation="secondary" size="medium">
             Update
             <span>
               <HiPencil />

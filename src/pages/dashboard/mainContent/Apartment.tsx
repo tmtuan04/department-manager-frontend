@@ -1,4 +1,3 @@
-import React from "react";
 import Row from "../../../components/Row";
 import Heading from "../../../components/Heading";
 import AddAndSearch from "../../../components/AddAndSearch";

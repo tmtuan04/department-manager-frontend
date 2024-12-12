@@ -1,11 +1,10 @@
-import styled from "styled-components";
 import Table from "../../components/Table";
 import Tag from "../../components/Tag";
 import { capitalize } from "../../utils/helpers";
 import Modal from "../../components/Modal";
 import FeeAndFundForm from "./FeeAndFundForm";
 
-export default function FeeAndFundRow({ feeOrFund }) {
+export default function FeeAndFundRow({ feeOrFund }: any) {
   const { id, name, description, unitCost, type } = feeOrFund;
 
   const statusStyled = {
@@ -19,7 +18,9 @@ export default function FeeAndFundRow({ feeOrFund }) {
       <div>{name}</div>
       <div>{description}</div>
       <div>{unitCost}</div>
-      <Tag type={statusStyled[type]}>{capitalize(type)}</Tag>
+      <Tag type={statusStyled[(type as "Fee") || "Fund"]}>
+        {capitalize(type)}
+      </Tag>
       <Modal>
         <Modal.Open id="details">
           <button>Details</button>

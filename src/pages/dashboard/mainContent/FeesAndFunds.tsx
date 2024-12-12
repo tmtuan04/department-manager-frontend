@@ -1,4 +1,3 @@
-import React from "react";
 import Heading from "../../../components/Heading";
 import AddAndSearch from "../../../components/AddAndSearch";
 import FeeAndFundTable from "../../../features/fee-and-fund/FeeAndFundTable";

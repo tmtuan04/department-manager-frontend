@@ -1,7 +1,12 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import styled, { css } from "styled-components";
 
-const StyledForm = styled.form`
+// Styled components with types
+interface StyledFormProps {
+  width?: string;
+}
+
+const StyledForm = styled.form<StyledFormProps>`
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -12,20 +17,16 @@ const StyledForm = styled.form`
     css`
       width: ${props.width || "500px"};
     `}
-
   overflow: hidden;
   font-size: 14px;
   font-weight: 600;
 `;
 
-const Buttons = styled.div`
-  margin-top: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-`;
+interface FieldsProps {
+  type?: "vertical" | "horizontal";
+}
 
-const Fields = styled.div`
+const Fields = styled.div<FieldsProps>`
   ${(props) =>
     props.type === "vertical" &&
     css`
@@ -47,8 +48,15 @@ const Fields = styled.div`
 `;
 
 Fields.defaultProps = {
-  type: "vertical",
+  type: "vertical" as "vertical",
 };
+
+const Buttons = styled.div`
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+`;
 
 const TextArea = styled.textarea`
   width: 100%;
@@ -56,20 +64,35 @@ const TextArea = styled.textarea`
   padding: 10px;
   border: 1px solid var(--color-grey-700);
   border-radius: 15px;
-  white-space: pre-wrap; /* Ensures text wraps properly */
-  word-wrap: break-word; /* Allows long words to break and wrap onto the next line */
-  overflow-wrap: break-word; /* Same as word-wrap, for better compatibility */
-  resize: none; /* Optional: Disables resizing */
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  resize: none;
 `;
 
-export default function Form({ children, width, onSubmit }) {
+interface FormProps {
+  children: ReactNode;
+  width?: string;
+  onSubmit: any;
+}
+
+// Extending React.FC to allow additional properties (Buttons, Fields, TextArea)
+interface FormComponent extends React.FC<FormProps> {
+  Buttons: React.ElementType;
+  Fields: React.ElementType;
+  TextArea: React.ElementType;
+}
+
+const Form: FormComponent = ({ children, width, onSubmit }) => {
   return (
     <StyledForm width={width} onSubmit={onSubmit}>
       {children}
     </StyledForm>
   );
-}
+};
 
 Form.Buttons = Buttons;
 Form.Fields = Fields;
 Form.TextArea = TextArea;
+
+export default Form;

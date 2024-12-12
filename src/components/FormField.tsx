@@ -1,7 +1,8 @@
-import React from "react";
+import React, { ChangeEvent } from "react";
 import styled from "styled-components";
 import { capitalize } from "../utils/helpers";
 
+// Styled components for form field
 const StyledFormField = styled.div`
   display: grid;
   grid-template-columns: 1.4fr 3.5fr;
@@ -25,10 +26,6 @@ const StyledInput = styled.input`
   border-top-right-radius: 20px;
   padding: 5px 15px;
   border: 1px solid var(--color-grey-700);
-
-  /* &:hover {
-    cursor: pointer;
-  } */
 `;
 
 const StyledSelect = styled.select`
@@ -36,41 +33,39 @@ const StyledSelect = styled.select`
   border-top-right-radius: 20px;
   padding: 5px 15px;
   border: 1px solid var(--color-grey-700);
-
-  /* appearance: none; 
-  position: relative; 
-
-  &:focus {
-    border-color: var(--color-grey-700);
-    outline: none;
-  }
-
-  /* Tạo mũi tên tùy chỉnh */
-  /* &::after {
-    content: "▼"; 
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 5px; 
-    color: black; 
-    pointer-events: none; 
-  } */
 `;
 
-function Label({ label }) {
+// Type definitions for components
+interface LabelProps {
+  label: string;
+}
+
+interface InputProps {
+  id: any;
+  type: any;
+  value: any;
+  onChange: any;
+}
+
+interface SelectProps {
+  id: string;
+  options: string[];
+  value: string;
+  onChange: (e: ChangeEvent<HTMLSelectElement>) => void;
+}
+
+// Form field components
+function Label({ label }: LabelProps) {
   return <StyledLabel>{label}</StyledLabel>;
 }
 
-function Input({ id, type, value, onChange }) {
-  return (
-    <StyledInput id={id} type={type} defaultValue={value} onChange={onChange} />
-  );
+function Input({ id, type, value, onChange }: InputProps) {
+  return <StyledInput id={id} type={type} value={value} onChange={onChange} />;
 }
 
-function Select({ id, options, value, onChange }) {
+function Select({ id, options, value, onChange }: SelectProps) {
   return (
-    <StyledSelect id={id} defaultValue={value} onChange={onChange}>
+    <StyledSelect id={id} value={value} onChange={onChange}>
       {options.map((option, index) => (
         <option key={index} value={option}>
           {capitalize(option)}
@@ -80,10 +75,22 @@ function Select({ id, options, value, onChange }) {
   );
 }
 
-export default function FormField({ children }) {
-  return <StyledFormField>{children}</StyledFormField>;
+// FormField component with nested form components
+interface FormFieldProps {
+  children: React.ReactNode;
 }
 
+const FormField: React.FC<FormFieldProps> & {
+  Label: React.FC<LabelProps>;
+  Input: React.FC<InputProps>;
+  Select: React.FC<SelectProps>;
+} = ({ children }) => {
+  return <StyledFormField>{children}</StyledFormField>;
+};
+
+// Adding components to FormField as static properties
 FormField.Label = Label;
 FormField.Input = Input;
 FormField.Select = Select;
+
+export default FormField;
