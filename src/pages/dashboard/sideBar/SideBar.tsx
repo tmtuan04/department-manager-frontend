@@ -35,31 +35,31 @@ const SideBar = () => {
           <span className="tooltip">Dashboard</span>
         </li>
         <li>
-          <Link to="/dashboard/resident-management">
+          <Link to="/dashboard/residents">
             <i className="bx bxs-grid-alt"></i>
             <span className="links_name">Resident Management</span>
           </Link>
           <span className="tooltip">Resident Management</span>
         </li>
         <li>
-          <a href="#">
+          <Link to="/dashboard/apartments">
             <i className="bx bxs-grid-alt"></i>
             <span className="links_name">Apartment Management</span>
-          </a>
+          </Link>
           <span className="tooltip">Apartment Management</span>
         </li>
         <li>
-          <a href="#">
+          <Link to="/dashboard/vehicles">
             <i className="bx bx-user"></i>
             <span className="links_name">Vehicle Management</span>
-          </a>
+          </Link>
           <span className="tooltip">Vehicle Management</span>
         </li>
         <li>
-          <a href="#">
+          <Link to="/dashboard/fee-and-fund">
             <i className="bx bx-chat"></i>
             <span className="links_name">Fee and Fund</span>
-          </a>
+          </Link>
           <span className="tooltip">Fee and Fund</span>
         </li>
         <li>

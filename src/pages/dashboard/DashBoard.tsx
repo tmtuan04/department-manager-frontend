@@ -1,5 +1,8 @@
 import "./DashBoard.css";
+import Apartments from "./mainContent/Apartment";
+import FeesAndFunds from "./mainContent/FeesAndFunds";
 import Resident from "./mainContent/Resident";
+import Vehicles from "./mainContent/Vehicles";
 import SideBar from "./sideBar/SideBar";
 import { Routes, Route } from "react-router-dom";
 
@@ -10,7 +13,10 @@ const DashBoard = () => {
       <div className="dashboard-content" style={{ flex: 1 }}>
         {/* Routes */}
         <Routes>
-          <Route path="/resident-management" element={<Resident />}></Route>
+          <Route path="/residents" element={<Resident />}></Route>
+          <Route path="/apartments" element={<Apartments />}></Route>
+          <Route path="/fee-and-fund" element={<FeesAndFunds />}></Route>
+          <Route path="/vehicles" element={<Vehicles />}></Route>
         </Routes>
       </div>
     </div>
