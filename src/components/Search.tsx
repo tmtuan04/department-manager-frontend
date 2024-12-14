@@ -18,6 +18,8 @@ const SearchIcon = styled(HiOutlineSearch)`
 const Input = styled.input`
   color: white;
   width: 200px;
+  border: none;
+  outline: none;
   transition: width 0.3s ease;
   background-color: var(--color-grey-700);
 

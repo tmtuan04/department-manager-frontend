@@ -1,9 +1,15 @@
 import "./sideBar.css";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const SideBar = () => {
   const [extended, setExtended] = useState(false);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem('accessToken');
+    navigate("/");
+  }
 
   // active la full
   return (
@@ -89,7 +95,7 @@ const SideBar = () => {
               <div className="role">Manager</div>
             </div>
           </div>
-          <i className="bx bx-log-out" id="log_out"></i>
+          <i title="Logout" className="bx bx-log-out" id="log_out" onClick={handleLogout}></i>
         </div>
       </div>
     </div>

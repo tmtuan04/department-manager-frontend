@@ -4,21 +4,36 @@ import Table from "../../components/Table";
 import Modal from "../../components/Modal";
 import ApartmentForm from "./ApartmentForm";
 
-export default function ApartmentRow({ apartment }: any) {
-  const { room, ownerName, contact, residentCount, status } = apartment;
+interface ApartmentProps {
+  apartment: {
+    addressNumber: string;
+    owner: {
+      id: string;
+      name: string;
+      // Add other properties if necessary
+    };
+    ownerPhone: string;
+    numberOfMembers: number;
+    status: "Business" | "Residential" | "Vacant"; // Adjust the status types if needed
+  };
+}
+
+export default function ApartmentRow({ apartment }: ApartmentProps) {
+  const { addressNumber, owner, ownerPhone, numberOfMembers, status } = apartment;
 
   const statusStyled = {
-    occupied: "red",
-    available: "green",
+    Vacant: "red",
+    Business: "blue",
+    Residential: "green",
   };
 
   return (
     <Table.Row>
-      <div>{room}</div>
-      <div>{ownerName}</div>
-      <div>{contact}</div>
-      <div>{residentCount}</div>
-      <Tag type={statusStyled[status as "occupied" | "available"]}>
+      <div>{addressNumber}</div>
+      <div>{owner?.name || owner?.id}</div> {/* If owner is available, display the name */}
+      <div>{ownerPhone}</div> {/* Display ownerPhone as contact */}
+      <div>{numberOfMembers}</div> {/* Display number of residents */}
+      <Tag type={statusStyled[status] || "gray"}> {/* Default to "gray" if status doesn't match */}
         {capitalize(status)}
       </Tag>
       <Modal>

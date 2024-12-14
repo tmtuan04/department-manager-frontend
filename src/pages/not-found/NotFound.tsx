@@ -11,9 +11,8 @@ export const NotFound = () => {
         <p className="text-dn text2">Maybe you can find what you need here?</p>
 
         <div className="buttons">
-          <a href="#" className="button">Help 1</a>
-          <a href="#" className="button">Help 2</a>
-          <a href="#" className="button">Help 3</a>
+          <a href="#" className="button">Back to Homepage</a>
+          <a href="#" className="button">Contact Us</a>
         </div>
       </div>
     </div>

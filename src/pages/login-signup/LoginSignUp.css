@@ -26,8 +26,7 @@
 
 .container-dn p {
    font-size: 14px; 
-   line-height: 20px; /* Đặt khoảng cách giữa các dòng văn bản là 20 pixel, giúp tăng tính dễ đọc */
-   /* Đặt khoảng cách giữa các chữ cái là 0.3 pixel, giúp văn bản không bị chật chội */
+   line-height: 20px;
    letter-spacing: 0.3px;
    margin: 20px 0;
 }

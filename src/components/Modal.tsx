@@ -47,7 +47,7 @@ const Button = styled.button`
   position: absolute;
   top: 12px;
   right: 19px;
-  background-color: var(--color-red-500);
+  background-color: var(--color-red-500); 
 
   &:hover {
     background-color: var(--color-red-700);

@@ -1,20 +1,38 @@
 import "./LoginSignUp.css";
-import { assets } from "../../assets/assets";
 import { useState } from "react";
-import Button from "../../components/Button/Button";
 import axios from "axios";
 import { AuthService } from "../../services/AuthService";
+import { useNavigate } from "react-router-dom";
 
 // Component LoginSignUp dùng để hiển thị các form đăng nhập và đăng ký
 const LoginSignUp = () => {
   // State: True - Đăng ký, False - Đăng nhập
   const [isSignUpActive, setIsSignUpActive] = useState(false);
   const [loginData, setLoginData] = useState({ username: "", password: "" });
+  const [registerData, setRegisterData] = useState({ name: "", username: "", password: "", confirm: "" });
   const [error, setError] = useState("");
+
+  const navigate = useNavigate();
 
   const handleToggle = (type: "login" | "register") => {
     setIsSignUpActive(type === "register");
   };
+
+  const handleSignUp = async (e: any) => {
+    e.preventDefault();
+    setError("");
+
+    try {
+      const response = await axios.post("http://localhost:8080/api/v1/users/register", {
+        // Vế trái này khớp với định nghĩa bên API
+        name: registerData.name,
+        username: registerData.username,
+        password: registerData.password,
+      })
+    } catch(error){
+      setError("SignUp failed..");
+    }
+  }
 
   const handleLogin = async (e: any) => {
     e.preventDefault();
@@ -28,8 +46,10 @@ const LoginSignUp = () => {
           password: loginData.password,
         }
       );
-      alert("Login successful");
-      console.log("Login successful:", response.data);
+      localStorage.setItem('accessToken', response.data.data.accessToken);
+
+      // Điều hướng khi đăng nhập thành công
+      navigate('/dashboard');
     } catch (error) {
       setError("Login failed. Please check your credentials.");
     }
@@ -70,7 +90,7 @@ const LoginSignUp = () => {
                 <input
                   className="w-full outline-blue-500 border-2 border-gray-400 rounded-xl p-3 mt-1 bg-transparent"
                   type="text"
-                  placeholder="Username"
+                  placeholder="Name"
                 />
               </div>
               <div className="input">
@@ -135,6 +155,12 @@ const LoginSignUp = () => {
                 />
               </div>
             </div>
+            <div className="mt-4 mr-20">
+              <input className="scale-110" type="checkbox" id="remember" />
+              <label className="ml-2 text-base" htmlFor="remember">
+                Remember for 3 day!
+              </label>
+            </div>
             {error && <p className="error">{error}</p>}
             <a href="#">Forgot Your Password?</a>
             <button className="btn-tdn" type="submit">
@@ -183,7 +209,7 @@ const LoginSignUp = () => {
           <div className="toggle">
             <div className="toggle-panel toggle-left">
               <h1 className="text-tdn">Welcome Back!</h1>
-              <p>Demo text.</p>
+              <p>If you already have an account, <strong>Sign in</strong></p>
               <button
                 id="login"
                 className="btn-tdn-2"
@@ -194,13 +220,13 @@ const LoginSignUp = () => {
             </div>
             <div className="toggle-panel toggle-right">
               <h1 className="text-tdn">Hello Friend!</h1>
-              <p>Demo text.</p>
+              <p>Do you have an accout? If not, please <strong>Sign Up</strong></p>
               <button
                 id="register"
                 className="btn-tdn-2"
                 onClick={() => handleToggle("register")}
               >
-                Sign In
+                Sign Up
               </button>
             </div>
           </div>

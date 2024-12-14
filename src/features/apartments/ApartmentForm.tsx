@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Form from "../../components/Form";
 import FormField from "../../components/FormField";
 import Selector from "../../components/Selector";
@@ -6,20 +6,38 @@ import Button from "../../components/Button";
 import { HiOutlinePlusCircle, HiPencil, HiTrash } from "react-icons/hi2";
 import Table from "../../components/Table";
 
-export default function ApartmentForm({ apartment }: any) {
+interface Resident {
+  name: string;
+  dob: string;
+}
+
+interface Vehicle {
+  ownerName: string;
+  number: string;
+  type: string;
+}
+
+interface ApartmentFormProps {
+  apartment: {
+    addressNumber: string;
+    status: "Business" | "Residential" | "Vacant";
+    area: string;
+    ownerName: string;
+    ownerPhone: string;
+    residentList: Resident[];
+    vehicleList: Vehicle[];
+  };
+}
+
+export default function ApartmentForm({ apartment }: ApartmentFormProps) {
   const [formValues, setFormValues] = useState({
-    room: apartment?.room || "",
+    addressNumber: apartment?.addressNumber || "",
     status: apartment?.status || "",
-    roomArea: apartment?.roomArea || "",
+    area: apartment?.area || "",
     ownerName: apartment?.ownerName || "",
   });
-  const residents = [
-    {
-      name: "Nguyen Thi A",
-      dob: "20/12/2000",
-    },
-  ];
 
+  // Handle form changes
   const handleChange = (e: any) => {
     const { id, value } = e.target;
     setFormValues((prevValues) => ({
@@ -28,18 +46,14 @@ export default function ApartmentForm({ apartment }: any) {
     }));
   };
 
+  // Handle form submission
   const handleSubmit = (e: any) => {
     e.preventDefault();
     console.log(formValues);
     // Add submit logic here
   };
 
-  const vehicles = [
-    { ownerName: "Nguyen Thi A", number: "123ABC", type: "Car" },
-    { ownerName: "Nguyen Thi B", number: "456XYZ", type: "Motorbike" },
-  ];
-
-  const statusOptions = ["available", "occupied"];
+  const statusOptions = ["Business", "Vacant", "Residential"];
 
   return (
     <Form width="800px" onSubmit={handleSubmit}>
@@ -48,9 +62,9 @@ export default function ApartmentForm({ apartment }: any) {
         <FormField>
           <FormField.Label label={"Room"} />
           <FormField.Input
-            id="room"
-            type="search"
-            value={formValues.room}
+            id="addressNumber"
+            type="text"
+            value={formValues.addressNumber}
             onChange={handleChange}
           />
         </FormField>
@@ -58,9 +72,9 @@ export default function ApartmentForm({ apartment }: any) {
         <FormField>
           <FormField.Label label={"Room Area"} />
           <FormField.Input
-            id="roomArea"
+            id="area"
             type="text"
-            value={formValues.roomArea}
+            value={formValues.area}
             onChange={handleChange}
           />
         </FormField>
@@ -69,12 +83,12 @@ export default function ApartmentForm({ apartment }: any) {
       <Selector
         id="status"
         value={formValues.status}
-        onChange={(e: any) => handleChange(e)}
+        onChange={handleChange}
         options={statusOptions}
         label={"Status"}
-      ></Selector>
+      />
 
-      {apartment && (
+      {apartment?.residentList && (
         <>
           <label>Resident:</label>
           <Table columns="1fr 1fr 1fr">
@@ -84,20 +98,18 @@ export default function ApartmentForm({ apartment }: any) {
               <div>Role</div>
             </Table.Header>
 
-            {residents.map((resident) => (
-              <Table.Row size="small">
+            {apartment.residentList.map((resident) => (
+              <Table.Row size="small" key={resident.name}>
                 <div>{resident.name}</div>
                 <div>{resident.dob}</div>
-                <div>
-                  {resident.name === apartment.ownerName ? "Owner" : "Member"}
-                </div>
+                <div>{resident.name === apartment.ownerName ? "Owner" : "Member"}</div>
               </Table.Row>
             ))}
           </Table>
         </>
       )}
 
-      {apartment && (
+      {apartment?.vehicleList && (
         <>
           <label>Vehicle:</label>
           <Table columns="1fr 1fr 1fr">
@@ -107,8 +119,8 @@ export default function ApartmentForm({ apartment }: any) {
               <div>Type</div>
             </Table.Header>
 
-            {vehicles.map((vehicle) => (
-              <Table.Row size="small">
+            {apartment.vehicleList.map((vehicle) => (
+              <Table.Row size="small" key={vehicle.number}>
                 <div>{vehicle.ownerName}</div>
                 <div>{vehicle.number}</div>
                 <div>{vehicle.type}</div>
