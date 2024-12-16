@@ -8,14 +8,11 @@ import { HiOutlinePlusCircle, HiPencil, HiTrash } from "react-icons/hi2";
 export default function ResidentForm({ resident, onCloseModal }: any) {
   const [formValues, setFormValues] = useState({
     name: resident?.name || "",
-    cic: resident?.cic || "",
     dob: resident?.dob || "",
-    room: resident?.room || "",
-    gender: resident?.gender || "",
+    apartmentId: resident?.apartmentId || "",
     status: resident?.status || "",
   });
 
-  const genderOptions = ["male", "female", "other"];
   const statusOptions = ["active", "moved"];
 
   const handleChange = (e: any) => {
@@ -46,17 +43,6 @@ export default function ResidentForm({ resident, onCloseModal }: any) {
               onChange={handleChange}
             />
           </FormField>
-
-          <FormField>
-            <FormField.Label label={"CIC"} />
-            <FormField.Input
-              type="cic"
-              id="cic"
-              value={formValues.cic}
-              onChange={handleChange}
-            />
-          </FormField>
-
           <FormField>
             <FormField.Label label={"DOB"} />
             <FormField.Input
@@ -68,24 +54,15 @@ export default function ResidentForm({ resident, onCloseModal }: any) {
           </FormField>
         </Form.Fields>
       </div>
-
-      <Selector
-        id="gender"
-        value={formValues.gender}
-        onChange={(e: any) => handleChange(e)}
-        options={genderOptions}
-        label={"Gender:"}
-      />
-
       <div>
         <label>Room:</label>
         <Form.Fields>
           <FormField>
             <FormField.Label label={"Room"} />
             <FormField.Input
-              id="room"
+              id="apartmentId"
               type="search"
-              value={formValues.room}
+              value={formValues.apartmentId}
               onChange={handleChange}
             />
           </FormField>

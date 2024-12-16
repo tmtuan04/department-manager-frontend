@@ -4,14 +4,14 @@ import FormField from "../../components/FormField";
 import Selector from "../../components/Selector";
 import Button from "../../components/Button";
 import { HiOutlinePlusCircle, HiPencil, HiTrash } from "react-icons/hi2";
+import axios from "axios";
 
 export default function VehicleForm({ vehicle }: any) {
-  // const { room, ownerName, vehicleNumber, type } = vehicle ?? {};
   const [formValues, setFormValues] = useState({
-    room: vehicle?.room || "",
-    ownerName: vehicle?.ownerName || "",
-    vehicleNumber: vehicle?.vehicleNumber || "",
-    type: vehicle?.type || "",
+    apartmentId: vehicle?.apartmentId || "",
+    registerDate: vehicle?.registerDate || "",
+    id: vehicle?.id || "",
+    category: vehicle?.category || "",
   });
   const vehicleTypeOptions = ["Motorbike", "Car"];
 
@@ -23,30 +23,63 @@ export default function VehicleForm({ vehicle }: any) {
     }));
   };
 
-  const handleSubmit = (e: any) => {
+  const handleDelete = async (e: any) => {
     e.preventDefault();
-    console.log(formValues);
-    // Add submit logic here
+
+    try {
+      console.log(formValues.apartmentId);
+      const response = await axios.delete(`http://localhost:8080/api/v1/vehicles/${formValues.apartmentId}`, {
+        data: { id: formValues.id }, // Payload gửi kèm
+        headers: { "Content-Type": "application/json" }, // Đảm bảo header đúng
+      });
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+
+    const vehicleData = {
+      apartmentId: formValues.apartmentId,
+      id: formValues.id,
+      category: formValues.category
+    };
+
+    console.log(vehicleData);
+
+    try {
+      const response = await axios.post(
+        "http://localhost:8080/api/v1/vehicles", vehicleData
+      );
+      
+      const data = await response.data;
+      console.log("Apartment created successfully", data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <Form width="400px" onSubmit={handleSubmit}>
       <Form.Fields>
         <FormField>
           <FormField.Label label={"Room"} />
           <FormField.Input
-            id="room"
+            id="apartmentId"
             type="text"
-            value={formValues.room}
+            value={formValues.apartmentId}
             onChange={handleChange}
           />
         </FormField>
 
         <FormField>
-          <FormField.Label label={"Owner"} />
+          <FormField.Label label={"Date"} />
           <FormField.Input
             id="ownerName"
             type="text"
-            value={formValues.ownerName}
+            value={formValues.registerDate}
             onChange={handleChange}
           />
         </FormField>
@@ -54,25 +87,25 @@ export default function VehicleForm({ vehicle }: any) {
         <FormField>
           <FormField.Label label={"Number"} />
           <FormField.Input
-            id="vehicleNumber"
+            id="id"
             type="text"
-            value={formValues.vehicleNumber}
+            value={formValues.id}
             onChange={handleChange}
           />
         </FormField>
       </Form.Fields>
 
       <Selector
-        value={formValues.type}
+        value={formValues.category}
         onChange={handleChange}
-        id="type"
+        id="category"
         options={vehicleTypeOptions}
         label={"Type:"}
       ></Selector>
 
       {vehicle ? (
         <Form.Buttons>
-          <Button variation="danger" size="medium">
+          <Button variation="danger" size="medium" onClick={handleDelete}>
             Delete
             <span>
               <HiTrash />

@@ -5,8 +5,8 @@ POST http://localhost:8080/api/v1/users/register
 Content-Type: application/json
 
 {
-    "name": "Tuan",
-    "username": "h4@gmail.com",
+    "name": "Tu Minh Tuan",
+    "username": "test@gmail.com",
     "password": "tuan2004"
 }
 
@@ -16,7 +16,7 @@ POST http://localhost:8080/api/v1/auth/login
 Content-Type: application/json
 
 {
-    "username": "tuantest@gmail.com",
+    "username": "test@gmail.com",
     "password": "tuan2004"
 }
 
@@ -30,10 +30,11 @@ POST  http://localhost:8080/api/v1/residents
 Content-Type: application/json
 
 {
-    "id": 2,
-    "name": "Nguyen Van A",
+    "id": "1",
+    "name": "Tu Minh Tuan",
     "dob": "2004-02-04",
-    "status": "Resident"
+    "status": "Resident",
+    "addressNumber": 100
 }
 
 ### GET: Lấy thông tin các cư dân (Successful)
@@ -53,13 +54,47 @@ Content-Type: application/json
 
 # Chưa có thêm phương tiện ở đây
 {
-    "addressNumber":"102",
-    "area":"200",
+    "addressNumber": 100,
+    "area": "350",
     "status":"Business",
-    "ownerId":"2",
-    "ownerPhone":"0987654321",
-    "memberIds":[2]
+    "ownerId": "1",
+    "ownerPhone": 123456789,
+    "memberIds":[]
 }
 
 ### GET: Lấy all thông tin căn hộ (Successfull) 
 GET http://localhost:8080/api/v1/apartments
+
+
+#########################################################
+
+# VEHICLES API
+
+### POST: Thêm phương tiện mới (Successfull, nhưng id đang lưu số chứ kp chuỗi (biển số))
+POST http://localhost:8080/api/v1/vehicles
+Content-Type: application/json
+
+{
+    "id":"29A999",
+    "category":"Motorbike",
+    "apartmentId":"100"
+}
+
+### GET: Get phương tiện theo id của căn hộ (Successfull)
+GET http://localhost:8080/api/v1/vehicles/103
+
+
+### GET: Get tất cả phương tiện (Successfull)
+GET http://localhost:8080/api/v1/vehicles
+
+
+### DELETE: Xoá phương tiện theo id (Successfull)
+DELETE http://localhost:8080/api/v1/vehicles/100
+Content-Type: application/json
+
+{
+    "id": "29A99999"
+}
+
+### PUT: Update thông tin phương tiện
+PUT http://localhost:8080/api/v1/vehicles/100

@@ -12,7 +12,7 @@ export default function ApartmentsTable() {
       const response = await axios.get(
         "http://localhost:8080/api/v1/apartments"
       );
-
+      console.log(response.data.data.result);
       setApartments(response.data.data.result);
     } catch (error) {
       console.error("Error fetching apartments:", error);
@@ -20,7 +20,7 @@ export default function ApartmentsTable() {
   };
 
   useEffect(() => {
-    console.log(apartments.length);
+    // console.log(apartments.length);
     apiApartments();
   }, []);
 

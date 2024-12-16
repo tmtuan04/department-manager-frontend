@@ -1,15 +1,17 @@
 import "./sideBar.css";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const SideBar = () => {
   const [extended, setExtended] = useState(false);
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    localStorage.removeItem('accessToken');
+    localStorage.removeItem("accessToken");
+    toast.success("Logout successful!")
     navigate("/");
-  }
+  };
 
   // active la full
   return (
@@ -69,10 +71,10 @@ const SideBar = () => {
           <span className="tooltip">Fee and Fund</span>
         </li>
         <li>
-          <a href="#">
+          <Link to="/dashboard/statistics">
             <i className="bx bx-folder"></i>
             <span className="links_name">Statistics</span>
-          </a>
+          </Link>
           <span className="tooltip">Statistics</span>
         </li>
         <li>
@@ -95,7 +97,12 @@ const SideBar = () => {
               <div className="role">Manager</div>
             </div>
           </div>
-          <i title="Logout" className="bx bx-log-out" id="log_out" onClick={handleLogout}></i>
+          <i
+            title="Logout"
+            className="bx bx-log-out"
+            id="log_out"
+            onClick={handleLogout}
+          ></i>
         </div>
       </div>
     </div>

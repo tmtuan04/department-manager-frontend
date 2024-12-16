@@ -2,23 +2,9 @@
   display: flex;
 }
 
-/* const Main = styled.main`
-  background-color: var(--color-grey-0);
-  padding: 40px 48px 64px;
-  overflow: scroll;
-`;
-
-const StyledDashBoard = styled.div`
-  display: grid;
-  grid-template-columns: auto 1fr;
-  height: 100vh;
-  width: 100%;
-  margin: 10px;
-`; */
-
 .dashboard-content {
   background-color: var(--color-grey-0);
-  padding: 40px 48px 64px;
+  padding: 20px;
   overflow: scroll;
   max-width: 100%;
 

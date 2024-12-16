@@ -3,9 +3,9 @@ import styled from "styled-components";
 import Add from "./Add";
 
 const AddAndSearchStyled = styled.div`
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  justify-content: space-between;
+  // justify-content: space-between;
   gap: 10px;
 `;
 

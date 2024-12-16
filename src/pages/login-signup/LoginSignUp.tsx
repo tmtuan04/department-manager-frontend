@@ -3,6 +3,7 @@ import { useState } from "react";
 import axios from "axios";
 import { AuthService } from "../../services/AuthService";
 import { useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
 
 // Component LoginSignUp dùng để hiển thị các form đăng nhập và đăng ký
 const LoginSignUp = () => {
@@ -50,6 +51,7 @@ const LoginSignUp = () => {
 
       // Điều hướng khi đăng nhập thành công
       navigate('/dashboard');
+      toast.success("Login successful!")
     } catch (error) {
       setError("Login failed. Please check your credentials.");
     }
