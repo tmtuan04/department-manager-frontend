@@ -7,6 +7,7 @@ import { HiOutlinePlusCircle, HiPencil, HiTrash } from "react-icons/hi2";
 import Table from "../../components/Table";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 interface Resident {
   name: string;
@@ -22,7 +23,7 @@ interface Vehicle {
 interface ApartmentFormProps {
   apartment: {
     addressNumber: string;
-    status: "Business" | "Residential" | "Vacant";
+    status: "Business" | "Residential" | "Vacant" | "";
     area: string;
     ownerName: string;
     ownerPhone: string;
@@ -43,7 +44,7 @@ export default function ApartmentForm({
     area: apartment?.area || "",
     ownerName: apartment?.ownerName || "",
     ownerPhone: apartment?.ownerPhone || "",
-    ownerId: apartment?.owner.id, // Added ownerId field
+    ownerId: apartment?.owner.id || "", // Added ownerId field
     memberIds: [],
   });
 
@@ -55,6 +56,18 @@ export default function ApartmentForm({
       [id]: value,
     }));
   };
+
+  // const handleDelete = async (e: any) => {
+  //   e.preventDefault();
+
+  //   try {
+  //     console.log(formValues.addressNumber);
+  //     const response = await axios.delete(`http://localhost:8080/api/v1/apartments/${formValues.addressNumber}`);
+  //     console.log(response.data);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   // Handle form submission
   const handleSubmit = async (e: any) => {
@@ -69,6 +82,8 @@ export default function ApartmentForm({
       memberIds: formValues.memberIds,
     };
 
+    console.log(apartmentData);
+
     try {
       const response = await axios.post(
         "http://localhost:8080/api/v1/apartments",
@@ -80,7 +95,7 @@ export default function ApartmentForm({
       // Reset the form after successful submission
       setFormValues({
         addressNumber: "",
-        status: "Residential",
+        status: "",
         area: "",
         ownerName: "",
         ownerId: "",
@@ -89,6 +104,7 @@ export default function ApartmentForm({
       });
 
       // Optionally, refresh the apartment list after adding the new apartment
+      toast.success("Add Apartment Successfull")
       fetchApartments();
       // // window.location.reload();
       // const navigate = useNavigate();

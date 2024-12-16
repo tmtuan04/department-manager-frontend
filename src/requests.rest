@@ -20,7 +20,6 @@ Content-Type: application/json
     "password": "tuan2004"
 }
 
-
 #########################################################
 
 # RESIDENT API
@@ -30,11 +29,10 @@ POST  http://localhost:8080/api/v1/residents
 Content-Type: application/json
 
 {
-    "id": "1",
-    "name": "Tu Minh Tuan",
-    "dob": "2004-02-04",
-    "status": "Resident",
-    "addressNumber": 100
+    "id": "8",
+    "name": "Bui Le Huy",
+    "dob": "2004-11-18",
+    "status": "Resident"
 }
 
 ### GET: Lấy thông tin các cư dân (Successful)
@@ -48,17 +46,28 @@ GET http://localhost:8080/api/v1/residents?size=5&page=0
 
 # APARTMENT API
 
+### PUT: Cập nhật thông tin căn hộ
+PUT http://localhost:8080/api/v1/apartments/88
+Content-Type: application/json
+
+{
+    "area":"222",
+    "status":"Residential",
+    "residents":[8]
+}
+
+
 ### POST: Tạo căn hộ (Successfull)
 POST http://localhost:8080/api/v1/apartments
 Content-Type: application/json
 
 # Chưa có thêm phương tiện ở đây
 {
-    "addressNumber": 100,
+    "addressNumber": 300,
     "area": "350",
     "status":"Business",
-    "ownerId": "1",
-    "ownerPhone": 123456789,
+    "ownerId": "3",
+    "ownerPhone": "0123456789",
     "memberIds":[]
 }
 
