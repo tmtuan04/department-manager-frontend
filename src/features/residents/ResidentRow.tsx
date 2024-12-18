@@ -5,17 +5,11 @@ import Modal from "../../components/Modal";
 import ResidentForm from "./ResidentForm";
 
 export default function ResidentRow({ resident }: any) {
-  const { id, roomId, name, cic, gender, dob, status } = resident;
+  const { id, apartmentId, name, dob, status } = resident;
 
   const statusStyled = {
     active: "green",
     moved: "red",
-  };
-
-  const genderStyled = {
-    male: "blue",
-    female: "pink",
-    other: "purple",
   };
 
   return (
@@ -23,12 +17,8 @@ export default function ResidentRow({ resident }: any) {
       {" "}
       {/* Ensure the row is uniquely identified */}
       <div>{id}</div>
-      <div>{roomId}</div>
+      <div>{apartmentId}</div>
       <div>{name}</div>
-      <div>{cic}</div>
-      <Tag type={genderStyled[gender as "male" | "female" | "other"] || "grey"}>
-        {capitalize(gender) || "Unknown"}
-      </Tag>
       <div>{dob}</div>
       <Tag type={statusStyled[status as "active" | "moved"] || "grey"}>
         {capitalize(status) || "Unknown"}

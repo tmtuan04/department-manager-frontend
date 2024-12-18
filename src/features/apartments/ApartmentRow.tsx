@@ -8,7 +8,7 @@ interface ApartmentProps {
   apartment: {
     addressNumber: string;
     owner: {
-      id: string;
+      id: number;
       name: string;
       // Add other properties if necessary
     };
@@ -31,7 +31,7 @@ export default function ApartmentRow({ apartment }: ApartmentProps) {
     <Table.Row>
       <div>{addressNumber}</div>
       <div>{owner?.name || owner?.id}</div> {/* If owner is available, display the name */}
-      <div>{ownerPhone}</div> {/* Display ownerPhone as contact */}
+      <div>0{ownerPhone}</div> {/* Display ownerPhone as contact */}
       <div>{numberOfMembers}</div> {/* Display number of residents */}
       <Tag type={statusStyled[status] || "gray"}> {/* Default to "gray" if status doesn't match */}
         {capitalize(status)}

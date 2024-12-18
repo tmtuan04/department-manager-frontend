@@ -5,6 +5,9 @@ import Selector from "../../components/Selector";
 import Button from "../../components/Button";
 import { HiOutlinePlusCircle, HiPencil, HiTrash } from "react-icons/hi2";
 import Table from "../../components/Table";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 interface Resident {
   name: string;
@@ -20,21 +23,29 @@ interface Vehicle {
 interface ApartmentFormProps {
   apartment: {
     addressNumber: string;
-    status: "Business" | "Residential" | "Vacant";
+    status: "Business" | "Residential" | "Vacant" | "";
     area: string;
     ownerName: string;
     ownerPhone: string;
+    owner: number;
     residentList: Resident[];
     vehicleList: Vehicle[];
   };
+  fetchApartments: () => void; // A function to refresh the apartment list after adding a new apartment
 }
 
-export default function ApartmentForm({ apartment }: ApartmentFormProps) {
+export default function ApartmentForm({
+  apartment,
+  fetchApartments,
+}: ApartmentFormProps) {
   const [formValues, setFormValues] = useState({
     addressNumber: apartment?.addressNumber || "",
     status: apartment?.status || "",
     area: apartment?.area || "",
     ownerName: apartment?.ownerName || "",
+    ownerPhone: apartment?.ownerPhone || "",
+    ownerId: apartment?.owner.id || "", // Added ownerId field
+    memberIds: [],
   });
 
   // Handle form changes
@@ -46,14 +57,67 @@ export default function ApartmentForm({ apartment }: ApartmentFormProps) {
     }));
   };
 
+  // const handleDelete = async (e: any) => {
+  //   e.preventDefault();
+
+  //   try {
+  //     console.log(formValues.addressNumber);
+  //     const response = await axios.delete(`http://localhost:8080/api/v1/apartments/${formValues.addressNumber}`);
+  //     console.log(response.data);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
   // Handle form submission
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
-    console.log(formValues);
-    // Add submit logic here
+
+    const apartmentData = {
+      addressNumber: formValues.addressNumber,
+      area: formValues.area,
+      status: formValues.status,
+      ownerId: formValues.ownerId,
+      ownerPhone: formValues.ownerPhone,
+      memberIds: formValues.memberIds,
+    };
+
+    console.log(apartmentData);
+
+    try {
+      const response = await axios.post(
+        "http://localhost:8080/api/v1/apartments",
+        apartmentData
+      );
+      const data = await response.data;
+      console.log("Apartment created successfully", data);
+
+      // Reset the form after successful submission
+      setFormValues({
+        addressNumber: "",
+        status: "",
+        area: "",
+        ownerName: "",
+        ownerId: "",
+        ownerPhone: "",
+        memberIds: [],
+      });
+
+      // Optionally, refresh the apartment list after adding the new apartment
+      toast.success("Add Apartment Successfull")
+      fetchApartments();
+      // // window.location.reload();
+      // const navigate = useNavigate();
+      // navigate("/dashboard/apartments", { replace: true });
+
+    } catch (error) {
+      // const navigate = useNavigate();
+      // navigate("/dashboard/apartments", { replace: true });
+      console.error("Error: ", error);
+    }
   };
 
-  const statusOptions = ["Business", "Vacant", "Residential"];
+  const statusOptions = ["Business", "Residential"];
 
   return (
     <Form width="800px" onSubmit={handleSubmit}>
@@ -88,6 +152,27 @@ export default function ApartmentForm({ apartment }: ApartmentFormProps) {
         label={"Status"}
       />
 
+      <label>Owner:</label>
+      <Form.Fields type="horizontal">
+        <FormField>
+          <FormField.Label label={"Owner ID:"} />
+          <FormField.Input
+            id="ownerId"
+            type="text"
+            value={formValues.ownerId}
+            onChange={handleChange}
+          />
+        </FormField>
+        <FormField>
+          <FormField.Label label={"PhoneNB:"} />
+          <FormField.Input
+            id="ownerPhone"
+            type="text"
+            value={formValues.ownerPhone}
+            onChange={handleChange}
+          />
+        </FormField>
+      </Form.Fields>
       {apartment?.residentList && (
         <>
           <label>Resident:</label>
@@ -102,7 +187,9 @@ export default function ApartmentForm({ apartment }: ApartmentFormProps) {
               <Table.Row size="small" key={resident.name}>
                 <div>{resident.name}</div>
                 <div>{resident.dob}</div>
-                <div>{resident.name === apartment.ownerName ? "Owner" : "Member"}</div>
+                <div>
+                  {resident.name === apartment.ownerName ? "Owner" : "Member"}
+                </div>
               </Table.Row>
             ))}
           </Table>
@@ -147,7 +234,7 @@ export default function ApartmentForm({ apartment }: ApartmentFormProps) {
         </Form.Buttons>
       ) : (
         <Form.Buttons>
-          <Button size="medium" variation="primary">
+          <Button onClick={handleSubmit} size="medium" variation="primary">
             Add
             <span>
               <HiOutlinePlusCircle />

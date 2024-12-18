@@ -4,6 +4,10 @@
     min-width: 100vw;
 } */
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 .main-sign-in-up {
     background: linear-gradient(to right, #e2e2e2, #c9d6ff);
     display: flex;

@@ -3,17 +3,14 @@ import Modal from "../../components/Modal";
 import VehicleForm from "./VehicleForm";
 
 export default function VehicleRow({ vehicle }: any) {
-  const { id, vehicleNumber, ownerName, room, type, registrationDate } =
-    vehicle;
+  const { id, apartmentId, category, registerDate } = vehicle;
 
   return (
     <Table.Row>
       <div>{id}</div>
-      <div>{vehicleNumber}</div>
-      <div>{ownerName}</div>
-      <div>{room}</div>
-      <div>{type}</div>
-      <div>{registrationDate}</div>
+      <div>{apartmentId}</div>
+      <div>{category}</div>
+      <div>{registerDate}</div>
       <Modal>
         <Modal.Open id="details">
           <button>Details</button>
