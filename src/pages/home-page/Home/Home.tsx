@@ -35,7 +35,7 @@ const Home = () => {
   return (
     <>
       <section className="home" id="home">
-        <div className="container full-height-page">
+        <div className="container-tdn full-height-page">
           <div className="home__main">
             <div className="main__left">
               <div className="left__title">

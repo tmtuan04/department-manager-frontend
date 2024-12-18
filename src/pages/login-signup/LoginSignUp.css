@@ -1,13 +1,22 @@
-body {
-    background-color: #c9d6ff;
+/* body {
+    
+    min-height: 100vh;
+    min-width: 100vw;
+} */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.main-sign-in-up {
     background: linear-gradient(to right, #e2e2e2, #c9d6ff);
     display: flex;
-    align-items: center;
     justify-content: center;
-    height: 100vh;
+    align-items: center;
+    min-height: 100vh;
 }
 
-.container {
+.container-dn{
     background-color: #fff;
     border-radius: 30px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
@@ -19,15 +28,14 @@ body {
     min-height: 480px;
 }
 
-.container p {
+.container-dn p {
    font-size: 14px; 
-   line-height: 20px; /* Đặt khoảng cách giữa các dòng văn bản là 20 pixel, giúp tăng tính dễ đọc */
-   /* Đặt khoảng cách giữa các chữ cái là 0.3 pixel, giúp văn bản không bị chật chội */
+   line-height: 20px;
    letter-spacing: 0.3px;
    margin: 20px 0;
 }
 
-.container a {
+.container-dn a {
     color: #333;
     font-size: 13px;
     text-decoration: none;
@@ -35,11 +43,11 @@ body {
     
 }
 
-.container a:hover {
+.container-dn a:hover {
     transform: scale(1.05);
 }
 
-.container form {
+.container-dn form {
     background-color: #fff;
     display: flex;
     align-items: center;
@@ -63,6 +71,11 @@ body {
     font-weight: 800;
 }
 
+.text-tdn {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
 /* Cái underline thực chất là div thôi */
 .underline {
     width: 65px;
@@ -79,28 +92,10 @@ body {
 }
 
 .input {
-    border: 1px solid #472183;
     display: flex;
     align-items: center;
-    margin: auto;
-    width: 330px;
+    width: 300px;
     height: 50px;
-    background-color: #F1F6F9;
-    border-radius: 8px;
-}
-
-.input img {
-    margin: 0 20px;
-}
-
-.input input {
-    height: 50px;
-    width: 380px;
-    background: transparent;
-    border: none;
-    outline: none;
-    color: #002;
-    font-size: 16px;
 }
 
 .form-container {
@@ -117,7 +112,7 @@ body {
     z-index: 2;
 }
 
-.container.active .sign-in {
+.container-dn.active .sign-in {
     transform: translateX(100%);
 }
 
@@ -128,7 +123,7 @@ body {
     z-index: 1;
 }
 
-.container.active .sign-up {
+.container-dn.active .sign-up {
     transform: translateX(100%);
     opacity: 1;
     z-index: 5;
@@ -158,7 +153,7 @@ body {
     height: 100%;
 }
 
-.container.active .toggle-container {
+.container-dn.active .toggle-container {
     transform: translateX(-100%);
     border-radius: 0 150px 100px 0;
 }
@@ -176,7 +171,7 @@ body {
     transition: all 0.6s ease-in-out;
 }
 
-.container.active .toggle {
+.container-dn.active .toggle {
     transform: translateX(50%);
 }
 
@@ -199,7 +194,7 @@ body {
     transform: translateX(-200%);
 }
 
-.container.active .toggle-left {
+.container-dn.active .toggle-left {
     transform: translateX(0);
 }
 
@@ -208,6 +203,47 @@ body {
     transform: translateX(0);
 }
 
-.container.active .toggle-right {
+.container-dn.active .toggle-right {
     transform: translateX(200%);
 }
+
+.btn-tdn {
+    background-color: #512da8;
+    border: none;
+    border-radius: 1px solid transparent;
+    color: #fff;
+    font-size: 14px;
+    padding: 10px 40px;
+    border-radius: 8px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.btn-tdn-2 {
+    margin-top: 10px;
+    padding: 8px 30px;
+    border: 2px solid #fff;
+    border-radius: 8px;
+}
+
+/* Hiệu ứng hover cho nút bình thường */
+.btn-tdn:hover {
+    background-color: #16325B; /* Màu nền thay đổi khi hover */
+    color: #ffffff; /* Giữ màu chữ */
+    transform: scale(1.05); /* Phóng to 5% */
+}
+
+/* Hiệu ứng hover cho nút ẩn */
+.btn-tdn-2:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Thêm nền mờ trắng khi hover */
+    border-color: #fff; /* Giữ màu viền */
+    color: #fff; /* Giữ màu chữ */
+}
+
+.error {
+    color: red;
+}
+  

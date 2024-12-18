@@ -1,19 +1,31 @@
 import "./sideBar.css";
-import { assets } from "../../../assets/assets";
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const SideBar = () => {
   const [extended, setExtended] = useState(false);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("accessToken");
+    toast.success("Logout successful!")
+    navigate("/");
+  };
 
   // active la full
   return (
     <div className={extended ? "sidebar active" : "sidebar"}>
       <div className="logo_content">
         <div className="logo">
-          <img src={assets.logo} alt="" />
-          <div className="logo_name">Tuan Inc.</div>
+          {/* <img src={assets.logo} alt="" /> */}
+          <div className="logo_name">HustCity.</div>
         </div>
-        <i className="bx bx-menu" id="btn" onClick={() => setExtended(prev => !prev)}></i>
+        <i
+          className="bx bx-menu"
+          id="btn"
+          onClick={() => setExtended((prev) => !prev)}
+        ></i>
       </div>
       <ul className="nav_list">
         <li>
@@ -21,42 +33,56 @@ const SideBar = () => {
             <i className="bx bx-search"></i>
             <input type="text" placeholder="Search..." />
           </a>
-          <span className='tooltip'>Search</span>
+          <span className="tooltip">Search</span>
         </li>
         <li>
           <a href="#">
             <i className="bx bxs-grid-alt"></i>
-            <span className="links_name" >Dashboard</span>
+            <span className="links_name">Dashboard</span>
           </a>
-          <span className='tooltip'>Dashboard</span>
+          <span className="tooltip">Dashboard</span>
         </li>
         <li>
-          <a href="#">
+          <Link to="/dashboard/residents">
+            <i className="bx bxs-grid-alt"></i>
+            <span className="links_name">Resident Management</span>
+          </Link>
+          <span className="tooltip">Resident Management</span>
+        </li>
+        <li>
+          <Link to="/dashboard/apartments">
+            <i className="bx bxs-grid-alt"></i>
+            <span className="links_name">Apartment Management</span>
+          </Link>
+          <span className="tooltip">Apartment Management</span>
+        </li>
+        <li>
+          <Link to="/dashboard/vehicles">
             <i className="bx bx-user"></i>
-            <span className="links_name">User</span>
-          </a>
-          <span className='tooltip'>User</span>
+            <span className="links_name">Vehicle Management</span>
+          </Link>
+          <span className="tooltip">Vehicle Management</span>
         </li>
         <li>
-          <a href="#">
+          <Link to="/dashboard/fee-and-fund">
             <i className="bx bx-chat"></i>
-            <span className="links_name">Messages</span>
-          </a>
-          <span className='tooltip'>Messages</span>
+            <span className="links_name">Fee and Fund</span>
+          </Link>
+          <span className="tooltip">Fee and Fund</span>
         </li>
         <li>
-          <a href="#">
+          <Link to="/dashboard/statistics">
             <i className="bx bx-folder"></i>
-            <span className="links_name">File Manager</span>
-          </a>
-          <span className='tooltip'>File Manager</span>
+            <span className="links_name">Statistics</span>
+          </Link>
+          <span className="tooltip">Statistics</span>
         </li>
         <li>
           <a href="#">
             <i className="bx bxs-cog"></i>
             <span className="links_name">Setting</span>
           </a>
-          <span className='tooltip'>Setting</span>
+          <span className="tooltip">Setting</span>
         </li>
       </ul>
       <div className="profile_content">
@@ -71,7 +97,12 @@ const SideBar = () => {
               <div className="role">Manager</div>
             </div>
           </div>
-          <i className="bx bx-log-out" id="log_out"></i>
+          <i
+            title="Logout"
+            className="bx bx-log-out"
+            id="log_out"
+            onClick={handleLogout}
+          ></i>
         </div>
       </div>
     </div>

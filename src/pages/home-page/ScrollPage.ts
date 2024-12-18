@@ -1,7 +1,7 @@
 export const highlightMenuOnScroll = () => {
     const sections = document.querySelectorAll("section");
     const menuItems = document.querySelectorAll(".inner-menu li");
-    const menuLinks = document.querySelectorAll(".inner-menu li a")
+    const menuLinks = document.querySelectorAll(".inner-menu li a");
 
     if (sections.length === 0 || menuItems.length === 0) {
         console.warn("Elements not found, delaying scroll effect");
@@ -10,7 +10,7 @@ export const highlightMenuOnScroll = () => {
     // Tạo IntersectionObserver để theo dõi sự xuất hiện của các phần tử trong viewport
     const observerOptions = {
         root: null, // viewport của trình duyệt
-        threshold: 0.5, // Khi 70% của phần tử xuất hiện trong viewport
+        threshold: 0.5, // Khi 50% của phần tử xuất hiện trong viewport
     };
 
     const observer = new IntersectionObserver((entries) => {
@@ -33,7 +33,6 @@ export const highlightMenuOnScroll = () => {
         observer.observe(section);
     });
 
-
     menuLinks.forEach((link) => {
         link.addEventListener("click", (event) => {
             event.preventDefault(); // Ngăn chặn hành vi mặc định (chuyển trang)
@@ -52,5 +51,4 @@ export const highlightMenuOnScroll = () => {
             }
         });
     });
-
 };

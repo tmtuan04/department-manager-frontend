@@ -1,0 +1,109 @@
+# AUTH API
+
+### POST: Register (Successful)
+POST http://localhost:8080/api/v1/users/register
+Content-Type: application/json
+
+{
+    "name": "Tu Minh Tuan",
+    "username": "test@gmail.com",
+    "password": "tuan2004"
+}
+
+### POST: Login (Successful)
+# Lưu trữ refresh token ở cookie, hết hạn sau 1 ngày
+POST http://localhost:8080/api/v1/auth/login
+Content-Type: application/json
+
+{
+    "username": "test@gmail.com",
+    "password": "tuan2004"
+}
+
+#########################################################
+
+# RESIDENT API
+
+### POST: Tạo cư dân (Successful)
+POST  http://localhost:8080/api/v1/residents
+Content-Type: application/json
+
+{
+    "id": "8",
+    "name": "Bui Le Huy",
+    "dob": "2004-11-18",
+    "status": "Resident"
+}
+
+### GET: Lấy thông tin các cư dân (Successful)
+GET http://localhost:8080/api/v1/residents?size=5&page=0
+
+# Descriptiton: ?size=5&page=0, số lượng kết quả trả về mỗi trang là 5 (trả về 5 cư dân mỗi khi gọi API)
+# Bắt đầu từ trang 0 (Ví dụ 10 cư dân, thì định nghĩa 5-1 sẽ trả về 5 dân cư ở cuối)
+
+
+#########################################################
+
+# APARTMENT API
+
+### PUT: Cập nhật thông tin căn hộ
+PUT http://localhost:8080/api/v1/apartments/88
+Content-Type: application/json
+
+{
+    "area":"222",
+    "status":"Residential",
+    "residents":[8]
+}
+
+
+### POST: Tạo căn hộ (Successfull)
+POST http://localhost:8080/api/v1/apartments
+Content-Type: application/json
+
+# Chưa có thêm phương tiện ở đây
+{
+    "addressNumber": 300,
+    "area": "350",
+    "status":"Business",
+    "ownerId": "3",
+    "ownerPhone": "0123456789",
+    "memberIds":[]
+}
+
+### GET: Lấy all thông tin căn hộ (Successfull) 
+GET http://localhost:8080/api/v1/apartments
+
+
+#########################################################
+
+# VEHICLES API
+
+### POST: Thêm phương tiện mới (Successfull, nhưng id đang lưu số chứ kp chuỗi (biển số))
+POST http://localhost:8080/api/v1/vehicles
+Content-Type: application/json
+
+{
+    "id":"29A999",
+    "category":"Motorbike",
+    "apartmentId":"100"
+}
+
+### GET: Get phương tiện theo id của căn hộ (Successfull)
+GET http://localhost:8080/api/v1/vehicles/103
+
+
+### GET: Get tất cả phương tiện (Successfull)
+GET http://localhost:8080/api/v1/vehicles
+
+
+### DELETE: Xoá phương tiện theo id (Successfull)
+DELETE http://localhost:8080/api/v1/vehicles/100
+Content-Type: application/json
+
+{
+    "id": "29A99999"
+}
+
+### PUT: Update thông tin phương tiện
+PUT http://localhost:8080/api/v1/vehicles/100
