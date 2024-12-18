@@ -4,10 +4,10 @@ const TechMarquee = () => {
     return (
         <>
             <div className="home__tech">
-                <div className="container-tdn">
+                <div className="container-tdn2">
                     <div className="inner-tech">
                         <div className="desc">Technology used</div>
-                        <div className="wrap fade-out">
+                        <div className="wrap-tdn fade-out">
                             <div className="tech__main">
                                 <div className="tech__item">
                                     <div className="item__icon">
