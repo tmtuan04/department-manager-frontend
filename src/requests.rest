@@ -105,5 +105,42 @@ Content-Type: application/json
     "id": "29A99999"
 }
 
-### PUT: Update thông tin phương tiện
-PUT http://localhost:8080/api/v1/vehicles/100
+
+#########################################################
+
+# Fees And Funds API
+
+
+### POST: Tạo fee or fund
+POST http://localhost:8080/api/v1/fees
+Content-Type: application/json
+# Enum: ContributionFund, DepartmentFee
+
+{
+    "name": "Quỹ 1",
+    "description": "Xyzgh",
+    "feeTypeEnum": "ContributionFund",
+    "unitPrice" : 1234
+}
+
+### GET: Lấy thông tin tất cả các loại phí quỹ
+GET http://localhost:8080/api/v1/fees
+
+
+### DELETE: Xoá Fee-Fund theo ID (Successfull)
+DELETE http://localhost:8080/api/v1/fees/5
+
+### PUT: UPDATE thông tin Fee-Fund
+PUT http://localhost:8080/api/v1/fees
+Content-Type: application/json
+# Cái này chắc là cập nhật theo id
+
+{
+    "id": 2,
+    "name": "phí 2",
+    "description": "loại phí 2",
+    "feeTypeEnum": "DepartmentFee",
+    "unitPrice" : 1000.22
+}
+
+

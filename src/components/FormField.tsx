@@ -45,6 +45,7 @@ interface InputProps {
   type: any;
   value: any;
   onChange: any;
+  readOnly?: boolean; // Thêm thuộc tính readOnly vào đây
 }
 
 interface SelectProps {
@@ -59,8 +60,8 @@ function Label({ label }: LabelProps) {
   return <StyledLabel>{label}</StyledLabel>;
 }
 
-function Input({ id, type, value, onChange }: InputProps) {
-  return <StyledInput id={id} type={type} value={value} onChange={onChange} />;
+function Input({ id, type, value, onChange, readOnly }: InputProps) {
+  return <StyledInput id={id} type={type} value={value} onChange={onChange} readOnly={readOnly}/>;
 }
 
 function Select({ id, options, value, onChange }: SelectProps) {

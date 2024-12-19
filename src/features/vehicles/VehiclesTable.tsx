@@ -9,7 +9,6 @@ export default function VehiclesTable() {
 
   const apiVehicles = async () => {
     try {
-      // API này chỉ tìm theo căn hộ xác định (VD: 102)
       const response = await axios.get(
         "http://localhost:8080/api/v1/vehicles"
       );
