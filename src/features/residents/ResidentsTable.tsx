@@ -19,7 +19,7 @@ export default function ResidentsTable({}) {
 
   const apiResidents = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/api/v1/residents?size=10&page=0");
+      const response = await axios.get("http://localhost:8080/api/v1/residents?size=5&page=0");
       console.log(response.data.data.result);
       setResidents(response.data.data.result);
     } catch (error) {
