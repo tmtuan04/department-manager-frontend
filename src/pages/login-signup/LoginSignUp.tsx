@@ -48,6 +48,7 @@ const LoginSignUp = () => {
         password: loginData.password,
       });
       localStorage.setItem("accessToken", response.data.data.accessToken);
+      localStorage.setItem("name", response.data.data.user.name);
 
       // Điều hướng khi đăng nhập thành công
       navigate("/dashboard");
