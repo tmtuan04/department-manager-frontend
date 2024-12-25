@@ -1,15 +1,23 @@
 import "./sideBar.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const SideBar = () => {
   const [extended, setExtended] = useState(false);
+  const [name, setName] = useState("");
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const storedName = localStorage.getItem("name");
+    if (storedName) {
+      setName(storedName);
+    }
+  }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("accessToken");
-    toast.success("Logout successful!")
+    toast.success("Logout successful!");
     navigate("/");
   };
 
@@ -21,11 +29,7 @@ const SideBar = () => {
           {/* <img src={assets.logo} alt="" /> */}
           <div className="logo_name">HustCity.</div>
         </div>
-        <i
-          className="bx bx-menu"
-          id="btn"
-          onClick={() => setExtended((prev) => !prev)}
-        ></i>
+        <i className="bx bx-menu" id="btn" onClick={() => setExtended((prev) => !prev)}></i>
       </div>
       <ul className="nav_list">
         <li>
@@ -88,21 +92,13 @@ const SideBar = () => {
       <div className="profile_content">
         <div className="profile">
           <div className="profile_details">
-            <img
-              src="https://i.pinimg.com/564x/5e/7b/9c/5e7b9c338994683cdadd9b52d95223cc.jpg"
-              alt="Tuan dep trai profile"
-            />
+            <img src="https://i.pinimg.com/564x/5e/7b/9c/5e7b9c338994683cdadd9b52d95223cc.jpg" alt="Admin profile" />
             <div className="name_role">
-              <div className="name">Tu Minh Tuan</div>
+              <div className="name">{name || "Unknown User"}</div>
               <div className="role">Manager</div>
             </div>
           </div>
-          <i
-            title="Logout"
-            className="bx bx-log-out"
-            id="log_out"
-            onClick={handleLogout}
-          ></i>
+          <i title="Logout" className="bx bx-log-out" id="log_out" onClick={handleLogout}></i>
         </div>
       </div>
     </div>

@@ -28,21 +28,20 @@ interface ApartmentFormProps {
     ownerName: string;
     ownerPhone: string;
     owner: number;
+    // numberOfMembers: number;
     residentList: Resident[];
     vehicleList: Vehicle[];
   };
   fetchApartments: () => void; // A function to refresh the apartment list after adding a new apartment
 }
 
-export default function ApartmentForm({
-  apartment,
-  fetchApartments,
-}: ApartmentFormProps) {
+export default function ApartmentForm({ apartment, fetchApartments }: ApartmentFormProps) {
   const [formValues, setFormValues] = useState({
     addressNumber: apartment?.addressNumber || "",
     status: apartment?.status || "",
     area: apartment?.area || "",
     ownerName: apartment?.ownerName || "",
+    // numberOfMembers: apartment?.numberOfMembers || 0,
     ownerPhone: apartment?.ownerPhone || "",
     ownerId: apartment?.owner.id || "", // Added ownerId field
     memberIds: [],
@@ -85,10 +84,7 @@ export default function ApartmentForm({
     console.log(apartmentData);
 
     try {
-      const response = await axios.post(
-        "http://localhost:8080/api/v1/apartments",
-        apartmentData
-      );
+      const response = await axios.post("http://localhost:8080/api/v1/apartments", apartmentData);
       const data = await response.data;
       console.log("Apartment created successfully", data);
 
@@ -104,12 +100,11 @@ export default function ApartmentForm({
       });
 
       // Optionally, refresh the apartment list after adding the new apartment
-      toast.success("Add Apartment Successfull")
+      toast.success("Add Apartment Successfull");
       fetchApartments();
       // // window.location.reload();
       // const navigate = useNavigate();
       // navigate("/dashboard/apartments", { replace: true });
-
     } catch (error) {
       // const navigate = useNavigate();
       // navigate("/dashboard/apartments", { replace: true });
@@ -125,22 +120,12 @@ export default function ApartmentForm({
       <Form.Fields type="horizontal">
         <FormField>
           <FormField.Label label={"Room"} />
-          <FormField.Input
-            id="addressNumber"
-            type="text"
-            value={formValues.addressNumber}
-            onChange={handleChange}
-          />
+          <FormField.Input id="addressNumber" type="text" value={formValues.addressNumber} onChange={handleChange} />
         </FormField>
 
         <FormField>
           <FormField.Label label={"Room Area"} />
-          <FormField.Input
-            id="area"
-            type="text"
-            value={formValues.area}
-            onChange={handleChange}
-          />
+          <FormField.Input id="area" type="text" value={formValues.area} onChange={handleChange} />
         </FormField>
       </Form.Fields>
 
@@ -156,21 +141,11 @@ export default function ApartmentForm({
       <Form.Fields type="horizontal">
         <FormField>
           <FormField.Label label={"Owner ID:"} />
-          <FormField.Input
-            id="ownerId"
-            type="text"
-            value={formValues.ownerId}
-            onChange={handleChange}
-          />
+          <FormField.Input id="ownerId" type="text" value={formValues.ownerId} onChange={handleChange} />
         </FormField>
         <FormField>
           <FormField.Label label={"PhoneNB:"} />
-          <FormField.Input
-            id="ownerPhone"
-            type="text"
-            value={formValues.ownerPhone}
-            onChange={handleChange}
-          />
+          <FormField.Input id="ownerPhone" type="text" value={formValues.ownerPhone} onChange={handleChange} />
         </FormField>
       </Form.Fields>
       {apartment?.residentList && (
@@ -187,9 +162,7 @@ export default function ApartmentForm({
               <Table.Row size="small" key={resident.name}>
                 <div>{resident.name}</div>
                 <div>{resident.dob}</div>
-                <div>
-                  {resident.name === apartment.ownerName ? "Owner" : "Member"}
-                </div>
+                <div>{resident.name === apartment.ownerName ? "Owner" : "Member"}</div>
               </Table.Row>
             ))}
           </Table>
