@@ -1,11 +1,18 @@
 import './Header.css'
 
+const handleClickLogo = () => {
+    window.scrollTo({
+        top: 0,       // Cuộn về đầu trang
+        behavior: 'smooth' // Hiệu ứng cuộn mượt
+    })
+}
+
 const Header = () => {
     return (
         <>
             <div className="home-page__header">
                 <div className="inner-header">
-                    <div className="header__logo">
+                    <div className="header__logo" onClick={handleClickLogo}>
                         .HustCity
                     </div>
                     <div className="header__menu">
