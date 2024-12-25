@@ -1,17 +1,18 @@
-import axios from "axios";
 import Footer from "../partials/Footer";
 import "./contact-us.css";
-import { useState } from 'react'
+import { useState } from 'react';
+import emailjs from "emailjs-com";
 
 const ContactUs = () => {
 
-    const state = {
+    const initialState = {
         name: '',
         email: '',
         message: ''
-    }
+    };
 
-    const [stateFormContact, setStateFormContact] = useState(state)
+    const [stateFormContact, setStateFormContact] = useState(initialState);
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const info = [
         {
@@ -44,17 +45,39 @@ const ContactUs = () => {
         },
     ];
 
-    const handlechangeInput = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, inputName: string) => {
+    const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, inputName: string) => {
         const content = e.target.value;
         setStateFormContact({
             ...stateFormContact,
             [inputName]: content,
         });
-    }
-    const handleSubmitFormContact = async () => {
-        const response = await axios.post(`url`, stateFormContact);
-        // {...}
-    }
+    };
+
+    const handleSubmitFormContact = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setIsSubmitting(true);
+
+        const serviceId = "service_unjh7i1"; // Thay bằng Service ID của bạn
+        const templateId = "template_g63418u"; // Thay bằng Template ID của bạn
+        const userId = "tf-MxgxXuR58OH_M_"; // Thay bằng User ID của bạn
+
+        try {
+            await emailjs.send(
+                serviceId,
+                templateId,
+                stateFormContact,
+                userId
+            );
+
+            alert("Your message has been sent successfully!");
+            setStateFormContact(initialState); // Reset form sau khi gửi
+        } catch (error) {
+            console.error("Failed to send message:", error);
+            alert("Failed to send your message. Please try again.");
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
 
     return (
         <>
@@ -75,38 +98,42 @@ const ContactUs = () => {
                             ))}
                         </div>
                         <div className="body__right">
-                            <form className="right-form">
+                            <form className="right-form" onSubmit={handleSubmitFormContact}>
                                 <div className="form__input">
                                     <input
                                         type="text"
                                         name="name"
                                         placeholder="Your Name"
-                                        onChange={(e) => { handlechangeInput(e, 'name') }}
+                                        onChange={(e) => handleChangeInput(e, 'name')}
                                         value={stateFormContact.name}
+                                        required
                                     />
                                 </div>
 
                                 <div className="form__input">
                                     <input
-                                        type="text"
+                                        type="email"
                                         name="email"
                                         placeholder="Your Email"
-                                        onChange={(e) => { handlechangeInput(e, 'email') }}
+                                        onChange={(e) => handleChangeInput(e, 'email')}
                                         value={stateFormContact.email}
+                                        required
                                     />
                                 </div>
                                 <div className="form__input">
                                     <textarea
                                         name="message"
-                                        id=""
-                                        placeholder="Your message"
-                                        onChange={(e) => { handlechangeInput(e, 'message') }}
+                                        placeholder="Your Message"
+                                        onChange={(e) => handleChangeInput(e, 'message')}
                                         value={stateFormContact.message}
+                                        required
                                     ></textarea>
                                 </div>
 
                                 <div className="form__input">
-                                    <button type="submit" onClick={handleSubmitFormContact}>Submit</button>
+                                    <button type="submit" disabled={isSubmitting}>
+                                        {isSubmitting ? "Submitting..." : "Submit"}
+                                    </button>
                                 </div>
                             </form>
                         </div>
