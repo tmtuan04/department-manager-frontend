@@ -168,7 +168,7 @@ function Invoice() {
         <div style={invoiceStyles.leftColumn}>
           <Form.Fields>
             <FormField>
-              <FormField.Label label={"ID"} />
+              <FormField.Label label={"Invoice ID"} />
               <FormField.Input
                 id="id"
                 type="text"

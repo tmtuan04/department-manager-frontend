@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Billing List</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="billing-container">
+    <h2>List of Billing for apartment <span class="apartment-code">TC-312A</span></h2>
+
+    <!-- September Bill -->
+    <div class="billing-header incomplete" onclick="toggleDropdown(this)">
+      <span>September Bill</span>
+      <span class="status">Not Completed</span>
+      <span class="arrow">&#9662;</span>
+    </div>
+    <div class="billing-details">
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Payable</th>
+            <th>Paid</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Parking Fee</td>
+            <td>100$</td>
+            <td>100$</td>
+          </tr>
+          <tr>
+            <td>Housing Fee</td>
+            <td>1000$</td>
+            <td>0$</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="total-due">Total amount due: 1000$</div>
+    </div>
+
+    <!-- August Bill -->
+    <div class="billing-header complete" onclick="toggleDropdown(this)">
+      <span>August Bill</span>
+      <span class="status">Completed &#10003;</span>
+      <span class="arrow">&#9662;</span>
+    </div>
+    <div class="billing-details">
+      <p>All payments for August have been completed.</p>
+    </div>
+
+    <!-- July Bill -->
+    <div class="billing-header complete" onclick="toggleDropdown(this)">
+      <span>July Bill</span>
+      <span class="status">Completed &#10003;</span>
+      <span class="arrow">&#9662;</span>
+    </div>
+    <div class="billing-details">
+      <p>All payments for July have been completed.</p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
