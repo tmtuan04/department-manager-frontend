@@ -6,7 +6,7 @@ Content-Type: application/json
 
 {
     "name": "Tu Minh Tuan",
-    "username": "test@gmail.com",
+    "username": "testtt@gmail.com",
     "password": "tuan2004"
 }
 
@@ -29,8 +29,8 @@ POST  http://localhost:8080/api/v1/residents
 Content-Type: application/json
 
 {
-    "id": "8",
-    "name": "Bui Le Huy",
+    "id": "1",
+    "name": "Tu Minh Tuan",
     "dob": "2004-11-18",
     "status": "Resident"
 }
@@ -144,3 +144,10 @@ Content-Type: application/json
 }
 
 
+#########################################################
+
+# Invoices API
+
+### GET ALL: Lấy thông tin tất cả các hoá đơn (Successful)
+
+GET http://localhost:8080/api/v1/invoices

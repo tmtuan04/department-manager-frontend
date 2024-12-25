@@ -5,7 +5,8 @@ import Selector from "../../components/Selector";
 import Button from "../../components/Button";
 import { HiOutlinePlusCircle, HiPencil, HiTrash } from "react-icons/hi2";
 import axios from "axios";
-import FeeAndFundTable from "./FeeAndFundTable";
+import { toast } from "react-toastify";
+
 
 export default function FeeAndFundForm({ feeOrFund }: any) {
   const [formValues, setFormValues] = useState({
@@ -69,12 +70,9 @@ export default function FeeAndFundForm({ feeOrFund }: any) {
       feeTypeEnum: formValues.feeTypeEnum,
     }
 
-    // console.log(data);
     try {
       const response = await axios.post("http://localhost:8080/api/v1/fees", data);
-      console.log(`Created Successfully!!`);
-
-      // fetchData();
+      toast.success(`Add ${formValues.name} Successfull!`);
       
     } catch (err) {
       console.error(err);

@@ -1,6 +1,7 @@
 import "./DashBoard.css";
 import Apartments from "./mainContent/Apartment";
 import FeesAndFunds from "./mainContent/FeesAndFunds";
+import Invoice from "./mainContent/Invoice";
 import Resident from "./mainContent/Resident";
 import Statistics from "./mainContent/Statistics";
 import Vehicles from "./mainContent/Vehicles";
@@ -19,6 +20,7 @@ const DashBoard = () => {
           <Route path="/fee-and-fund" element={<FeesAndFunds />}></Route>
           <Route path="/vehicles" element={<Vehicles />}></Route>
           <Route path="/statistics" element={<Statistics />} ></Route>
+          <Route path="/invoices" element={<Invoice />}></Route>
         </Routes>
       </div>
     </div>

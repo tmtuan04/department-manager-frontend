@@ -29,7 +29,11 @@ const SideBar = () => {
           {/* <img src={assets.logo} alt="" /> */}
           <div className="logo_name">HustCity.</div>
         </div>
-        <i className="bx bx-menu" id="btn" onClick={() => setExtended((prev) => !prev)}></i>
+        <i
+          className="bx bx-menu"
+          id="btn"
+          onClick={() => setExtended((prev) => !prev)}
+        ></i>
       </div>
       <ul className="nav_list">
         <li>
@@ -82,23 +86,31 @@ const SideBar = () => {
           <span className="tooltip">Statistics</span>
         </li>
         <li>
-          <a href="#">
+          <Link to="/dashboard/invoices">
             <i className="bx bxs-cog"></i>
-            <span className="links_name">Setting</span>
-          </a>
-          <span className="tooltip">Setting</span>
+            <span className="links_name">Invoices</span>
+          </Link>
+          <span className="tooltip">Invoices</span>
         </li>
       </ul>
       <div className="profile_content">
         <div className="profile">
           <div className="profile_details">
-            <img src="https://i.pinimg.com/564x/5e/7b/9c/5e7b9c338994683cdadd9b52d95223cc.jpg" alt="Admin profile" />
+            <img
+              src="https://i.pinimg.com/564x/5e/7b/9c/5e7b9c338994683cdadd9b52d95223cc.jpg"
+              alt="Admin profile"
+            />
             <div className="name_role">
               <div className="name">{name || "Unknown User"}</div>
               <div className="role">Manager</div>
             </div>
           </div>
-          <i title="Logout" className="bx bx-log-out" id="log_out" onClick={handleLogout}></i>
+          <i
+            title="Logout"
+            className="bx bx-log-out"
+            id="log_out"
+            onClick={handleLogout}
+          ></i>
         </div>
       </div>
     </div>

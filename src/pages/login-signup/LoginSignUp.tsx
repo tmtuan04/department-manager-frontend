@@ -11,7 +11,6 @@ const LoginSignUp = () => {
   const [isSignUpActive, setIsSignUpActive] = useState(false);
   const [loginData, setLoginData] = useState({ username: "", password: "" });
   const [registerData, setRegisterData] = useState({ name: "", username: "", password: "", confirm: "" });
-  const [error, setError] = useState("");
 
   const navigate = useNavigate();
 
@@ -21,7 +20,6 @@ const LoginSignUp = () => {
 
   const handleSignUp = async (e: any) => {
     e.preventDefault();
-    setError("");
 
     try {
       const response = await axios.post("http://localhost:8080/api/v1/users/register", {
@@ -31,16 +29,18 @@ const LoginSignUp = () => {
       });
 
       if (response.status === 201) {
+        localStorage.setItem("name", response.data.data.name);
+
         navigate("/dashboard");
+        toast.success("SignUp Successfull, Please SignIn");
       }
     } catch (error) {
-      setError("SignUp failed..");
+      console.error(error);
     }
   };
 
   const handleLogin = async (e: any) => {
     e.preventDefault();
-    setError("");
 
     try {
       const response = await axios.post("http://localhost:8080/api/v1/auth/login", {
@@ -54,7 +54,8 @@ const LoginSignUp = () => {
       navigate("/dashboard");
       toast.success("Login successful!");
     } catch (error) {
-      setError("Login failed. Please check your credentials.");
+      // setError("Login failed. Please check your credentials.");
+      console.error("Login Failed!")
     }
   };
 
@@ -166,7 +167,7 @@ const LoginSignUp = () => {
                 Remember for 3 day!
               </label>
             </div>
-            {error && <p className="error">{error}</p>}
+            {/* {error && <p className="error">{error}</p>} */}
             <a href="#">Forgot Your Password?</a>
             <button className="btn-tdn" type="submit">
               Sign In
