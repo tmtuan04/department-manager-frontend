@@ -33,6 +33,7 @@ type BodyProps<T> = {
 
 const StyledTable = styled.div`
   border: 1px solid var(--color-grey-200);
+  border-radius: 14px;
   font-size: 14px;
   background-color: var(--color-grey-0);
   overflow: hidden;
@@ -100,13 +101,12 @@ const StyledBody = styled.section`
 `;
 
 const Footer = styled.footer`
-  background-color: var(--color-grey-700);
+  background-color: var(--color-grey-0);
   color: var(--color-grey-0);
   border-bottom-right-radius: 15px;
   border-bottom-left-radius: 15px;
   display: flex;
   justify-content: center;
-  padding: 12px;
 
   &:not(:has(*)) {
     display: none;
