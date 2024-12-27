@@ -2,7 +2,10 @@ import React from 'react'
 import "./Button.css"
 
 
-// Phần này chỉ là test thôi nhé, không cần thiết lắm
+/*
+Phần này chỉ là test thôi nhé, không cần thiết lắm
+*/
+
 
 interface ButtonProps {
     text: string;

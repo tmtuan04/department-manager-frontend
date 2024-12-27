@@ -1,0 +1,11 @@
+.home-page {
+    min-width: 100%;
+    background-color: #000235;
+    overflow-x: hidden;
+}
+
+.container-tdn {
+    max-width: 1140px;
+    margin-left: auto;
+    margin-right: auto;
+}

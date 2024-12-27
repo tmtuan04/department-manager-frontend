@@ -1,0 +1,115 @@
+.home {
+    width: 100%;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+}
+
+.home::before {
+    content: "";
+    position: absolute; 
+    opacity: 0.4;
+    background: linear-gradient(217deg, #ffffff, rgba(255, 255, 255, 0) 70.71%), linear-gradient(127deg, #ffffff, rgba(255, 255, 255, 0) 70.71%), linear-gradient(336deg, #ffffff, rgba(255, 255, 255, 0) 70.71%);
+    border-radius: 50%;
+    font-size: 350px;
+    height: 1em;
+    width: 1em;
+    filter: blur(60px);
+    transform: translate(200px, -50%);
+    z-index: 1000;
+}
+
+.home::after {
+    content: "";
+    position: absolute; 
+    opacity: 0.5;
+    background: linear-gradient(217deg, #ffffff, rgba(255, 255, 255, 0) 70.71%), linear-gradient(127deg, #ffffff, rgba(255, 255, 255, 0) 70.71%), linear-gradient(336deg, #ffffff, rgba(255, 255, 255, 0) 70.71%);
+    border-radius: 50%;
+    font-size: 350px;
+    height: 1em;
+    width: 1em;
+    filter: blur(60px);
+    top: 50%;
+    right: 0;
+    transform: translate(50%, -50%);
+    z-index: 1000;
+}
+
+.full-height-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    min-width: 100vw;
+}
+
+.home__main {
+    /* padding-top: 150px; */
+    margin: 100px 0;
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+}
+
+.home__main .main__left {
+    width: 40%;
+}
+
+.home__main .main__left .left__title {
+    font-size: 50px;
+    font-weight: 700;
+    line-height: 60px;
+    margin-bottom: 20px;
+}
+
+.home__main .left__desc {
+    font-size: 13px;
+    margin-bottom: 20px;
+}
+
+.home__main .left__button {
+    /* position: fixed; */
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.home__main .left__button .button {
+    color: #fff;
+    font-size: 20px;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 16px 28px;
+    border: 1px solid #77B8B8;
+    border-radius: 10px;
+    background-color: transparent;
+    width: calc(100%/2 - 10px);
+    text-align: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.home__main .left__button .button__active.button {
+    background-color: #8D8CDA;
+    border: 1px solid #8D8CDA;
+}
+
+.home__main .left__button .button-contact:hover {
+    background-color: #8D8CDA;
+    border: #8D8CDA;
+}
+
+/* .home__main .main__right {
+    margin-left: 40px;
+} */
+
+.home__main .right__img {
+    margin-left: 140px;
+    /* width: 100%; */
+    aspect-ratio: 4/3;
+    text-align: right;
+}
+
+.home__main .right__img img {
+    width: 100%;
+    object-fit: cover;
+}

@@ -1,0 +1,122 @@
+.contact-us {
+    background-color: #E6E0E2;
+    padding: 90px 0 0 0;
+    /* margin: 80px; */
+    min-height: 100vh;
+    
+}
+
+.inner-contact-us {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.contact-us__title {
+    font-size: 45px;
+    font-weight: 700;
+    color: #000235;
+    position: relative;
+    width: max-content;
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.contact-us__title::before {
+    content: "";
+    border-bottom: 9px solid #000235;
+    width: 60%;
+    display: inline-block;
+    border-radius: 5px;
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+.contact-us .contact-us__body {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin-bottom: 50px;
+}
+
+.contact-us .contact-us__body .body__left {
+    width: 45%;
+}
+
+.contact-us .body__left .left__item {
+    display: flex;
+    gap: 10px;
+    padding: 17px 10px;
+    align-items: center;
+}
+
+.contact-us .body__left .left__item .icon {
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contact-us .body__left .left__item .content {
+    font-weight: 400;
+    font-size: 15px;
+}
+
+
+.contact-us .body__right {
+    width: 45%;
+    
+}
+
+.contact-us .body__right .right-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    gap: 20px;
+}
+
+.contact-us .body__right .right-form .form__input {
+    width: 100%;
+    text-align: center;
+}
+
+
+.contact-us .body__right .right-form .form__input input {
+    width: 100%;
+    padding: 20px;
+    border-radius: 10px;
+    font-size: 14px;
+    border: 1px solid #000235;
+}
+
+.contact-us .body__right .right-form .form__input input:focus {
+    outline: none;
+}
+
+
+.contact-us .body__right .right-form .form__input textarea {
+    width: 100%;
+    border-radius: 10px;
+    padding: 20px;
+    height: 200px;
+    font-size: 14px;
+    border: 1px solid #000235;
+}
+
+.contact-us .body__right .right-form .form__input textarea:focus {
+    outline: none;
+}
+
+.contact-us .body__right .right-form .form__input button {
+    background-color: #322B66;
+    color: #fff;
+    padding: 12px 36px;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 10px;
+}
