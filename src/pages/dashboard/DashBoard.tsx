@@ -1,6 +1,7 @@
 import "./DashBoard.css";
 import Apartments from "./mainContent/Apartment";
 import FeesAndFunds from "./mainContent/FeesAndFunds";
+import Overview from "./mainContent/Overview";
 import Resident from "./mainContent/Resident";
 import Statistics from "./mainContent/Statistics";
 import Vehicles from "./mainContent/Vehicles";
@@ -14,11 +15,12 @@ const DashBoard = () => {
       <div className="dashboard-content" style={{ flex: 1 }}>
         {/* Routes */}
         <Routes>
+          <Route path="/" element={<Overview />}></Route>
           <Route path="/residents" element={<Resident />}></Route>
           <Route path="/apartments" element={<Apartments />}></Route>
           <Route path="/fee-and-fund" element={<FeesAndFunds />}></Route>
           <Route path="/vehicles" element={<Vehicles />}></Route>
-          <Route path="/statistics" element={<Statistics />} ></Route>
+          <Route path="/statistics" element={<Statistics />}></Route>
         </Routes>
       </div>
     </div>
