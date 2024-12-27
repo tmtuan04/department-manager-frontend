@@ -28,10 +28,19 @@ export const GlobalStyles = createGlobalStyle`
   --color-blue-500: #3b82f6;
   --color-blue-700: #0369a1;
 
+  --color-cyan-700:#0e7490;
+  --color-cyan-100: #cffafe;
+
+  --color-emerald-700:#047857;
+  --color-emerald-100:#d1fae5;
+
+  --color-pink-700:#be185d;
   --color-pink-500:#ec4899;
-
+  --color-pink-100:#fce7f3;
+  
+  --color-purple-700:#7e22ce;
   --color-purple-500:#a855f7;
-
+  --color-purple-100:#f3e8ff;
 
   --color-green-100: #dcfce7;
   --color-green-200: #bbf7d0;
