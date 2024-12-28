@@ -64,6 +64,7 @@ const Title = styled.label`
   text-align: center;
   font-weight: 700;
   font-size: 25px;
+  color: #374151;
   text-decoration: underline;
 `;
 

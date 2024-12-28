@@ -32,6 +32,9 @@ const Heading = styled.h1`
 
   line-height:1.4;
   color: var(--color-grey-700);
+  display: flex;
+  align-items: center;
+  gap: 20px;
 `;
 
 export default Heading;

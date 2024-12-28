@@ -5,11 +5,13 @@ import Modal from "../../components/Modal";
 import ResidentForm from "./ResidentForm";
 
 export default function ResidentRow({ resident }: any) {
-  const { id, apartmentId, name, dob, status } = resident;
+  const { id, apartmentId, name, dob, status, gender } = resident;
 
   const statusStyled = {
-    active: "green",
-    moved: "red",
+    Resident: "green",
+    Moved: "red",
+    Temporary: "pink",
+    Absent: "yellow",
   };
 
   return (
@@ -19,8 +21,15 @@ export default function ResidentRow({ resident }: any) {
       <div>{id}</div>
       <div>{apartmentId}</div>
       <div>{name}</div>
+      <div>{gender}</div>
       <div>{dob}</div>
-      <Tag type={statusStyled[status as "active" | "moved"] || "grey"}>
+      <Tag
+        type={
+          statusStyled[
+            status as "Resident" | "Moved" | "Temporary" | "Absent"
+          ] || "grey"
+        }
+      >
         {capitalize(status) || "Unknown"}
       </Tag>
       <Modal>

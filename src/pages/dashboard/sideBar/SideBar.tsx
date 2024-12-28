@@ -1,15 +1,23 @@
 import "./sideBar.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const SideBar = () => {
   const [extended, setExtended] = useState(false);
+  const [name, setName] = useState("");
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const storedName = localStorage.getItem("name");
+    if (storedName) {
+      setName(storedName);
+    }
+  }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("accessToken");
-    toast.success("Logout successful!")
+    toast.success("Logout successful!");
     navigate("/");
   };
 
@@ -78,11 +86,11 @@ const SideBar = () => {
           <span className="tooltip">Statistics</span>
         </li>
         <li>
-          <a href="#">
+          <Link to="/dashboard/invoices">
             <i className="bx bxs-cog"></i>
-            <span className="links_name">Setting</span>
-          </a>
-          <span className="tooltip">Setting</span>
+            <span className="links_name">Invoices</span>
+          </Link>
+          <span className="tooltip">Invoices</span>
         </li>
       </ul>
       <div className="profile_content">
@@ -90,10 +98,10 @@ const SideBar = () => {
           <div className="profile_details">
             <img
               src="https://i.pinimg.com/564x/5e/7b/9c/5e7b9c338994683cdadd9b52d95223cc.jpg"
-              alt="Tuan dep trai profile"
+              alt="Admin profile"
             />
             <div className="name_role">
-              <div className="name">Tu Minh Tuan</div>
+              <div className="name">{name || "Unknown User"}</div>
               <div className="role">Manager</div>
             </div>
           </div>

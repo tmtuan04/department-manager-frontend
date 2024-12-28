@@ -3,7 +3,7 @@ import { useState } from "react";
 import axios from "axios";
 import { AuthService } from "../../services/AuthService";
 import { useNavigate } from "react-router-dom";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 
 // Component LoginSignUp dùng để hiển thị các form đăng nhập và đăng ký
 const LoginSignUp = () => {
@@ -11,7 +11,6 @@ const LoginSignUp = () => {
   const [isSignUpActive, setIsSignUpActive] = useState(false);
   const [loginData, setLoginData] = useState({ username: "", password: "" });
   const [registerData, setRegisterData] = useState({ name: "", username: "", password: "", confirm: "" });
-  const [error, setError] = useState("");
 
   const navigate = useNavigate();
 
@@ -21,39 +20,42 @@ const LoginSignUp = () => {
 
   const handleSignUp = async (e: any) => {
     e.preventDefault();
-    setError("");
 
     try {
       const response = await axios.post("http://localhost:8080/api/v1/users/register", {
-        // Vế trái này khớp với định nghĩa bên API
         name: registerData.name,
         username: registerData.username,
         password: registerData.password,
-      })
-    } catch(error){
-      setError("SignUp failed..");
+      });
+
+      if (response.status === 201) {
+        localStorage.setItem("name", response.data.data.name);
+
+        navigate("/dashboard");
+        toast.success("SignUp Successfull, Please SignIn");
+      }
+    } catch (error) {
+      console.error(error);
     }
-  }
+  };
 
   const handleLogin = async (e: any) => {
     e.preventDefault();
-    setError("");
 
     try {
-      const response = await axios.post(
-        "http://localhost:8080/api/v1/auth/login",
-        {
-          username: loginData.username,
-          password: loginData.password,
-        }
-      );
-      localStorage.setItem('accessToken', response.data.data.accessToken);
+      const response = await axios.post("http://localhost:8080/api/v1/auth/login", {
+        username: loginData.username,
+        password: loginData.password,
+      });
+      localStorage.setItem("accessToken", response.data.data.accessToken);
+      localStorage.setItem("name", response.data.data.user.name);
 
       // Điều hướng khi đăng nhập thành công
-      navigate('/dashboard');
-      toast.success("Login successful!")
+      navigate("/dashboard");
+      toast.success("Login successful!");
     } catch (error) {
-      setError("Login failed. Please check your credentials.");
+      // setError("Login failed. Please check your credentials.");
+      console.error("Login Failed!")
     }
   };
 
@@ -62,10 +64,7 @@ const LoginSignUp = () => {
       const url = await AuthService.authenticate("google");
       window.location.href = url;
     } catch (error: any) {
-      console.error(
-        "Lỗi xác thực với Google: ",
-        error?.response?.data?.message || ""
-      );
+      console.error("Lỗi xác thực với Google: ", error?.response?.data?.message || "");
     }
   };
 
@@ -76,13 +75,10 @@ const LoginSignUp = () => {
 
   return (
     <div className="main-sign-in-up">
-      <div
-        className={`container-dn ${isSignUpActive ? "active" : ""}`}
-        id="container"
-      >
+      <div className={`container-dn ${isSignUpActive ? "active" : ""}`} id="container">
         {/* Sign Up Form */}
         <div className="form-container sign-up">
-          <form action="">
+          <form onSubmit={handleSignUp}>
             <div className="header">
               <h1 className="text">Create Account</h1>
               <div className="underline"></div>
@@ -93,6 +89,8 @@ const LoginSignUp = () => {
                   className="w-full outline-blue-500 border-2 border-gray-400 rounded-xl p-3 mt-1 bg-transparent"
                   type="text"
                   placeholder="Name"
+                  value={registerData.name}
+                  onChange={(e) => setRegisterData({ ...registerData, name: e.target.value })}
                 />
               </div>
               <div className="input">
@@ -101,6 +99,8 @@ const LoginSignUp = () => {
                   type="email"
                   placeholder="Email"
                   autoComplete="username"
+                  value={registerData.username}
+                  onChange={(e) => setRegisterData({ ...registerData, username: e.target.value })}
                 />
               </div>
               <div className="input">
@@ -108,6 +108,8 @@ const LoginSignUp = () => {
                   className="w-full outline-blue-500 border-2 border-gray-400 rounded-xl p-3 mt-1 bg-transparent"
                   type="password"
                   placeholder="Password"
+                  value={registerData.password}
+                  onChange={(e) => setRegisterData({ ...registerData, password: e.target.value })}
                   autoComplete="new-password"
                 />
               </div>
@@ -116,6 +118,8 @@ const LoginSignUp = () => {
                   className="w-full outline-blue-500 border-2 border-gray-400 rounded-xl p-3 mt-1 bg-transparent"
                   type="password"
                   placeholder="Confirm password"
+                  value={registerData.confirm}
+                  onChange={(e) => setRegisterData({ ...registerData, confirm: e.target.value })}
                   autoComplete="new-password"
                 />
               </div>
@@ -163,7 +167,7 @@ const LoginSignUp = () => {
                 Remember for 3 day!
               </label>
             </div>
-            {error && <p className="error">{error}</p>}
+            {/* {error && <p className="error">{error}</p>} */}
             <a href="#">Forgot Your Password?</a>
             <button className="btn-tdn" type="submit">
               Sign In
@@ -211,23 +215,19 @@ const LoginSignUp = () => {
           <div className="toggle">
             <div className="toggle-panel toggle-left">
               <h1 className="text-tdn">Welcome Back!</h1>
-              <p>If you already have an account, <strong>Sign in</strong></p>
-              <button
-                id="login"
-                className="btn-tdn-2"
-                onClick={() => handleToggle("login")}
-              >
+              <p>
+                If you already have an account, <strong>Sign in</strong>
+              </p>
+              <button id="login" className="btn-tdn-2" onClick={() => handleToggle("login")}>
                 Sign In
               </button>
             </div>
             <div className="toggle-panel toggle-right">
               <h1 className="text-tdn">Hello Friend!</h1>
-              <p>Do you have an accout? If not, please <strong>Sign Up</strong></p>
-              <button
-                id="register"
-                className="btn-tdn-2"
-                onClick={() => handleToggle("register")}
-              >
+              <p>
+                Do you have an accout? If not, please <strong>Sign Up</strong>
+              </p>
+              <button id="register" className="btn-tdn-2" onClick={() => handleToggle("register")}>
                 Sign Up
               </button>
             </div>

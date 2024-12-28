@@ -4,15 +4,20 @@ import FormField from "../../components/FormField";
 import Selector from "../../components/Selector";
 import Button from "../../components/Button";
 import { HiOutlinePlusCircle, HiPencil, HiTrash } from "react-icons/hi2";
+import axios from "axios";
+import { toast } from "react-toastify";
+
 
 export default function FeeAndFundForm({ feeOrFund }: any) {
   const [formValues, setFormValues] = useState({
+    id: feeOrFund?.id || "",
     name: feeOrFund?.name || "",
-    unitCost: feeOrFund?.unitCost || "",
+    unitPrice: feeOrFund?.unitPrice || "",
     description: feeOrFund?.description || "",
-    type: feeOrFund?.type || "",
+    feeTypeEnum: feeOrFund?.feeTypeEnum || "",
+    createdAt: feeOrFund?.createdAt || "",
   });
-  const typeOptions = ["Fee", "Fund"];
+  const typeOptions = ["DepartmentFee", "ContributionFund"];
 
   const handleChange = (e: any) => {
     const { id, value } = e.target;
@@ -22,18 +27,64 @@ export default function FeeAndFundForm({ feeOrFund }: any) {
     }));
   };
 
-  const handleSubmit = (e: any) => {
+  const handleUpdate = async (e: any) => {
+    e.preventDefault();
+
+    const data = {
+      id: feeOrFund.id,
+      name: formValues.name,
+      unitPrice: formValues.unitPrice,
+      description: formValues.description,
+      feeTypeEnum: formValues.feeTypeEnum,
+    }
+
+    try {
+      const response = await axios.put("http://localhost:8080/api/v1/fees", data);
+      console.log("Update Successfull!")
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  const handleDelete = async (e: any) => {
+    e.preventDefault();
+
+    try {
+      // Xoá Fee-Fund theo ID
+      const response = await axios.delete(`http://localhost:8080/api/v1/fees/${formValues.id}`);
+      console.log("Delete Successfull!");
+    } catch (err) {
+      console.log(err);
+    }
+
+  }
+
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     console.log(formValues);
-    // Add submit logic here
+    
+    const data = {
+      name: formValues.name,
+      unitPrice: formValues.unitPrice,
+      description: formValues.description,
+      feeTypeEnum: formValues.feeTypeEnum,
+    }
+
+    try {
+      const response = await axios.post("http://localhost:8080/api/v1/fees", data);
+      toast.success(`Add ${formValues.name} Successfull!`);
+      
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
     <Form width="400px" onSubmit={handleSubmit}>
       <Selector
-        value={formValues.type}
+        value={formValues.feeTypeEnum}
         onChange={handleChange}
-        id="type"
+        id="feeTypeEnum"
         options={typeOptions}
         label={"Type:"}
       ></Selector>
@@ -49,31 +100,42 @@ export default function FeeAndFundForm({ feeOrFund }: any) {
       </FormField>
 
       <FormField>
-        <FormField.Label label={"Unit Cost"} />
+        <FormField.Label label={"Unit Price"} />
         <FormField.Input
-          id="unitCost"
+          id="unitPrice"
           type="text"
-          value={formValues.unitCost}
+          value={formValues.unitPrice}
           onChange={handleChange}
+        />
+      </FormField>
+
+      <FormField>
+        <FormField.Label label={"Created At"} />
+        <FormField.Input
+          id="createdAt"
+          type="text"
+          value={formValues.createdAt}
+          onChange={handleChange}
+          readOnly
         />
       </FormField>
 
       <label>Description: </label>
       <Form.TextArea
-        id="desciption"
+        id="description"
         value={formValues.description}
         onChange={handleChange}
       />
 
       {feeOrFund ? (
         <Form.Buttons>
-          <Button variation="danger" size="medium">
+          <Button variation="danger" size="medium" onClick={handleDelete}>
             Delete
             <span>
               <HiTrash />
             </span>
           </Button>
-          <Button variation="secondary" size="medium">
+          <Button variation="secondary" size="medium" onClick={handleUpdate}>
             Update
             <span>
               <HiPencil />
@@ -82,7 +144,7 @@ export default function FeeAndFundForm({ feeOrFund }: any) {
         </Form.Buttons>
       ) : (
         <Form.Buttons>
-          <Button size="medium" variation="primary">
+          <Button size="medium" variation="primary" onClick={handleSubmit}>
             Add
             <span>
               <HiOutlinePlusCircle />
