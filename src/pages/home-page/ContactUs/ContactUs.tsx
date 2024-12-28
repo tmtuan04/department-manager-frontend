@@ -119,7 +119,7 @@ const ContactUs = () => {
                                         value={stateFormContact.email}
                                         required
                                     />
-                                </div>
+                             </div>
                                 <div className="form__input">
                                     <textarea
                                         name="message"
@@ -127,6 +127,7 @@ const ContactUs = () => {
                                         onChange={(e) => handleChangeInput(e, 'message')}
                                         value={stateFormContact.message}
                                         required
+                                        spellCheck="false"
                                     ></textarea>
                                 </div>
 

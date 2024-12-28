@@ -38,9 +38,9 @@ export default function VehiclesTable() {
       {vehicles.map((vehicle) => (
         <VehicleRow vehicle={vehicle} />
       ))}
-      <Table.Footer>
+      {/* <Table.Footer>
         <Pagination count={vehicles.length} />
-      </Table.Footer>
+      </Table.Footer> */}
     </Table>
   );
 }

@@ -32,9 +32,9 @@ const StatisticsTable = () => {
         <StatisticsRow key={statistic.addressNumber} statistic={statistic} />
       ))}
 
-        <Table.Footer>
+        {/* <Table.Footer>
           <Pagination count={statistics.length} />
-        </Table.Footer>       
+        </Table.Footer>        */}
     </Table>
   )
 }

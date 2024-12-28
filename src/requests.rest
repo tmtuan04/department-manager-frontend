@@ -29,17 +29,21 @@ POST  http://localhost:8080/api/v1/residents
 Content-Type: application/json
 
 {
-    "id": "1",
-    "name": "Tu Minh Tuan",
+    "name": "Tran Nguyen",
     "dob": "2004-11-18",
-    "status": "Resident"
+    "status": "Resident",
+    "gender": "Male",
+    "cic": "1234567890",
+    "apartmentId": "100"
 }
 
-### GET: Lấy thông tin các cư dân (Successful)
-GET http://localhost:8080/api/v1/residents?size=5&page=0
 
-# Descriptiton: ?size=5&page=0, số lượng kết quả trả về mỗi trang là 5 (trả về 5 cư dân mỗi khi gọi API)
-# Bắt đầu từ trang 0 (Ví dụ 10 cư dân, thì định nghĩa 5-1 sẽ trả về 5 dân cư ở cuối)
+### GET: Lấy thông tin các cư dân (Successful)
+GET http://localhost:8080/api/v1/residents?size=5&page=1
+
+
+### DELETE: Xoá cư dân theo id
+DELETE http://localhost:8080/api/v1/residents/2
 
 
 #########################################################
@@ -151,3 +155,14 @@ Content-Type: application/json
 ### GET ALL: Lấy thông tin tất cả các hoá đơn (Successful)
 
 GET http://localhost:8080/api/v1/invoices
+
+### GET: Lấy thông tin tất cả cả hoá đơn theo căn hộ
+GET http://localhost:8080/api/v1/invoiceapartment/100
+
+
+#########################################################
+
+# Utility API
+
+### GET: Lấy thông tin hoá đơn tiện ích từ từng căn hộ
+GET http://localhost:8080/api/v1/utilitybills/100

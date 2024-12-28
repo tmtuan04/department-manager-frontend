@@ -19,7 +19,7 @@ export default function StatisticsRow({ statistic }: StatisticsProps) {
           <button>Details</button>
         </Modal.Open>
 
-        <Modal.Window id="details" name="List of Billing for Apartment TC-312A">
+        <Modal.Window id="details" name="List of Billing">
           <StatisticsForm statistic={statistic} />
         </Modal.Window>
       </Modal>

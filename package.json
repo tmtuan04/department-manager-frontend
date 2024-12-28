@@ -10,6 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.7.2",
+    "@fortawesome/free-solid-svg-icons": "^6.7.2",
+    "@fortawesome/react-fontawesome": "^0.2.2",
     "@heroicons/react": "^2.2.0",
     "@supabase/supabase-js": "^2.47.2",
     "@tanstack/react-query": "^5.62.3",
@@ -29,7 +32,8 @@
     "react-toastify": "^10.0.6",
     "slick-carousel": "^1.8.1",
     "styled-components": "^6.1.13",
-    "typed.js": "^2.1.0"
+    "typed.js": "^2.1.0",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",

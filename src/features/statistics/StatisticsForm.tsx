@@ -1,7 +1,14 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import "./form.css";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const StatisticsForm = () => {
+  // Lưu trữ thông tin Invoice
+  const [dataInvoice, setDataInvoice] = useState<any[]>([]);
+  // Lưu trữ thông tin
+  const [dataUtility, setDataUtility] = useState<any[]>([]);
+
   // State to manage open/close status of each billing detail
   const [openDropdowns, setOpenDropdowns] = useState({
     september: false,
@@ -17,9 +24,25 @@ const StatisticsForm = () => {
     }));
   };
 
+  // Invoice API cho từng căn hộ
+  const apiInvoice = async () => {
+
+    try {
+      const response = await axios.get(`http://localhost:8080/api/v1/invoiceapartment/100`);
+      console.log(response.data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  useEffect(() => {
+    apiInvoice();
+  }, []);
+
   return (
     <div className="wra">
       <div className="cts">
+        <p className="invoiceText">Invoice (Fee and Fund):</p>
         {/* September Bill */}
         <div
           className="billing-header incomplete"
@@ -55,6 +78,7 @@ const StatisticsForm = () => {
           </div>
         )}
 
+        <p className="invoiceText">Utility Bill:</p>
         {/* August Bill */}
         <div
           className="billing-header complete"
@@ -68,7 +92,9 @@ const StatisticsForm = () => {
         </div>
         {openDropdowns.august && (
           <div className="billing-details">
-            <p className="pText">All payments for August have been completed.</p>
+            <p className="pText">
+              All payments for August have been completed.
+            </p>
           </div>
         )}
 
@@ -85,7 +111,9 @@ const StatisticsForm = () => {
         </div>
         {openDropdowns.july && (
           <div className="billing-details">
-            <p className="text-black">All payments for July have been completed.</p>
+            <p className="text-black">
+              All payments for July have been completed.
+            </p>
           </div>
         )}
       </div>

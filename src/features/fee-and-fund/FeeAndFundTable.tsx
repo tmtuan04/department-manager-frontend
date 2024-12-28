@@ -51,9 +51,9 @@ export default function FeeAndFundTable() {
       {feesAndFunds.map((feeOrFund: any) => (
         <FeeAndFundRow key={feeOrFund.id} feeOrFund={feeOrFund} />
       ))}
-      <Table.Footer>
+      {/* <Table.Footer>
         <Pagination count={feesAndFunds.length} />
-      </Table.Footer>
+      </Table.Footer> */}
     </Table>
     </>
   );

@@ -1,0 +1,77 @@
+.ctn-tdn {
+    width: 700px;
+    height: inherit;
+}
+
+
+#upload {
+    display: none;
+}
+
+#uploadLabel {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    position: relative;
+    top: 10px;
+    left: 10px;
+    font-weight: 400;
+    color: #fff;
+    padding: 6px 10px;
+    background-color: #67C16E;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.table-tdn {
+    margin-top: 30px;
+    display: flex;
+    justify-content: flex-start; /* Canh trên cùng cho các phần tử */
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    height: 70%; /* Để toàn bộ chiều cao */
+    position: relative;
+}
+
+.saveBtn {
+    margin-top: auto; /* Đẩy nút xuống dưới */
+    align-self: center; /* Đưa nút ra giữa theo chiều ngang */
+}
+
+
+#utilityLabel {
+    color: #374151;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.saveBtn {
+    position: relative;
+    /* bottom: 10px; */
+    top: 15px;
+    font-weight: 400;
+    color: #fff;
+    padding: 6px 10px;
+    background-color: #67C16E;
+    border-radius: 8px;
+    cursor: pointer;
+    /* float: bottom; */
+}
+
+.file-name {
+    color: black;
+    position: relative;
+    left: 10px;
+    top: 20px;
+}
+
+.inputName {
+    margin-top: 10px;
+}
+
+#billName {
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 4px 8px;
+}

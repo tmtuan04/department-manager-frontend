@@ -125,3 +125,9 @@ td {
   font-weight: 400;
   font-size: 14px;
 }
+
+.invoiceText {
+  color: #000012;
+  font-weight: 600;
+  margin-bottom: 10px;
+}

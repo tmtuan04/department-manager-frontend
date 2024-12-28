@@ -38,9 +38,9 @@ const InvoiceTable = () => {
       {invoices.map((invoice: any) => (
         <InvoiceRow key={invoice.id} invoice={invoice} />
       ))}
-      <Table.Footer>
+      {/* <Table.Footer>
         <Pagination count={invoices.length} />
-      </Table.Footer>
+      </Table.Footer> */}
     </Table>
   );
 };
