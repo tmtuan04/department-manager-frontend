@@ -101,6 +101,11 @@ export default function ApartmentForm({
         `http://localhost:8080/api/v1/apartments/${formValues.addressNumber}`,
         data
       );
+
+      setTimeout(() => {
+        window.location.reload();
+      }, 1500);
+
       toast.success("Update Sucessfull");
     } catch (err) {
       toast.error(`Có lỗi xảy ra`);
@@ -126,6 +131,9 @@ export default function ApartmentForm({
       );
 
       toast.success("Add Apartment Successful");
+      setTimeout(() => {
+        window.location.reload();
+      }, 1500);
       fetchApartments();
       setFormValues({
         addressNumber: "",
@@ -138,14 +146,28 @@ export default function ApartmentForm({
       });
       setSelectedResidents([]);
     } catch (error) {
-      toast.error(`Có lỗi xảy ra`);
+      // toast.error(`Có lỗi xảy ra`);
+      console.error(error);
     }
   };
 
   const statusOptions = ["Business", "Residential"];
 
+  // API xoá căn hộ (delete)
+
+  // const handleDelete = async (e: any) => {
+  //   e.preventDefault();
+
+  //   try {
+  //     const response = await axios.delete(``)
+  //   } catch (err) {
+  //     toast.error("Có lỗi xảy ra");
+  //   }
+
+  // }
+
   return (
-    <Form width="800px" onSubmit={handleSubmit}>
+    <Form width="800px">
       <label>Room:</label>
       <Form.Fields type="horizontal">
         <FormField>

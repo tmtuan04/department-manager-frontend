@@ -29,8 +29,8 @@ export default function ResidentForm({ resident, onCloseModal }: any) {
     }));
   };
 
-  const handleSubmit = async () => {
-    // console.log(formValues);
+  const handleAddResident = async (e: any) => {
+    e.preventDefault();
     
     const data = {
       id: formValues.id,
@@ -40,16 +40,21 @@ export default function ResidentForm({ resident, onCloseModal }: any) {
       status: formValues.status,
       gender: formValues.gender
     }
-    console.log(data);  
+    // console.log(data);  
 
     try {
       const response = await axios.post(
         "http://localhost:8080/api/v1/residents",
         data
       );
-      toast.success(`Add ${formValues.name} Successfull!`);
+
+      toast.success(`Add Resident Successfull!`);
+
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+
     } catch (err) {
-      console.error(err);
       toast.error("Có lỗi xảy ra!!");
     }
   };
@@ -58,7 +63,10 @@ export default function ResidentForm({ resident, onCloseModal }: any) {
     try {
       console.log(formValues.id);
       const response = await axios.delete(`http://localhost:8080/api/v1/residents/${formValues.id}`)
-      console.log(response.data);
+      // console.log(response.data);
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
       toast.success("Delete successful");
     } catch (err) {
       toast.error("Có lỗi xảy ra!!")
@@ -67,7 +75,7 @@ export default function ResidentForm({ resident, onCloseModal }: any) {
   }
 
   return (
-    <Form onSubmit={handleSubmit} width="400px">
+    <Form width="400px">
       <div>
         <label>Information:</label>
         <Form.Fields>
@@ -140,17 +148,17 @@ export default function ResidentForm({ resident, onCloseModal }: any) {
               <HiTrash />
             </span>
           </Button>
-          <Button type="button" variation="secondary" size="medium">
+          {/* <Button type="button" variation="secondary" size="medium">
             Update
             <span>
               <HiPencil />
             </span>
-          </Button>
+          </Button> */}
         </Form.Buttons>
       ) : (
         <Form.Buttons>
           <Button
-            onClick={handleSubmit}
+            onClick={handleAddResident}
             size="medium"
             variation="primary"
             type="submit"

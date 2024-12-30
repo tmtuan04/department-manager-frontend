@@ -30,7 +30,7 @@ const InvoiceTable = ({keyword}: InvoicesTableProps) => {
     }, [keyword])
 
     return (
-    <Table columns="0.5fr 1fr 1.5fr 1fr">
+    <Table columns="0.5fr 1.5fr 1fr 1fr">
       <Table.Header>
         <div>ID</div>
         <div>Name</div>

@@ -33,8 +33,12 @@ export default function VehicleForm({ vehicle }: any) {
         data: { id: formValues.id }, // Payload gửi kèm
         headers: { "Content-Type": "application/json" }, // Đảm bảo header đúng
       });
+      
+      // console.log(response.data);
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
       toast.success("Delete vehicle successfull!");
-      console.log(response.data);
     } catch (error) {
       toast.error("Có lỗi xảy ra");
       // console.log(error);
@@ -56,7 +60,9 @@ export default function VehicleForm({ vehicle }: any) {
       const response = await axios.post(
         "http://localhost:8080/api/v1/vehicles", vehicleData
       );
-      
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
       toast.success("Add vehicle successfull");
     } catch (error) {
       toast.error("Có lỗi xảy ra");
@@ -77,7 +83,7 @@ export default function VehicleForm({ vehicle }: any) {
           />
         </FormField>
 
-        <FormField>
+        {/* <FormField>
           <FormField.Label label={"Date"} />
           <FormField.Input
             id="ownerName"
@@ -85,7 +91,7 @@ export default function VehicleForm({ vehicle }: any) {
             value={formValues.registerDate}
             onChange={handleChange}
           />
-        </FormField>
+        </FormField> */}
 
         <FormField>
           <FormField.Label label={"Number"} />
