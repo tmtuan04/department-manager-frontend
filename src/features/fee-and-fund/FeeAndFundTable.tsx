@@ -6,14 +6,18 @@ import axios from "axios";
 import FeeAndFundForm from "./FeeAndFundForm";
 
 
-export default function FeeAndFundTable() {
+interface FeeAndFundTableProps {
+  keyword: string;
+}
+
+export default function FeeAndFundTable({keyword}: FeeAndFundTableProps) {
   const [feesAndFunds, setFeesAndFunds] = useState([]);
   const [isFormVisible, setIsFormVisible] = useState(false); // State điều khiển việc hiển thị form
 
 
   const apiFeesAndFunds = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/api/v1/fees")
+      const response = await axios.get(`http://localhost:8080/api/v1/fees?filter=name~'${keyword}'`)
       console.log(response.data.data.result);
 
       setFeesAndFunds(response.data.data.result);
@@ -24,7 +28,7 @@ export default function FeeAndFundTable() {
 
   useEffect(() => {
     apiFeesAndFunds();
-  }, []);
+  }, [keyword]);
 
   return (
     <>

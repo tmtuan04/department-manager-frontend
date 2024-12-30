@@ -4,61 +4,46 @@ import Pagination from "../../components/Pagination";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const PAGE_SIZE = 10;
 
-export default function ResidentsTable({}) {
+interface ResidentsTableProps {
+  keyword: string;
+}
+
+
+export default function ResidentsTable({keyword}: ResidentsTableProps) {
   const [residents, setResidents] = useState<any[]>([]);
-  const [totalPages, setTotalPages] = useState<number>(0);
-  const [totalElements, setTotalElements] = useState<number>(0);
-  const [curPage, setCurPage] = useState<number>(1);
 
-  const apiResidents = async (page: number = 2) => {
+  const apiResidents = async () => {
     try {
-      const response = await axios.get(
-        `http://localhost:8080/api/v1/residents?size=${PAGE_SIZE}&page=${page}`
-      );
-      // console.log(response.data.data.result);
+      const response = await axios.get(`http://localhost:8080/api/v1/residents?size=10&page=1&filter=name~'${keyword}'`);
       setResidents(response.data.data.result);
-      setTotalPages(response.data.data.totalPages);
-      setTotalElements(response.data.data.totalElements);
     } catch (error) {
       console.error(error);
     }
-  };
+  }
 
   useEffect(() => {
-    apiResidents(curPage);
-  }, [curPage]);
-
-  const handlePageChange = (page: number) => {
-    setCurPage(page);
-  };
-
+    apiResidents();
+  }, [keyword]);
   return (
-    <Table columns="0.5fr 0.7fr 1.5fr 1fr 0.8fr 1fr 1fr 1fr">
+    <Table columns="0.5fr 1fr 1.5fr 1fr 2fr 1.2fr 1.2fr">
       <Table.Header>
-        <div>STT</div>
+        <div>CCCD</div>
         <div>Room</div>
         <div>Name</div>
-        <div>CCCD</div>
         <div>Gender</div>
         <div>DOB</div>
         <div>Status</div>
         <div>Actions</div>
       </Table.Header>
 
-      {residents.map((resident, index) => (
-        <ResidentRow resident={resident} index={index} />
+      {residents.map((resident) => (
+        <ResidentRow resident={resident} />
       ))}
 
-      <Table.Footer>
-        <Pagination
-          totalPages={totalPages}
-          curPage={curPage}
-          totalElements={totalElements}
-          onPageChange={handlePageChange}
-        />
-      </Table.Footer>
+      {/* <Table.Footer>
+        <Pagination count={residents.length} />
+      </Table.Footer> */}
     </Table>
   );
 }
