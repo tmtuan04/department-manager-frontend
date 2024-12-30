@@ -4,7 +4,7 @@ import { capitalize } from "../../utils/helpers";
 import Modal from "../../components/Modal";
 import ResidentForm from "./ResidentForm";
 
-export default function ResidentRow({ resident }: any) {
+export default function ResidentRow({ resident, index }:{ resident: any; index: number }) {
   const { id, apartmentId, name, dob, status, gender } = resident;
 
   const statusStyled = {
@@ -18,9 +18,10 @@ export default function ResidentRow({ resident }: any) {
     <Table.Row key={id}>
       {" "}
       {/* Ensure the row is uniquely identified */}
-      <div>{id}</div>
+      <div>{index + 1}</div>
       <div>{apartmentId}</div>
       <div>{name}</div>
+      <div>{id}</div>
       <div>{gender}</div>
       <div>{dob}</div>
       <Tag

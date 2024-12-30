@@ -5,6 +5,7 @@ import Selector from "../../components/Selector";
 import Button from "../../components/Button";
 import { HiOutlinePlusCircle, HiPencil, HiTrash } from "react-icons/hi2";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 export default function VehicleForm({ vehicle }: any) {
   const [formValues, setFormValues] = useState({
@@ -54,9 +55,9 @@ export default function VehicleForm({ vehicle }: any) {
         "http://localhost:8080/api/v1/vehicles", vehicleData
       );
       
-      const data = await response.data;
-      console.log("Apartment created successfully", data);
+      toast.success("Add vehicle successfull");
     } catch (error) {
+      toast.error("Có lỗi xảy ra");
       console.log(error);
     }
   };

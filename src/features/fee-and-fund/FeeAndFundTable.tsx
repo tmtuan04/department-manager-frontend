@@ -26,17 +26,8 @@ export default function FeeAndFundTable() {
     apiFeesAndFunds();
   }, []);
 
-  // const toggleFormVisibility = () => {
-  //   setIsFormVisible(!isFormVisible); // Đổi trạng thái hiển thị form
-  // };
-
   return (
     <>
-      {/* Nút để hiển thị form */}
-      {/* <button onClick={toggleFormVisibility}>Add New Fee or Fund</button> */}
-
-      {/* Chỉ hiển thị form nếu isFormVisible là true */}
-      {/* {isFormVisible && <FeeAndFundForm fetchData={apiFeesAndFunds} />} */}
 
     <Table columns="0.5fr 1.5fr 4fr 2fr 2fr 1.2fr">
       <Table.Header>

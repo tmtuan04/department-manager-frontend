@@ -70,10 +70,6 @@ export default function Invoice() {
   );
 }
 
-// function UtilityBill() {
-//   <div style={UtilityBillStyles.container}></div>
-// }
-
 function InvoiceTDN() {
   const [formValues, setFormValues] = useState({
     id: "",
@@ -99,7 +95,7 @@ function InvoiceTDN() {
         const data = response.data.data.result;
 
         const fees = data
-          .filter((item: any) => item.feeTypeEnum === "DepartmentFee")
+          .filter((item: any) => item.feeTypeEnum === "DepartmentFee" || item.feeTypeEnum === "VehicleFee")
           .map((item: any) => ({ id: item.id, name: item.name }));
         const funds = data
           .filter((item: any) => item.feeTypeEnum === "ContributionFund")
@@ -214,7 +210,7 @@ function InvoiceTDN() {
           </Form.Fields>
 
           <div style={invoiceStyles.row}>
-            <label className="font-bold">Fee Type: </label>
+            <label className="font-bold">Fee: </label>
             <select
               style={invoiceStyles.input}
               id="feeType"
@@ -238,7 +234,7 @@ function InvoiceTDN() {
           </div>
 
           <div style={invoiceStyles.row}>
-            <label className="font-bold">Fund Type: </label>
+            <label className="font-bold">Fund: </label>
             <select
               style={invoiceStyles.input}
               id="fundType"

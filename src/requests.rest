@@ -34,12 +34,12 @@ Content-Type: application/json
     "status": "Resident",
     "gender": "Male",
     "cic": "1234567890",
-    "apartmentId": "100"
+    "apartmentId": ""
 }
 
 
 ### GET: Lấy thông tin các cư dân (Successful)
-GET http://localhost:8080/api/v1/residents?size=5&page=1
+GET http://localhost:8080/api/v1/residents?size=100&page=1
 
 
 ### DELETE: Xoá cư dân theo id
@@ -77,6 +77,10 @@ Content-Type: application/json
 
 ### GET: Lấy all thông tin căn hộ (Successfull) 
 GET http://localhost:8080/api/v1/apartments
+
+
+### GET: Lấy thông tin căn hộ theo id (tức số phòng)
+GET http://localhost:8080/api/v1/apartments/100
 
 
 #########################################################
@@ -160,9 +164,21 @@ GET http://localhost:8080/api/v1/invoices
 GET http://localhost:8080/api/v1/invoiceapartment/100
 
 
+### Thanh toán invoice
+PUT http://localhost:8080/api/v1/invoiceapartment/update/100/HD02
+Content-Type: application/json
+
+{
+    "4": 50000
+}
+
+
 #########################################################
 
 # Utility API
 
 ### GET: Lấy thông tin hoá đơn tiện ích từ từng căn hộ
 GET http://localhost:8080/api/v1/utilitybills/100
+
+### POST: Cập nhật Unpaid -> Paid theo ID
+POST http://localhost:8080/api/v1/utilitybills/update/36

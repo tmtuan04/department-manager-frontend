@@ -10,6 +10,7 @@ export default function FeeAndFundRow({ feeOrFund }: any) {
   const statusStyled = {
     DepartmentFee: "pink",
     ContributionFund: "green",
+    VehicleFee: "yellow",
   };
 
   return (

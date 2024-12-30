@@ -1,54 +1,59 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Form from "../../components/Form";
 import FormField from "../../components/FormField";
 import Selector from "../../components/Selector";
 import Button from "../../components/Button";
 import { HiOutlinePlusCircle, HiPencil, HiTrash } from "react-icons/hi2";
 import Table from "../../components/Table";
+import Modal from "../../components/Modal";
+import ResidentAddModal from "./ResidentAddModal";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 interface Resident {
+  id: number;
   name: string;
   dob: string;
 }
 
 interface Vehicle {
-  ownerName: string;
-  number: string;
-  type: string;
+  id: number;
+  category: string;
 }
 
 interface ApartmentFormProps {
-  apartment: {
+  apartment?: {
     addressNumber: string;
     status: "Business" | "Residential" | "Vacant" | "";
     area: string;
     ownerName: string;
     ownerPhone: string;
-    owner: number;
-    // numberOfMembers: number;
+    owner: { id: number };
     residentList: Resident[];
     vehicleList: Vehicle[];
   };
   fetchApartments: () => void; // A function to refresh the apartment list after adding a new apartment
 }
 
-export default function ApartmentForm({ apartment, fetchApartments }: ApartmentFormProps) {
+export default function ApartmentForm({
+  apartment,
+  fetchApartments,
+}: ApartmentFormProps) {
   const [formValues, setFormValues] = useState({
     addressNumber: apartment?.addressNumber || "",
     status: apartment?.status || "",
     area: apartment?.area || "",
     ownerName: apartment?.ownerName || "",
-    // numberOfMembers: apartment?.numberOfMembers || 0,
     ownerPhone: apartment?.ownerPhone || "",
-    ownerId: apartment?.owner.id || "", // Added ownerId field
-    memberIds: [],
+    ownerId: apartment?.owner?.id || "",
+    memberIds: apartment?.residentList?.map((resident) => resident.id) || [],
   });
 
-  // Handle form changes
-  const handleChange = (e: any) => {
+  const [selectedResidents, setSelectedResidents] = useState<Resident[]>(
+    apartment?.residentList || []
+  );
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { id, value } = e.target;
     setFormValues((prevValues) => ({
       ...prevValues,
@@ -56,20 +61,48 @@ export default function ApartmentForm({ apartment, fetchApartments }: ApartmentF
     }));
   };
 
-  // const handleDelete = async (e: any) => {
-  //   e.preventDefault();
+  const handleResidentsSelect = (newResidents: Resident[]) => {
+    // Gộp danh sách cư dân hiện tại với danh sách cư dân mới, loại bỏ trùng lặp theo ID
+    const updatedResidents = [
+      ...selectedResidents,
+      ...newResidents.filter(
+        (newResident) =>
+          !selectedResidents.some(
+            (existingResident) => existingResident.id === newResident.id
+          )
+      ),
+    ];
+  
+    setSelectedResidents(updatedResidents);
+  
+    // Cập nhật memberIds để gửi API
+    setFormValues((prevValues) => ({
+      ...prevValues,
+      memberIds: updatedResidents.map((resident) => resident.id),
+    }));
+  };
 
-  //   try {
-  //     console.log(formValues.addressNumber);
-  //     const response = await axios.delete(`http://localhost:8080/api/v1/apartments/${formValues.addressNumber}`);
-  //     console.log(response.data);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+  const handleUpdate = async () => {
 
-  // Handle form submission
-  const handleSubmit = async (e: any) => {
+    try {
+      const data = {
+        area: formValues.area,
+        status: formValues.status,
+        ownerId: formValues.ownerId,
+        residents: formValues.memberIds,
+        ownerPhone: formValues.ownerPhone,
+      }
+      // console.log(data);
+  
+      const response = await axios.put(`http://localhost:8080/api/v1/apartments/${formValues.addressNumber}`, data);
+      toast.success("Update Sucessfull");
+    } catch (err) {
+      toast.error(`${err}`);
+    }
+  }
+  
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     const apartmentData = {
@@ -81,14 +114,11 @@ export default function ApartmentForm({ apartment, fetchApartments }: ApartmentF
       memberIds: formValues.memberIds,
     };
 
-    console.log(apartmentData);
-
     try {
-      const response = await axios.post("http://localhost:8080/api/v1/apartments", apartmentData);
-      const data = await response.data;
-      console.log("Apartment created successfully", data);
+      await axios.post("http://localhost:8080/api/v1/apartments", apartmentData);
 
-      // Reset the form after successful submission
+      toast.success("Add Apartment Successful");
+      fetchApartments();
       setFormValues({
         addressNumber: "",
         status: "",
@@ -98,16 +128,8 @@ export default function ApartmentForm({ apartment, fetchApartments }: ApartmentF
         ownerPhone: "",
         memberIds: [],
       });
-
-      // Optionally, refresh the apartment list after adding the new apartment
-      toast.success("Add Apartment Successfull");
-      fetchApartments();
-      // // window.location.reload();
-      // const navigate = useNavigate();
-      // navigate("/dashboard/apartments", { replace: true });
+      setSelectedResidents([]);
     } catch (error) {
-      // const navigate = useNavigate();
-      // navigate("/dashboard/apartments", { replace: true });
       console.error("Error: ", error);
     }
   };
@@ -119,13 +141,23 @@ export default function ApartmentForm({ apartment, fetchApartments }: ApartmentF
       <label>Room:</label>
       <Form.Fields type="horizontal">
         <FormField>
-          <FormField.Label label={"Room"} />
-          <FormField.Input id="addressNumber" type="text" value={formValues.addressNumber} onChange={handleChange} />
+          <FormField.Label label="Room" />
+          <FormField.Input
+            id="addressNumber"
+            type="text"
+            value={formValues.addressNumber}
+            onChange={handleChange}
+          />
         </FormField>
 
         <FormField>
-          <FormField.Label label={"Room Area"} />
-          <FormField.Input id="area" type="text" value={formValues.area} onChange={handleChange} />
+          <FormField.Label label="Room Area" />
+          <FormField.Input
+            id="area"
+            type="text"
+            value={formValues.area}
+            onChange={handleChange}
+          />
         </FormField>
       </Form.Fields>
 
@@ -134,71 +166,87 @@ export default function ApartmentForm({ apartment, fetchApartments }: ApartmentF
         value={formValues.status}
         onChange={handleChange}
         options={statusOptions}
-        label={"Status"}
+        label="Status"
       />
 
       <label>Owner:</label>
       <Form.Fields type="horizontal">
         <FormField>
-          <FormField.Label label={"Owner ID:"} />
-          <FormField.Input id="ownerId" type="text" value={formValues.ownerId} onChange={handleChange} />
+          <FormField.Label label="Owner ID" />
+          <FormField.Input
+            id="ownerId"
+            type="text"
+            value={formValues.ownerId}
+            onChange={handleChange}
+          />
         </FormField>
         <FormField>
-          <FormField.Label label={"PhoneNB:"} />
-          <FormField.Input id="ownerPhone" type="text" value={formValues.ownerPhone} onChange={handleChange} />
+          <FormField.Label label="Phone:" />
+          <FormField.Input
+            id="ownerPhone"
+            type="text"
+            value={formValues.ownerPhone}
+            onChange={handleChange}
+          />
         </FormField>
       </Form.Fields>
-      {apartment?.residentList && (
-        <>
-          <label>Resident:</label>
-          <Table columns="1fr 1fr 1fr">
-            <Table.Header size="small">
-              <div>Name</div>
-              <div>DOB</div>
-              <div>Role</div>
-            </Table.Header>
 
-            {apartment.residentList.map((resident) => (
-              <Table.Row size="small" key={resident.name}>
-                <div>{resident.name}</div>
-                <div>{resident.dob}</div>
-                <div>{resident.name === apartment.ownerName ? "Owner" : "Member"}</div>
-              </Table.Row>
-            ))}
-          </Table>
-        </>
-      )}
+      {/* Resident List */}
+      <label>Resident:</label>
+      <Table columns="1fr 1fr">
+        <Table.Header size="small">
+          <div>Name</div>
+          <div>DOB</div>
+        </Table.Header>
+        {selectedResidents.map((resident) => (
+          <Table.Row size="small" key={resident.id}>
+            <div>{resident.name}</div>
+            <div>{resident.dob}</div>
+          </Table.Row>
+        ))}
+      </Table>
+
+      {/* Add Residents Modal */}
+      <Modal>
+        <Modal.Open id="openAddResident">
+          <i className="bx bx-plus-circle"></i>
+        </Modal.Open>
+
+        <Modal.Window id="openAddResident" name="Add Residents">
+          <ResidentAddModal onResidentsSelect={handleResidentsSelect} />
+        </Modal.Window>
+      </Modal>
 
       {apartment?.vehicleList && (
         <>
           <label>Vehicle:</label>
-          <Table columns="1fr 1fr 1fr">
+          <Table columns="1fr 1fr">
             <Table.Header size="small">
-              <div>Owner Name</div>
               <div>Number</div>
               <div>Type</div>
             </Table.Header>
-
             {apartment.vehicleList.map((vehicle) => (
-              <Table.Row size="small" key={vehicle.number}>
-                <div>{vehicle.ownerName}</div>
-                <div>{vehicle.number}</div>
-                <div>{vehicle.type}</div>
+              <Table.Row size="small">
+                <div>{vehicle.id}</div>
+                <div>{vehicle.category}</div>
               </Table.Row>
             ))}
           </Table>
         </>
       )}
+      
+      
 
+      {/* Action Buttons */}
       {apartment ? (
         <Form.Buttons>
-          <Button variation="danger" size="medium">
+          <Button type="button" variation="danger" size="medium">
             Delete
             <span>
               <HiTrash />
             </span>
           </Button>
-          <Button variation="secondary" size="medium">
+          <Button onClick={handleUpdate} type="button" variation="secondary" size="medium">
             Update
             <span>
               <HiPencil />
@@ -207,7 +255,7 @@ export default function ApartmentForm({ apartment, fetchApartments }: ApartmentF
         </Form.Buttons>
       ) : (
         <Form.Buttons>
-          <Button onClick={handleSubmit} size="medium" variation="primary">
+          <Button type="button" onClick={handleSubmit} size="medium" variation="primary">
             Add
             <span>
               <HiOutlinePlusCircle />

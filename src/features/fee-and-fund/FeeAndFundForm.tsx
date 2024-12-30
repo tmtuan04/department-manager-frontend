@@ -17,7 +17,7 @@ export default function FeeAndFundForm({ feeOrFund }: any) {
     feeTypeEnum: feeOrFund?.feeTypeEnum || "",
     createdAt: feeOrFund?.createdAt || "",
   });
-  const typeOptions = ["DepartmentFee", "ContributionFund"];
+  const typeOptions = ["DepartmentFee", "ContributionFund", "VehicleFee"];
 
   const handleChange = (e: any) => {
     const { id, value } = e.target;
@@ -80,7 +80,7 @@ export default function FeeAndFundForm({ feeOrFund }: any) {
   };
 
   return (
-    <Form width="400px" onSubmit={handleSubmit}>
+    <Form width="500px" onSubmit={handleSubmit}>
       <Selector
         value={formValues.feeTypeEnum}
         onChange={handleChange}

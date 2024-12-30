@@ -1,41 +1,9 @@
 import './invoice.css'
 
 export default function AddInvoice() {
-  //   const [formData, setFormData] = useState({
-  //     id: "",
-  //     name: "",
-  //     feeType: "Maintenance Fee",
-  //     fundType: "Reserve Fund",
-  //     description: "",
-  //   });
-  //   const [selectedItems, setSelectedItems] = useState([]);
 
-  // const handleChange = (e) => {
-  //   const { id, value } = e.target;
-  //   setFormData((prevData) => ({
-  //     ...prevData,
-  //     [id]: value,
-  //   }));
-  // };
-
-  // Hàm thêm mục đã chọn
-  //   const addToSelected = (type) => {
-  //     const value = formData[type];
-  //     setSelectedItems((prevItems) => [...prevItems, value]);
-  //   };
-
+  
   return (
-    // <div>
-    //     <h2 classNameName="text-center text-2xl text-gray-700 font-extrabold">Create Invoice</h2>
-    //     <div classNameName="form-group">
-    //       <div classNameName="left-group">
-    //         <input classNameName="w-5" type="text" />
-    //         <input type="text" />
-    //         <input type="text" />
-    //         <input type="text" />
-    //       </div>
-    //     </div>
-    // </div>
     <div className="modal">
       <div className="modal-header">
         <h2>Add Invoice</h2>

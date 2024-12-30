@@ -1,5 +1,5 @@
 import "./LoginSignUp.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { AuthService } from "../../services/AuthService";
 import { useNavigate } from "react-router-dom";
@@ -11,11 +11,16 @@ const LoginSignUp = () => {
   const [isSignUpActive, setIsSignUpActive] = useState(false);
   const [loginData, setLoginData] = useState({ username: "", password: "" });
   const [registerData, setRegisterData] = useState({ name: "", username: "", password: "", confirm: "" });
+  const [remember, setRemember] = useState(false);
 
   const navigate = useNavigate();
 
   const handleToggle = (type: "login" | "register") => {
     setIsSignUpActive(type === "register");
+  };
+
+  const handleRememberChange = (e: any) => {
+    setRemember(e.target.checked);
   };
 
   const handleSignUp = async (e: any) => {
@@ -32,7 +37,6 @@ const LoginSignUp = () => {
         localStorage.setItem("name", response.data.data.name);
 
         navigate("/dashboard");
-        toast.success("SignUp Successfull, Please SignIn");
       }
     } catch (error) {
       console.error(error);
@@ -41,23 +45,36 @@ const LoginSignUp = () => {
 
   const handleLogin = async (e: any) => {
     e.preventDefault();
-
+  
     try {
       const response = await axios.post("http://localhost:8080/api/v1/auth/login", {
         username: loginData.username,
         password: loginData.password,
       });
-      localStorage.setItem("accessToken", response.data.data.accessToken);
-      localStorage.setItem("name", response.data.data.user.name);
-
-      // Điều hướng khi đăng nhập thành công
+  
+      const { accessToken, user } = response.data.data;
+  
+      // Lưu thông tin đăng nhập vào localStorage nếu chọn "Remember for 3 days"
+      if (remember) {
+        localStorage.setItem("accessToken", accessToken);
+        localStorage.setItem("name", user.name);
+        localStorage.setItem(
+          "remember",
+          JSON.stringify({ username: loginData.username, password: loginData.password })
+        );
+      } else {
+        // Nếu không chọn "Remember", chỉ lưu accessToken và tên
+        localStorage.setItem("accessToken", accessToken);
+        localStorage.setItem("name", user.name);
+      }
+  
       navigate("/dashboard");
       toast.success("Login successful!");
     } catch (error) {
-      // setError("Login failed. Please check your credentials.");
-      console.error("Login Failed!")
+      console.error("Login Failed!", error);
     }
   };
+  
 
   const loginWithGoogle = async () => {
     try {
@@ -72,6 +89,15 @@ const LoginSignUp = () => {
     const { name, value } = e.target;
     setLoginData((prev) => ({ ...prev, [name]: value }));
   };
+
+  useEffect(() => {
+    const rememberedData = JSON.parse(localStorage.getItem("remember"));
+    if (rememberedData) {
+      setLoginData(rememberedData);
+      setRemember(true); // Checkbox được tick nếu đã lưu trước đó
+    }
+  }, []);
+  
 
   return (
     <div className="main-sign-in-up">
@@ -161,14 +187,13 @@ const LoginSignUp = () => {
                 />
               </div>
             </div>
-            <div className="mt-4 mr-20">
-              <input className="scale-110" type="checkbox" id="remember" />
-              <label className="ml-2 text-base" htmlFor="remember">
-                Remember for 3 day!
+            <div className="mt-4 mr-20 remember-container">
+              <input className="scale-110" type="checkbox" id="remember" checked={remember} onChange={handleRememberChange} />
+              <label className="ml-2 text-base remember" htmlFor="remember">
+                Remember me
               </label>
             </div>
             {/* {error && <p className="error">{error}</p>} */}
-            <a href="#">Forgot Your Password?</a>
             <button className="btn-tdn" type="submit">
               Sign In
             </button>
