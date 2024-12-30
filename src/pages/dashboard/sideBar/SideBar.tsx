@@ -44,10 +44,10 @@ const SideBar = () => {
           <span className="tooltip">Search</span>
         </li>
         <li>
-          <a href="#">
+          <Link to="/dashboard">
             <i className="bx bxs-grid-alt"></i>
             <span className="links_name">Dashboard</span>
-          </a>
+          </Link>
           <span className="tooltip">Dashboard</span>
         </li>
         <li>
