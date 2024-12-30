@@ -23,8 +23,7 @@ const UtilityBill = () => {
   };
 
   // Xử lý khi gửi dữ liệu
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
 
     if (!selectedFile || !billName) {
       toast.error("Please select a file and enter a bill name.");

@@ -4,6 +4,8 @@ import Row from "../../../components/Row";
 import { FcCalendar } from "react-icons/fc";
 import Cards from "../../../components/Cards";
 import ApartmentFeeChart from "../../../components/ApartmentFeeChart";
+import ApartmentChart from "../../../components/ApartmentChart";
+import ResidentsChart from "../../../components/ResidentChart";
 
 const CalendarStyled = styled.label`
   font-size: 14px;
@@ -54,6 +56,13 @@ function Calendar() {
   );
 }
 
+const PieChartBoxes = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+`;
+
 export default function Overview() {
   return (
     <>
@@ -65,6 +74,10 @@ export default function Overview() {
       </Row>
 
       <Cards />
+      <PieChartBoxes>
+        <ApartmentChart />
+        <ResidentsChart />
+      </PieChartBoxes>
       <ApartmentFeeChart />
     </>
   );

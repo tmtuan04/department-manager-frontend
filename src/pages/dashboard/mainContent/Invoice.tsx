@@ -8,6 +8,7 @@ import axios from "axios";
 import Form from "../../../components/Form";
 import FormField from "../../../components/FormField";
 import UtilityBill from "../../../components/UtilityBill";
+import { toast } from "react-toastify";
 
 export default function Invoice() {
   return (
@@ -22,7 +23,7 @@ export default function Invoice() {
           <button
             className="btTdn"
             style={{
-              backgroundColor: "#1565C0",
+              backgroundColor: "#667BC6",
               color: "white",
               fontWeight: "400",
               padding: "9px 8px",
@@ -41,7 +42,7 @@ export default function Invoice() {
           <button
             className="btTdn"
             style={{
-              backgroundColor: "#4335A7",
+              backgroundColor: "#708871",
               color: "white",
               fontWeight: "400",
               padding: "7px 8px",
@@ -70,10 +71,6 @@ export default function Invoice() {
   );
 }
 
-// function UtilityBill() {
-//   <div style={UtilityBillStyles.container}></div>
-// }
-
 function InvoiceTDN() {
   const [formValues, setFormValues] = useState({
     id: "",
@@ -99,7 +96,7 @@ function InvoiceTDN() {
         const data = response.data.data.result;
 
         const fees = data
-          .filter((item: any) => item.feeTypeEnum === "DepartmentFee")
+          .filter((item: any) => item.feeTypeEnum === "DepartmentFee" || item.feeTypeEnum === "VehicleFee")
           .map((item: any) => ({ id: item.id, name: item.name }));
         const funds = data
           .filter((item: any) => item.feeTypeEnum === "ContributionFund")
@@ -163,12 +160,15 @@ function InvoiceTDN() {
         "http://localhost:8080/api/v1/invoices",
         payload
       );
-      console.log("Response:", response.data);
+      // console.log("Response:", response.data);
 
       // Lưu phản hồi từ server (nếu cần)
       // setSavedData((prevData) => [...prevData, payload]);
+
+      toast.success("Create Invoice Successfull");
     } catch (error) {
-      console.error("Error saving invoice:", error);
+      toast.error("Có lỗi xảy ra");
+      // console.error("Error saving invoice:", error);
     }
 
     setSavedData((prevData) => [...prevData, payload]);
@@ -214,7 +214,7 @@ function InvoiceTDN() {
           </Form.Fields>
 
           <div style={invoiceStyles.row}>
-            <label className="font-bold">Fee Type: </label>
+            <label className="font-bold">Fee: </label>
             <select
               style={invoiceStyles.input}
               id="feeType"
@@ -238,7 +238,7 @@ function InvoiceTDN() {
           </div>
 
           <div style={invoiceStyles.row}>
-            <label className="font-bold">Fund Type: </label>
+            <label className="font-bold">Fund: </label>
             <select
               style={invoiceStyles.input}
               id="fundType"

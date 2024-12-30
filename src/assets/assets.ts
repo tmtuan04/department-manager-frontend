@@ -18,6 +18,8 @@ import Tuan from './Tuan.jpg'
 import Trong from './Trong.jpg'
 import Hai from './Hai.jpg'
 import Nguyen from './Nguyen.jpg'
+import tailwind from './tailwind.png'
+import docker from './docker.png'
 
 export const assets = {
     email,
@@ -40,4 +42,6 @@ export const assets = {
     Hung,
     Trong,
     Nguyen,
+    tailwind,
+    docker,
 }

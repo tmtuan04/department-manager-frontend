@@ -25,13 +25,12 @@ const InvoiceTable = () => {
     }, [])
 
     return (
-    <Table columns="0.5fr 1fr 2fr 1fr 1fr">
+    <Table columns="0.5fr 1fr 1.5fr 1fr">
       <Table.Header>
         <div>ID</div>
         <div>Name</div>
         <div>Description</div>
         <div>Created At</div>
-        <div>Actions</div>
       </Table.Header>
 
         {/* Báo lỗi vì chưa định nghĩa ở Row */}

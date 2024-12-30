@@ -5,6 +5,7 @@ import Selector from "../../components/Selector";
 import Button from "../../components/Button";
 import { HiOutlinePlusCircle, HiPencil, HiTrash } from "react-icons/hi2";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 export default function VehicleForm({ vehicle }: any) {
   const [formValues, setFormValues] = useState({
@@ -32,9 +33,11 @@ export default function VehicleForm({ vehicle }: any) {
         data: { id: formValues.id }, // Payload gửi kèm
         headers: { "Content-Type": "application/json" }, // Đảm bảo header đúng
       });
+      toast.success("Delete vehicle successfull!");
       console.log(response.data);
     } catch (error) {
-      console.log(error);
+      toast.error("Có lỗi xảy ra");
+      // console.log(error);
     }
   };
 
@@ -54,9 +57,9 @@ export default function VehicleForm({ vehicle }: any) {
         "http://localhost:8080/api/v1/vehicles", vehicleData
       );
       
-      const data = await response.data;
-      console.log("Apartment created successfully", data);
+      toast.success("Add vehicle successfull");
     } catch (error) {
+      toast.error("Có lỗi xảy ra");
       console.log(error);
     }
   };
@@ -111,12 +114,12 @@ export default function VehicleForm({ vehicle }: any) {
               <HiTrash />
             </span>
           </Button>
-          <Button variation="secondary" size="medium">
+          {/* <Button variation="secondary" size="medium">
             Update
             <span>
               <HiPencil />
             </span>
-          </Button>
+          </Button> */}
         </Form.Buttons>
       ) : (
         <Form.Buttons>

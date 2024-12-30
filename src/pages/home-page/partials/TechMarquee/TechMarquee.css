@@ -53,12 +53,13 @@
 }
 
 .inner-tech .tech__item {
-    margin: 0 60px;
+    margin: 0px 60px;
     padding: 24px 0;
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    gap: 5px;
+    gap: 10px;
+    font-size: 18px;
 }
 
 .inner-tech .tech__item .item__icon {

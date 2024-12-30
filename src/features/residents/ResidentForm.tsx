@@ -9,10 +9,11 @@ import { toast } from "react-toastify";
 
 export default function ResidentForm({ resident, onCloseModal }: any) {
   const [formValues, setFormValues] = useState({
+    id: resident?.id || "",
     name: resident?.name || "",
     dob: resident?.dob || "",
     apartmentId: resident?.apartmentId || "",
-    status: resident?.status || "",
+    status: resident?.status || "Resident",
     cic: resident?.cic || "",
     gender: resident?.gender || "",
   });
@@ -20,7 +21,7 @@ export default function ResidentForm({ resident, onCloseModal }: any) {
   const statusOptions = ["Resident", "Moved", "Temporary", "Absent"];
   const genderOptions = ["Male", "Female"];
 
-  const handleChange = (e: any) => {
+  const   handleChange = (e: any) => {
     const { id, value } = e.target;
     setFormValues((prevValues) => ({
       ...prevValues,
@@ -28,39 +29,42 @@ export default function ResidentForm({ resident, onCloseModal }: any) {
     }));
   };
 
-  // const handleDelete = async (e: any) => {
-  //   e.preventDefault();
-
-  //   try {
-  //     const response = await axios.delete(`http://localhost:8080/api/v1/vehicles/${formValues.apartmentId}`)
-  //   }
-
-  // }
-
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();
-    console.log(formValues);
+  const handleSubmit = async () => {
+    // console.log(formValues);
     
     const data = {
-      id: formValues.cic,
+      id: formValues.id,
       name: formValues.name,
       dob: formValues.dob,
       apartmentId: formValues.apartmentId,
       status: formValues.status,
       gender: formValues.gender
     }
-
     console.log(data);  
 
     try {
-      const response = await axios.post("http://localhost:8080/api/v1/residents", data);
+      const response = await axios.post(
+        "http://localhost:8080/api/v1/residents",
+        data
+      );
       toast.success(`Add ${formValues.name} Successfull!`);
-      
     } catch (err) {
       console.error(err);
-      toast.error("Có lỗi xảy ra!!")
+      toast.error("Có lỗi xảy ra!!");
     }
   };
+
+  const handleDelete = async () => {
+    try {
+      console.log(formValues.id);
+      const response = await axios.delete(`http://localhost:8080/api/v1/residents/${formValues.id}`)
+      console.log(response.data);
+      toast.success("Delete successful");
+    } catch (err) {
+      toast.error("Có lỗi xảy ra!!")
+      console.error(err);
+    }
+  }
 
   return (
     <Form onSubmit={handleSubmit} width="400px">
@@ -88,9 +92,9 @@ export default function ResidentForm({ resident, onCloseModal }: any) {
           <FormField>
             <FormField.Label label={"CCCD"} />
             <FormField.Input
-              id="cic"
+              id="id"
               type="text"
-              value={formValues.cic}
+              value={formValues.id}
               onChange={handleChange}
             />
           </FormField>
@@ -99,7 +103,7 @@ export default function ResidentForm({ resident, onCloseModal }: any) {
             onChange={handleChange}
             id="gender"
             options={genderOptions}
-            label={"Type:"}
+            label={"Gender:"}
           ></Selector>
         </Form.Fields>
       </div>
@@ -130,13 +134,13 @@ export default function ResidentForm({ resident, onCloseModal }: any) {
 
       {resident ? (
         <Form.Buttons>
-          <Button variation="danger" size="medium">
+          <Button type="button" onClick={handleDelete} variation="danger" size="medium">
             Delete
             <span>
               <HiTrash />
             </span>
           </Button>
-          <Button variation="secondary" size="medium">
+          <Button type="button" variation="secondary" size="medium">
             Update
             <span>
               <HiPencil />
@@ -145,7 +149,12 @@ export default function ResidentForm({ resident, onCloseModal }: any) {
         </Form.Buttons>
       ) : (
         <Form.Buttons>
-          <Button onClick={handleSubmit} size="medium" variation="primary" type="submit">
+          <Button
+            onClick={handleSubmit}
+            size="medium"
+            variation="primary"
+            type="submit"
+          >
             Add
             <span>
               <HiOutlinePlusCircle />

@@ -10,11 +10,6 @@ export default function InvoiceRow({ invoice }: any) {
       <div>{name}</div>
       <div>{description}</div>
       <div>{lastUpdated}</div>
-      <Modal>
-        <Modal.Open id="details">
-          <button>Details</button>
-        </Modal.Open>
-      </Modal>
     </Table.Row>
   );
 }

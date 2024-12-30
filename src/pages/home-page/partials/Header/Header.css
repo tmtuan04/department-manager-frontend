@@ -21,6 +21,7 @@
 .inner-header .header__logo{
     font-weight: 600;
     color: #fff;
+    cursor: pointer;
 }
 
 .inner-header .header__menu ul {
