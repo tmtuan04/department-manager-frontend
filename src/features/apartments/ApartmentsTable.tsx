@@ -19,7 +19,7 @@ export default function ApartmentsTable({keyword}: ApartmentsTableProps) {
 
   const apiApartments = async (page: number = 1) => {
     try {
-      let url: string = 'http://localhost:8080/api/v1/apartments';
+      let url: string;
       if(keyword) {
         url= `http://localhost:8080/api/v1/apartments/${keyword}`
       }

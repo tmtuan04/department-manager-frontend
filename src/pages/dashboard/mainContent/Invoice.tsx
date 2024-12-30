@@ -10,11 +10,14 @@ import FormField from "../../../components/FormField";
 import UtilityBill from "../../../components/UtilityBill";
 
 export default function Invoice() {
+
+  const [keyword, setKeyword] = useState('')
+
   return (
     <Modal>
       <Row type="horizontal">
         <Heading as="h1">Invoices</Heading>
-        <Search></Search>
+        <Search setKeyword={setKeyword} keyword={keyword}></Search>
       </Row>
 
       <div style={{ display: "flex", gap: "10px", marginBottom: "15px" }}>
@@ -57,7 +60,7 @@ export default function Invoice() {
         </Modal.Open>
       </div>
 
-      <InvoiceTable />
+      <InvoiceTable keyword={keyword}/>
 
       <Modal.Window id="createInvoice" name="Create Invoice">
         <InvoiceTDN />
