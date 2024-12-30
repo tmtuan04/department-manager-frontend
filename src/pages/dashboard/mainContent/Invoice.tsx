@@ -11,11 +11,14 @@ import UtilityBill from "../../../components/UtilityBill";
 import { toast } from "react-toastify";
 
 export default function Invoice() {
+
+  const [keyword, setKeyword] = useState('')
+
   return (
     <Modal>
       <Row type="horizontal">
         <Heading as="h1">Invoices</Heading>
-        <Search></Search>
+        <Search setKeyword={setKeyword} keyword={keyword}></Search>
       </Row>
 
       <div style={{ display: "flex", gap: "10px", marginBottom: "15px" }}>
@@ -58,7 +61,7 @@ export default function Invoice() {
         </Modal.Open>
       </div>
 
-      <InvoiceTable />
+      <InvoiceTable keyword={keyword}/>
 
       <Modal.Window id="createInvoice" name="Create Invoice">
         <InvoiceTDN />

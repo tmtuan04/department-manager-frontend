@@ -4,13 +4,17 @@ import Pagination from "../../components/Pagination";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-export default function VehiclesTable() {
+interface VehiclesTableProps {
+  keyword: string;
+}
+
+export default function VehiclesTable({keyword}: VehiclesTableProps) {
   const [vehicles, setVehicles] = useState([]);
 
   const apiVehicles = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:8080/api/v1/vehicles"
+        `http://localhost:8080/api/v1/vehicles?filter=id~'${keyword}'`
       );
       
       console.log(response.data.data.result);
@@ -23,7 +27,7 @@ export default function VehiclesTable() {
 
   useEffect(() => {
     apiVehicles();
-  }, []);
+  }, [keyword]);
 
   return (
     <Table columns="1fr 1fr 1fr 1fr 1fr">
