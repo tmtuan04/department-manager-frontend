@@ -33,9 +33,11 @@ export default function VehicleForm({ vehicle }: any) {
         data: { id: formValues.id }, // Payload gửi kèm
         headers: { "Content-Type": "application/json" }, // Đảm bảo header đúng
       });
+      toast.success("Delete vehicle successfull!");
       console.log(response.data);
     } catch (error) {
-      console.log(error);
+      toast.error("Có lỗi xảy ra");
+      // console.log(error);
     }
   };
 
@@ -112,12 +114,12 @@ export default function VehicleForm({ vehicle }: any) {
               <HiTrash />
             </span>
           </Button>
-          <Button variation="secondary" size="medium">
+          {/* <Button variation="secondary" size="medium">
             Update
             <span>
               <HiPencil />
             </span>
-          </Button>
+          </Button> */}
         </Form.Buttons>
       ) : (
         <Form.Buttons>

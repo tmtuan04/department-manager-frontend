@@ -29,9 +29,8 @@ export default function ResidentForm({ resident, onCloseModal }: any) {
     }));
   };
 
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();
-    console.log(formValues);
+  const handleSubmit = async () => {
+    // console.log(formValues);
     
     const data = {
       id: formValues.id,

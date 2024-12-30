@@ -88,21 +88,21 @@ body {
 }
 
 .sidebar ul li .tooltip {
-    position: absolute;
-    left: 122px;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    border-radius: 6px;
-    height: 43px;
-    width: 122px;
-    background-color: #fff;
-    line-height: 20px;
-    text-align: center;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-    transition: 0s;
-    opacity: 0;
-    pointer-events: none;
-    display: block;
+  position: absolute;
+  left: 130px;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 6px;
+  padding: 5px 10px; /* Thêm khoảng cách nội dung */
+  background-color: #fff;
+  line-height: 20px;
+  text-align: center;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  transition: 0s;
+  opacity: 0;
+  pointer-events: none;
+  display: block;
+  /* white-space: nowrap; */
 }
 
 .sidebar.active ul li .tooltip {

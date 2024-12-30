@@ -27,8 +27,7 @@ export default function FeeAndFundForm({ feeOrFund }: any) {
     }));
   };
 
-  const handleUpdate = async (e: any) => {
-    e.preventDefault();
+  const handleUpdate = async () => {
 
     const data = {
       id: feeOrFund.id,
@@ -46,8 +45,7 @@ export default function FeeAndFundForm({ feeOrFund }: any) {
     }
   }
 
-  const handleDelete = async (e: any) => {
-    e.preventDefault();
+  const handleDelete = async () => {
 
     try {
       // Xoá Fee-Fund theo ID
@@ -61,7 +59,7 @@ export default function FeeAndFundForm({ feeOrFund }: any) {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    console.log(formValues);
+    // console.log(formValues);
     
     const data = {
       name: formValues.name,

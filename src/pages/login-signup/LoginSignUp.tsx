@@ -44,8 +44,10 @@ const LoginSignUp = () => {
   };
 
   const handleLogin = async (e: any) => {
+    
     e.preventDefault();
-  
+
+
     try {
       const response = await axios.post("http://localhost:8080/api/v1/auth/login", {
         username: loginData.username,
@@ -71,7 +73,8 @@ const LoginSignUp = () => {
       navigate("/dashboard");
       toast.success("Login successful!");
     } catch (error) {
-      console.error("Login Failed!", error);
+      toast.error("Có lỗi xảy ra!!")
+      // console.error("Login Failed!", error);
     }
   };
   

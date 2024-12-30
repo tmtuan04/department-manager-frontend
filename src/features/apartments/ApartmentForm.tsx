@@ -102,8 +102,7 @@ export default function ApartmentForm({
   }
   
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
 
     const apartmentData = {
       addressNumber: formValues.addressNumber,
