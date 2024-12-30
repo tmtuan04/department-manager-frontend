@@ -265,12 +265,12 @@ export default function ApartmentForm({
       {/* Action Buttons */}
       {apartment ? (
         <Form.Buttons>
-          <Button type="button" variation="danger" size="medium">
+          {/* <Button type="button" variation="danger" size="medium">
             Delete
             <span>
               <HiTrash />
             </span>
-          </Button>
+          </Button> */}
           <Button
             onClick={handleUpdate}
             type="button"
