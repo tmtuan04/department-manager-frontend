@@ -1,0 +1,120 @@
+
+  /* Tạm thời để lại xem cần hay không */
+  
+  
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    height: 100vh;
+  }
+  
+  .modal {
+    width: 500px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    position: relative;
+  }
+  
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .modal-header h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .close-btn {
+    background: #ff6b6b;
+    border: none;
+    color: white;
+    font-size: 20px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  
+  .modal-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-group label {
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+  }
+  
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 0.9rem;
+  }
+  
+  .form-group textarea {
+    resize: none;
+    height: 60px;
+  }
+  
+  .with-add {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .add-link {
+    color: green;
+    font-size: 0.85rem;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  .selected-section {
+    grid-column: span 2;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+  }
+  
+  .selected-section h3 {
+    font-size: 1rem;
+    margin-bottom: 5px;
+  }
+  
+  .modal-footer {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .save-btn {
+    background: #4caf50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+  .save-btn:hover {
+    background: #45a049;
+  }
+  

@@ -1,5 +1,6 @@
 import { assets } from "../../assets/assets";
 import "./NotFound.css";
+import { Link } from "react-router-dom";
 
 export const NotFound = () => {
   return (
@@ -11,8 +12,8 @@ export const NotFound = () => {
         <p className="text-dn text2">Maybe you can find what you need here?</p>
 
         <div className="buttons">
-          <a href="#" className="button">Back to Homepage</a>
-          <a href="#" className="button">Contact Us</a>
+          <Link to="/" className="button">Back to Homepage</Link>
+          {/* <Link href="#" className="button">Contact Us</Link> */}
         </div>
       </div>
     </div>

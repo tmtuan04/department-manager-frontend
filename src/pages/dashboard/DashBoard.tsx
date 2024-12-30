@@ -7,6 +7,7 @@ import Statistics from "./mainContent/Statistics";
 import Vehicles from "./mainContent/Vehicles";
 import SideBar from "./sideBar/SideBar";
 import { Routes, Route } from "react-router-dom";
+import Invoice from "./mainContent/Invoice";
 
 const DashBoard = () => {
   return (
@@ -21,6 +22,7 @@ const DashBoard = () => {
           <Route path="/fee-and-fund" element={<FeesAndFunds />}></Route>
           <Route path="/vehicles" element={<Vehicles />}></Route>
           <Route path="/statistics" element={<Statistics />}></Route>
+          <Route path="/invoices" element={<Invoice />}></Route>
         </Routes>
       </div>
     </div>

@@ -4,8 +4,6 @@ import { FaArrowCircleRight } from "react-icons/fa";
 import { FaArrowCircleLeft } from "react-icons/fa";
 import { useEffect, useState } from "react";
 
-const PAGE_SIZE = 2;
-
 const StyledPagination = styled.div`
   display: flex;
   align-items: center;
@@ -77,26 +75,35 @@ const PaginationButton = styled.button<PaginationButtonProps>`
 `;
 
 interface PaginationProps {
-  count: number;
+  totalPages: number;
+  curPage: number;
+  totalElements: number;
+  onPageChange: (page: number) => void;
 }
 
 // const P = styled.p`
 //   color: black;
 // `;
 
-export default function Pagination({ count }: PaginationProps) {
+export default function Pagination({
+  totalPages,
+  onPageChange,
+  curPage,
+  totalElements,
+}: PaginationProps) {
+  console.log(totalPages);
   const [searchParams, setSearchParams] = useSearchParams();
 
   const currentPage = Number(searchParams.get("page")) || 1;
-  const pageCount = Math.ceil(count / PAGE_SIZE);
 
   const [pageNumbers, setPageNumbers] = useState<(number | string)[]>([]);
 
   function nextPage() {
-    if (currentPage < pageCount) {
+    if (currentPage < totalPages) {
       const next = currentPage + 1;
       searchParams.set("page", next.toString());
       setSearchParams(searchParams);
+      onPageChange(next);
     }
   }
 
@@ -105,20 +112,20 @@ export default function Pagination({ count }: PaginationProps) {
       const prev = currentPage - 1;
       searchParams.set("page", prev.toString());
       setSearchParams(searchParams);
+      onPageChange(prev);
     }
   }
 
   function goToPage(page: number | string) {
     searchParams.set("page", page.toString());
     setSearchParams(searchParams);
+    onPageChange(Number(page));
   }
-
-  if (pageCount <= 1) return null;
 
   useEffect(() => {
     const updatedPageNumbers = [];
     const startPage = Math.max(1, currentPage - 1);
-    const endPage = Math.min(pageCount, currentPage + 1);
+    const endPage = Math.min(totalPages, currentPage + 1);
 
     if (currentPage > 2) {
       updatedPageNumbers.push(1);
@@ -128,23 +135,25 @@ export default function Pagination({ count }: PaginationProps) {
     }
 
     for (let i = startPage; i <= endPage; i++) {
-      if (i <= pageCount) updatedPageNumbers.push(i);
+      if (i <= totalPages) updatedPageNumbers.push(i);
     }
 
-    if (currentPage < pageCount - 1) {
-      if (currentPage < pageCount - 2) {
+    if (currentPage < totalPages - 1) {
+      if (currentPage < totalPages - 2) {
         updatedPageNumbers.push("...");
       }
-      updatedPageNumbers.push(pageCount);
+      updatedPageNumbers.push(totalPages);
     }
 
     setPageNumbers(updatedPageNumbers); // Cập nhật lại pageNumbers
-  }, [currentPage, pageCount]);
+  }, [currentPage, totalPages]);
+
+  if (totalPages <= 1) return null;
 
   return (
     <StyledPagination>
       <Buttons>
-        {/* Nút chuyển về trang trước */}
+        {/* Previous page button */}
         <PaginationButton
           buttonStyle="btn"
           onClick={prevPage}
@@ -156,7 +165,7 @@ export default function Pagination({ count }: PaginationProps) {
           <span>Previous</span>
         </PaginationButton>
 
-        {/* Các nút chuyển trang đánh số */}
+        {/* Page number buttons */}
         {pageNumbers.map((page, index) => {
           if (page === "...") {
             return (
@@ -176,6 +185,7 @@ export default function Pagination({ count }: PaginationProps) {
                 buttonStyle="numb"
                 onClick={() => goToPage(page)}
                 isActive={page === currentPage}
+                disabled={page === currentPage}
               >
                 {page}
               </PaginationButton>
@@ -183,11 +193,11 @@ export default function Pagination({ count }: PaginationProps) {
           }
         })}
 
-        {/* Chuyển về trang sau */}
+        {/* Next page button */}
         <PaginationButton
           buttonStyle="btn"
           onClick={nextPage}
-          disabled={currentPage === pageCount}
+          disabled={currentPage === totalPages}
           aria-label="Next page"
           isActive={false}
         >

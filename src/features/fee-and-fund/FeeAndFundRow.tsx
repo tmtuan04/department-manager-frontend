@@ -1,15 +1,15 @@
 import Table from "../../components/Table";
 import Tag from "../../components/Tag";
-import { capitalize } from "../../utils/helpers";
 import Modal from "../../components/Modal";
 import FeeAndFundForm from "./FeeAndFundForm";
+import { formatFeeType } from "../../utils/helpers";
 
 export default function FeeAndFundRow({ feeOrFund }: any) {
-  const { id, name, description, unitCost, type } = feeOrFund;
+  const { id, name, description, unitPrice, feeTypeEnum } = feeOrFund;
 
   const statusStyled = {
-    Fee: "red",
-    Fund: "green",
+    DepartmentFee: "pink",
+    ContributionFund: "green",
   };
 
   return (
@@ -17,16 +17,14 @@ export default function FeeAndFundRow({ feeOrFund }: any) {
       <div>{id}</div>
       <div>{name}</div>
       <div>{description}</div>
-      <div>{unitCost}</div>
-      <Tag type={statusStyled[(type as "Fee") || "Fund"]}>
-        {capitalize(type)}
-      </Tag>
+      <div>{unitPrice}</div>
+      <Tag type={statusStyled[feeTypeEnum]}>{formatFeeType(feeTypeEnum)}</Tag>
       <Modal>
         <Modal.Open id="details">
           <button>Details</button>
         </Modal.Open>
 
-        <Modal.Window id="details" name="Vehicle Details">
+        <Modal.Window id="details" name="Fee and Fund Details">
           <FeeAndFundForm feeOrFund={feeOrFund} />
         </Modal.Window>
       </Modal>

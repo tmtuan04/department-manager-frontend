@@ -11,6 +11,8 @@ import {
 } from "recharts";
 import Heading from "./Heading";
 import styled from "styled-components";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 const ChartBox = styled.div`
   background-color: var(--color-grey-0);
@@ -40,6 +42,30 @@ const feeData = [
 ];
 
 export default function ApartmentFeeChart() {
+  const [feeData, setFeeData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:8080/api/v1/invoices/total"
+        );
+        const data = response.data.data.slice(0, 5); // Lấy 5 phần tử đầu tiên
+        setFeeData(data);
+      } catch (err) {
+        console.error("Lỗi khi lấy dữ liệu hóa đơn", err);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  //Tính toán max value và chia cho 1 triệu
+  const maxValue = calculateMaxValue(feeData, 1000000); // Làm tròn và chia cho 1 triệu
+
+  // Hàm định dạng giá trị theo triệu
+  const formatValue = (value: number) => `${(value / 1000000).toFixed(2)}M`;
+
   return (
     <ChartBox>
       <Heading as="h2">Apartment Fee Collection Chart</Heading>
@@ -54,34 +80,72 @@ export default function ApartmentFeeChart() {
           }}
         >
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="month" />
+          <XAxis dataKey="name" />
           <YAxis
             yAxisId="left"
             orientation="left"
             stroke="#c084fc"
-            domain={[0, 10000]}
+            domain={[0, maxValue]}
+            tickFormatter={formatValue} // Áp dụng định dạng đơn vị triệu
           />
-          <YAxis
-            yAxisId="right"
-            orientation="right"
-            stroke="#86efac"
-            domain={[0, 10000]}
-          />
-          <Tooltip />
+          <Tooltip formatter={(value) => formatValue(value)} />{" "}
+          {/* Áp dụng định dạng cho Tooltip */}
           <Legend />
-          <Bar yAxisId="left" dataKey="fees_due" fill="#c084fc" barSize={60}>
-            <LabelList dataKey="fees_due" position="top" />
+          <Bar
+            yAxisId="left"
+            dataKey="totalAmount"
+            fill="#c084fc"
+            barSize={60}
+            radius={[10, 10, 0, 0]}
+          >
+            <LabelList
+              dataKey="totalAmount"
+              position="top"
+              formatter={formatValue}
+            />
           </Bar>
           <Bar
-            yAxisId="right"
-            dataKey="fees_collected"
+            yAxisId="left"
+            dataKey="paidAmount"
             fill="#86efac"
             barSize={60}
+            radius={[10, 10, 0, 0]}
           >
-            <LabelList dataKey="fees_collected" position="top" />
+            <LabelList
+              dataKey="paidAmount"
+              position="top"
+              formatter={formatValue}
+            />
+          </Bar>
+          <Bar
+            yAxisId="left"
+            dataKey="contributionAmount"
+            fill="#f97316"
+            barSize={60}
+            radius={[10, 10, 0, 0]}
+          >
+            <LabelList
+              dataKey="contributionAmount"
+              position="top"
+              formatter={formatValue}
+            />
           </Bar>
         </RechartsBarChart>
       </ResponsiveContainer>
     </ChartBox>
   );
 }
+
+// Hàm tính giá trị max và chia cho 1 triệu
+const calculateMaxValue = (data, roundTo = 1000000) => {
+  const maxValue = Math.max(
+    ...data.flatMap((item) => [
+      item.totalAmount,
+      item.paidAmount,
+      item.contributionAmount,
+    ])
+  );
+
+  // Làm tròn maxValue lên bội số của `roundTo` (1 triệu)
+  return Math.ceil(maxValue / roundTo) * roundTo;
+};
