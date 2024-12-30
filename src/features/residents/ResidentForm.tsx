@@ -12,7 +12,7 @@ export default function ResidentForm({ resident, onCloseModal }: any) {
     name: resident?.name || "",
     dob: resident?.dob || "",
     apartmentId: resident?.apartmentId || "",
-    status: resident?.status || "",
+    status: resident?.status || "Resident",
     cic: resident?.cic || "",
     gender: resident?.gender || "",
   });
