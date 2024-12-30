@@ -53,7 +53,9 @@ export default function ApartmentForm({
     apartment?.residentList || []
   );
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const { id, value } = e.target;
     setFormValues((prevValues) => ({
       ...prevValues,
@@ -72,9 +74,9 @@ export default function ApartmentForm({
           )
       ),
     ];
-  
+
     setSelectedResidents(updatedResidents);
-  
+
     // Cập nhật memberIds để gửi API
     setFormValues((prevValues) => ({
       ...prevValues,
@@ -82,7 +84,8 @@ export default function ApartmentForm({
     }));
   };
 
-  const handleUpdate = async () => {
+  const handleUpdate = async (e: any) => {
+    e.preventDefault();
 
     try {
       const data = {
@@ -91,18 +94,21 @@ export default function ApartmentForm({
         ownerId: formValues.ownerId,
         residents: formValues.memberIds,
         ownerPhone: formValues.ownerPhone,
-      }
+      };
       // console.log(data);
-  
-      const response = await axios.put(`http://localhost:8080/api/v1/apartments/${formValues.addressNumber}`, data);
+
+      const response = await axios.put(
+        `http://localhost:8080/api/v1/apartments/${formValues.addressNumber}`,
+        data
+      );
       toast.success("Update Sucessfull");
     } catch (err) {
-      toast.error(`${err}`);
+      toast.error(`Có lỗi xảy ra`);
     }
-  }
-  
+  };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
 
     const apartmentData = {
       addressNumber: formValues.addressNumber,
@@ -114,7 +120,10 @@ export default function ApartmentForm({
     };
 
     try {
-      await axios.post("http://localhost:8080/api/v1/apartments", apartmentData);
+      await axios.post(
+        "http://localhost:8080/api/v1/apartments",
+        apartmentData
+      );
 
       toast.success("Add Apartment Successful");
       fetchApartments();
@@ -129,7 +138,7 @@ export default function ApartmentForm({
       });
       setSelectedResidents([]);
     } catch (error) {
-      console.error("Error: ", error);
+      toast.error(`Có lỗi xảy ra`);
     }
   };
 
@@ -190,7 +199,6 @@ export default function ApartmentForm({
         </FormField>
       </Form.Fields>
 
-      {/* Resident List */}
       <label>Resident:</label>
       <Table columns="1fr 1fr">
         <Table.Header size="small">
@@ -205,7 +213,6 @@ export default function ApartmentForm({
         ))}
       </Table>
 
-      {/* Add Residents Modal */}
       <Modal>
         <Modal.Open id="openAddResident">
           <i className="bx bx-plus-circle"></i>
@@ -215,7 +222,6 @@ export default function ApartmentForm({
           <ResidentAddModal onResidentsSelect={handleResidentsSelect} />
         </Modal.Window>
       </Modal>
-
       {apartment?.vehicleList && (
         <>
           <label>Vehicle:</label>
@@ -233,8 +239,6 @@ export default function ApartmentForm({
           </Table>
         </>
       )}
-      
-      
 
       {/* Action Buttons */}
       {apartment ? (
@@ -245,7 +249,12 @@ export default function ApartmentForm({
               <HiTrash />
             </span>
           </Button>
-          <Button onClick={handleUpdate} type="button" variation="secondary" size="medium">
+          <Button
+            onClick={handleUpdate}
+            type="button"
+            variation="secondary"
+            size="medium"
+          >
             Update
             <span>
               <HiPencil />
@@ -254,7 +263,12 @@ export default function ApartmentForm({
         </Form.Buttons>
       ) : (
         <Form.Buttons>
-          <Button type="button" onClick={handleSubmit} size="medium" variation="primary">
+          <Button
+            type="button"
+            onClick={handleSubmit}
+            size="medium"
+            variation="primary"
+          >
             Add
             <span>
               <HiOutlinePlusCircle />

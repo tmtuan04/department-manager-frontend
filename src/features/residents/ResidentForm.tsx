@@ -43,12 +43,14 @@ export default function ResidentForm({ resident, onCloseModal }: any) {
     console.log(data);  
 
     try {
-      const response = await axios.post("http://localhost:8080/api/v1/residents", data);
+      const response = await axios.post(
+        "http://localhost:8080/api/v1/residents",
+        data
+      );
       toast.success(`Add ${formValues.name} Successfull!`);
-      
     } catch (err) {
       console.error(err);
-      toast.error("Có lỗi xảy ra!!")
+      toast.error("Có lỗi xảy ra!!");
     }
   };
 
@@ -147,7 +149,12 @@ export default function ResidentForm({ resident, onCloseModal }: any) {
         </Form.Buttons>
       ) : (
         <Form.Buttons>
-          <Button onClick={handleSubmit} size="medium" variation="primary" type="submit">
+          <Button
+            onClick={handleSubmit}
+            size="medium"
+            variation="primary"
+            type="submit"
+          >
             Add
             <span>
               <HiOutlinePlusCircle />

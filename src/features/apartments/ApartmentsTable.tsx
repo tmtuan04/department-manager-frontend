@@ -4,7 +4,7 @@ import Table from "../../components/Table";
 import Pagination from "../../components/Pagination";
 import ApartmentRow from "./ApartmentRow";
 
-const PAGE_SIZE = 10;
+const PAGE_SIZE = 5;
 
 export default function ApartmentsTable() {
   const [apartments, setApartments] = useState<any[]>([]);
@@ -14,7 +14,10 @@ export default function ApartmentsTable() {
 
   const apiApartments = async (page: number = 1) => {
     try {
-      const response = await axios.get(`http://localhost:8080/api/v1/apartments?page=${page}&size=${PAGE_SIZE}`);
+      const response = await axios.get(
+        `http://localhost:8080/api/v1/apartments?page=${page}&size=${PAGE_SIZE}`
+      );
+      console.log(response.data.data.totalPages);
       setApartments(response.data.data.result);
       setTotalPages(response.data.data.totalPages);
       setTotalElements(response.data.data.totalElements);
