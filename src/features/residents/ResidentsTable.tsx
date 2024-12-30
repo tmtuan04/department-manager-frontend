@@ -26,19 +26,20 @@ export default function ResidentsTable({keyword}: ResidentsTableProps) {
     apiResidents();
   }, [keyword]);
   return (
-    <Table columns="0.5fr 1fr 1.5fr 1fr 2fr 1.2fr 1.2fr">
+    <Table columns="0.5fr 1fr 1.5fr 1.5fr 1fr 1.5fr 1fr 1fr">
       <Table.Header>
-        <div>CCCD</div>
+        <div>STT</div>
         <div>Room</div>
         <div>Name</div>
+        <div>CCCD</div>
         <div>Gender</div>
         <div>DOB</div>
         <div>Status</div>
         <div>Actions</div>
       </Table.Header>
 
-      {residents.map((resident) => (
-        <ResidentRow resident={resident} />
+      {residents.map((resident, index) => (
+        <ResidentRow resident={resident} index={index} />
       ))}
 
       {/* <Table.Footer>
