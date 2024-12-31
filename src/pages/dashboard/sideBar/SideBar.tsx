@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Modal from "../../../components/Modal";
+import AccoutForm from "../mainContent/AccoutForm";
 
 const SideBar = () => {
   const [extended, setExtended] = useState(false);
@@ -53,21 +54,21 @@ const SideBar = () => {
         </li>
         <li>
           <Link to="/dashboard/apartments">
-            <i className='bx bxs-home'></i>
+            <i className="bx bxs-home"></i>
             <span className="links_name">Apartment Management</span>
           </Link>
           <span className="tooltip">Apartment Management</span>
         </li>
         <li>
           <Link to="/dashboard/vehicles">
-            <i className='bx bxs-car'></i>
+            <i className="bx bxs-car"></i>
             <span className="links_name">Vehicle Management</span>
           </Link>
           <span className="tooltip">Vehicle Management</span>
         </li>
         <li>
           <Link to="/dashboard/fee-and-fund">
-            <i className='bx bx-money-withdraw'></i>
+            <i className="bx bx-money-withdraw"></i>
             <span className="links_name">Fee and Fund</span>
           </Link>
           <span className="tooltip">Fee and Fund</span>
@@ -81,7 +82,7 @@ const SideBar = () => {
         </li>
         <li>
           <Link to="/dashboard/invoices">
-            <i className='bx bxs-file-plus'></i>
+            <i className="bx bxs-file-plus"></i>
             <span className="links_name">Invoices</span>
           </Link>
           <span className="tooltip">Invoices</span>
@@ -90,10 +91,19 @@ const SideBar = () => {
       <div className="profile_content">
         <div className="profile">
           <div className="profile_details">
-            <img
-              src="https://i.pinimg.com/564x/5e/7b/9c/5e7b9c338994683cdadd9b52d95223cc.jpg"
-              alt="Admin profile"
-            />
+            <Modal>
+              <Modal.Open id="accountForm">
+                <img
+                  id="accountForm"
+                  src="https://i.pinimg.com/564x/5e/7b/9c/5e7b9c338994683cdadd9b52d95223cc.jpg"
+                  alt="Admin profile"
+                />
+              </Modal.Open>
+              <Modal.Window id="accountForm" name="Account Details">
+                  <AccoutForm></AccoutForm>
+              </Modal.Window>
+            </Modal>
+
             <div className="name_role">
               <div className="name">{name || "Unknown User"}</div>
               <div className="role">Manager</div>

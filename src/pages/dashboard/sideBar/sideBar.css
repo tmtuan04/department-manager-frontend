@@ -254,3 +254,7 @@ body {
   color: #11101d;
   border-radius: 50%;
 }
+
+#accountForm{
+  cursor: pointer;
+}

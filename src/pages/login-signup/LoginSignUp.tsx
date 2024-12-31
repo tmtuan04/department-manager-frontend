@@ -60,6 +60,7 @@ const LoginSignUp = () => {
       if (remember) {
         localStorage.setItem("accessToken", accessToken);
         localStorage.setItem("name", user.name);
+        localStorage.setItem("id", user.id);
         localStorage.setItem(
           "remember",
           JSON.stringify({ username: loginData.username, password: loginData.password })

@@ -19,7 +19,6 @@ const App = () => {
           <Route element={<ProtectedRoute />}>
             <Route path="/dashboard/*" element={<DashBoard />}></Route>
           </Route>
-          <Route path="*" element={<NotFound />}></Route>
         </Routes>
       </Router>
       <Notification />
