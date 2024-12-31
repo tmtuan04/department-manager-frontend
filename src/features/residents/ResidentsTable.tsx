@@ -4,27 +4,36 @@ import Pagination from "../../components/Pagination";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-
 interface ResidentsTableProps {
   keyword: string;
 }
 
-
-export default function ResidentsTable({keyword}: ResidentsTableProps) {
+export default function ResidentsTable({ keyword }: ResidentsTableProps) {
   const [residents, setResidents] = useState<any[]>([]);
+  const [totalPages, setTotalPages] = useState<number>(0);
+  const [totalElements, setTotalElements] = useState<number>(0);
+  const [curPage, setCurPage] = useState<number>(1);
 
-  const apiResidents = async () => {
+  const apiResidents = async (page: number = 1) => {
     try {
-      const response = await axios.get(`http://localhost:8080/api/v1/residents?size=10&page=1&filter=name~'${keyword}'`);
+      const response = await axios.get(
+        `http://localhost:8080/api/v1/residents?size=10&page=${page}&filter=name~'${keyword}'`
+      );
       setResidents(response.data.data.result);
+      setTotalPages(response.data.data.totalPages);
+      setTotalElements(response.data.data.totalElements);
     } catch (error) {
       console.error(error);
     }
-  }
+  };
 
   useEffect(() => {
-    apiResidents();
-  }, [keyword]);
+    apiResidents(curPage);
+  }, [keyword, curPage]);
+
+  const handlePageChange = (page: number) => {
+    setCurPage(page);
+  };
   return (
     <Table columns="0.5fr 1fr 1.5fr 1.5fr 1fr 1.5fr 1fr 1fr">
       <Table.Header>
@@ -42,9 +51,14 @@ export default function ResidentsTable({keyword}: ResidentsTableProps) {
         <ResidentRow resident={resident} index={index} />
       ))}
 
-      {/* <Table.Footer>
-        <Pagination count={residents.length} />
-      </Table.Footer> */}
+      <Table.Footer>
+        <Pagination
+          totalPages={totalPages}
+          curPage={curPage}
+          totalElements={totalElements}
+          onPageChange={handlePageChange}
+        />
+      </Table.Footer>
     </Table>
   );
 }

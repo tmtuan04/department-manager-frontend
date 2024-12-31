@@ -53,7 +53,7 @@ async function prepareData(): Promise<ProcessedData[]> {
   const fetchApartments = async (): Promise<Apartment[]> => {
     try {
       const response = await axios.get(
-        "http://localhost:8080/api/v1/residents"
+        "http://localhost:8080/api/v1/residents?size=999"
       );
       return response.data.data.result; // Trả về danh sách căn hộ
     } catch (error) {
@@ -96,7 +96,7 @@ export default function ResidentsChart() {
       setData(result);
     };
     fetchData();
-  }, []);
+  }, [data]);
 
   // Tính tổng giá trị để hiển thị ở giữa PieChart
   const totalValue = data.reduce((total, entry) => total + entry.value, 0);

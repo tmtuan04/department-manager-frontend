@@ -51,7 +51,7 @@ async function prepareData(): Promise<ProcessedData[]> {
   const fetchApartments = async (): Promise<Apartment[]> => {
     try {
       const response = await axios.get(
-        "http://localhost:8080/api/v1/apartments"
+        "http://localhost:8080/api/v1/apartments?size=999"
       );
       return response.data.data.result; // Trả về danh sách căn hộ
     } catch (error) {
