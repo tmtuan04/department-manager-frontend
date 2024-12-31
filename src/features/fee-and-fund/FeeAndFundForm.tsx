@@ -17,7 +17,7 @@ export default function FeeAndFundForm({ feeOrFund }: any) {
     feeTypeEnum: feeOrFund?.feeTypeEnum || "",
     createdAt: feeOrFund?.createdAt || "",
   });
-  const typeOptions = ["DepartmentFee", "ContributionFund"];
+  const typeOptions = ["DepartmentFee", "ContributionFund", "VehicleFee"];
 
   const handleChange = (e: any) => {
     const { id, value } = e.target;
@@ -40,9 +40,14 @@ export default function FeeAndFundForm({ feeOrFund }: any) {
 
     try {
       const response = await axios.put("http://localhost:8080/api/v1/fees", data);
-      console.log("Update Successfull!")
+
+      setTimeout(() => {
+        window.location.reload();
+      }, 1500);
+
+      toast.success("Update Successfull!")
     } catch (err) {
-      console.log(err);
+      toast.error("Có lỗi xảy ra");
     }
   }
 
@@ -52,8 +57,14 @@ export default function FeeAndFundForm({ feeOrFund }: any) {
     try {
       // Xoá Fee-Fund theo ID
       const response = await axios.delete(`http://localhost:8080/api/v1/fees/${formValues.id}`);
-      console.log("Delete Successfull!");
+
+      setTimeout(() => {
+        window.location.reload();
+      }, 1500);
+
+      toast.success("Delete Sucessfull!!");
     } catch (err) {
+      toast.error("Có lỗi xảy ra");
       console.log(err);
     }
 
@@ -61,7 +72,7 @@ export default function FeeAndFundForm({ feeOrFund }: any) {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    console.log(formValues);
+    // console.log(formValues);
     
     const data = {
       name: formValues.name,
@@ -72,6 +83,11 @@ export default function FeeAndFundForm({ feeOrFund }: any) {
 
     try {
       const response = await axios.post("http://localhost:8080/api/v1/fees", data);
+
+      setTimeout(() => {
+        window.location.reload();
+      }, 1500);
+
       toast.success(`Add ${formValues.name} Successfull!`);
       
     } catch (err) {
@@ -80,7 +96,7 @@ export default function FeeAndFundForm({ feeOrFund }: any) {
   };
 
   return (
-    <Form width="400px" onSubmit={handleSubmit}>
+    <Form width="500px">
       <Selector
         value={formValues.feeTypeEnum}
         onChange={handleChange}

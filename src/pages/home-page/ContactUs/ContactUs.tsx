@@ -2,6 +2,7 @@ import Footer from "../partials/Footer";
 import "./contact-us.css";
 import { useState } from 'react';
 import emailjs from "emailjs-com";
+import { toast } from "react-toastify";
 
 const ContactUs = () => {
 
@@ -69,11 +70,11 @@ const ContactUs = () => {
                 userId
             );
 
-            alert("Your message has been sent successfully!");
+            toast.success("Your message has been sent successfully!");
             setStateFormContact(initialState); // Reset form sau khi gửi
         } catch (error) {
             console.error("Failed to send message:", error);
-            alert("Failed to send your message. Please try again.");
+            toast.error("Failed to send your message. Please try again.");
         } finally {
             setIsSubmitting(false);
         }

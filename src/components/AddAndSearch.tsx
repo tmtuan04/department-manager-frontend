@@ -9,11 +9,11 @@ const AddAndSearchStyled = styled.div`
   gap: 10px;
 `;
 
-export default function AddAndSearch({ children, title }) {
+export default function AddAndSearch({ children, title, setKeyword, keyword }) {
   return (
     <AddAndSearchStyled>
       <Add title={title}>{children}</Add>
-      <Search />
+      <Search setKeyword={setKeyword} keyword={keyword}/>
     </AddAndSearchStyled>
   );
 }

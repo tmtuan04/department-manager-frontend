@@ -21,6 +21,7 @@ const IconBox = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 10px;
   grid-column: 2;
   grid-row: 2;
 `;
@@ -48,6 +49,7 @@ const Value = styled.div`
   line-height: 1;
   grid-row: 2; /* Value nằm ở hàng thứ 2 */
   grid-column: 1;
+  margin: auto;
   color: black;
 `;
 

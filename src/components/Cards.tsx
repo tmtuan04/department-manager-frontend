@@ -27,7 +27,7 @@ export default function Cards() {
     const totalApartments = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8080/api/v1/apartments"
+          "http://localhost:8080/api/v1/apartments?size=999"
         );
         setNumOfApartments(response.data.data.totalElements);
       } catch (error) {
@@ -38,7 +38,7 @@ export default function Cards() {
     const totalResidents = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8080/api/v1/residents"
+          "http://localhost:8080/api/v1/residents?size=999"
         );
         setNumOfResidents(response.data.data.totalElements);
       } catch (error) {
@@ -49,7 +49,7 @@ export default function Cards() {
     const totalVehicles = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8080/api/v1/vehicles"
+          "http://localhost:8080/api/v1/vehicles?size=999"
         );
         setNumOfVehicles(response.data.data.totalElements);
       } catch (error) {
@@ -83,6 +83,7 @@ export default function Cards() {
 
     totalApartments();
     totalResidents();
+    totalVehicles();
     fetchTotalAmountLast30Days();
   }, []);
 

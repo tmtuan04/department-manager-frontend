@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { HiOutlineSearch } from "react-icons/hi";
+import { ChangeEvent, useEffect, useState } from "react";
 
 const SearchStyled = styled.div`
   display: flex;
@@ -28,11 +29,23 @@ const Input = styled.input`
   }
 `;
 
-export default function Search() {
+
+interface SearchProps {
+  setKeyword: (keyword: string) => void;
+  keyword: string
+}
+
+
+export default function Search({setKeyword, keyword}: SearchProps) {
+  const handleChangeSearchBar = (e: ChangeEvent<HTMLInputElement>) => {
+    setKeyword(e.target.value);
+  }
+
   return (
+    
     <SearchStyled>
       <SearchIcon />
-      <Input placeholder="Search..." />
+      <Input placeholder="Search..." value={keyword} onChange={handleChangeSearchBar}/>
     </SearchStyled>
   );
 }

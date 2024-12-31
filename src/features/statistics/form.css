@@ -5,6 +5,7 @@
 }
 
 .cts {
+  overflow-y: scroll;
   width: inherit;
   height: inherit;
   margin: 10px;
@@ -130,4 +131,41 @@ td {
   color: #000012;
   font-weight: 600;
   margin-bottom: 10px;
+}
+
+.voluntary-fund {
+  position: relative;
+  right: 80px;
+  margin: 10px;
+
+  .inputFund {
+    border: 1px solid black;
+    margin-left: 3px;
+    border-radius: 6px;
+    padding: 4px 8px;
+    font-size: 14px;
+  }
+}
+/* 
+.divPay {
+
+} */
+
+.payButton {
+  font-weight: 600;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  left: 280px;
+  top: 7px;
+  padding: 4px 12px;
+  background-color: var(--color-green-500);
+  color: white;
+  border-radius: 8px;
+  
+  i {
+    font-size: 22px;
+  }
 }
