@@ -1,0 +1,171 @@
+.wra {
+  display: flex;
+  width: 750px;
+  height: 500px;
+}
+
+.cts {
+  overflow-y: scroll;
+  width: inherit;
+  height: inherit;
+  margin: 10px;
+  border-radius: 10px;
+  border: 1px solid grey;
+  padding: 10px;
+}
+
+h2 {
+  text-align: center;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.apartment-code {
+  color: #d9534f;
+  font-weight: bold;
+}
+
+.billing-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+  margin-bottom: 5px;
+  border-radius: 4px;
+  cursor: pointer;
+  /* transition: background-color 0.1s ease; */
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.billing-header.incomplete {
+  background-color: #f06957;
+  color: #721c24;
+}
+
+.billing-header.complete {
+  background-color: #67c16e;
+  color: #155724;
+}
+
+.billing-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px;
+  /* background-color: #f9f9f9; */
+  border: 1px solid black;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+.billing-details table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 10px;
+}
+
+.total-due {
+  padding: 4px;
+  background-color: #f06957;
+  position: relative;
+  top: 8px;
+  text-align: right;
+  color: #fff;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 14px;
+  width: fit-content;
+}
+
+.arrow {
+  font-size: 14px;
+  transition: transform 0.3s ease;
+}
+
+.arrow.open {
+  transform: rotate(180deg);
+}
+
+.pText {
+  color: black;
+  text-align: center;
+}
+
+.spanText,
+.status {
+  color: #fff;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+thead th:first-child {
+  border-radius: 10px 0 0 0;
+  border: none;
+}
+
+thead th:last-child {
+  border-radius: 0 10px 0 0;
+  border: none;
+}
+
+th,
+td {
+  text-align: center;
+  padding: 6px;
+  border: 1px solid #ddd;
+}
+
+th {
+  font-weight: 500;
+  background-color: #31363f;
+  color: white;
+}
+
+td {
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.invoiceText {
+  color: #000012;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.voluntary-fund {
+  position: relative;
+  right: 80px;
+  margin: 10px;
+
+  .inputFund {
+    border: 1px solid black;
+    margin-left: 3px;
+    border-radius: 6px;
+    padding: 4px 8px;
+    font-size: 14px;
+  }
+}
+/* 
+.divPay {
+
+} */
+
+.payButton {
+  font-weight: 600;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  left: 280px;
+  top: 7px;
+  padding: 4px 12px;
+  background-color: var(--color-green-500);
+  color: white;
+  border-radius: 8px;
+  
+  i {
+    font-size: 22px;
+  }
+}

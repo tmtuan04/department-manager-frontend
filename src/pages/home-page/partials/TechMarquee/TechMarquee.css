@@ -1,7 +1,3 @@
-.home .home__tech {
-    margin-bottom: 60px;
-}
-
 .fade-out {
     mask-image: linear-gradient(to right,
             transparent,
@@ -10,7 +6,8 @@
             transparent);
 }
 
-.container {
+.container-tdn2 {
+    /* background-color: red; */
     max-width: 1140px;
     margin-left: auto;
     margin-right: auto;
@@ -22,11 +19,13 @@
 }
 
 .inner-tech .desc {
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    /* text-align: center; */
     font-weight: 600;
     margin-bottom: 20px;
 }
-.wrap {
+.wrap-tdn {
     background-color: #322B66;
     color: white;
     white-space: nowrap;
@@ -54,12 +53,13 @@
 }
 
 .inner-tech .tech__item {
-    margin: 0 60px;
+    margin: 0px 60px;
     padding: 24px 0;
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    gap: 5px;
+    gap: 10px;
+    font-size: 18px;
 }
 
 .inner-tech .tech__item .item__icon {

@@ -4,10 +4,10 @@ const TechMarquee = () => {
     return (
         <>
             <div className="home__tech">
-                <div className="container">
+                <div className="container-tdn2">
                     <div className="inner-tech">
                         <div className="desc">Technology used</div>
-                        <div className="wrap fade-out">
+                        <div className="wrap-tdn fade-out">
                             <div className="tech__main">
                                 <div className="tech__item">
                                     <div className="item__icon">
@@ -32,10 +32,10 @@ const TechMarquee = () => {
                                 </div>
                                 <div className="tech__item">
                                     <div className="item__icon">
-                                        <img src={assets.firebase}
+                                        <img src={assets.docker}
                                             alt="firebase" />
                                     </div>
-                                    <div className="content">Firebase</div>
+                                    <div className="content">Docker</div>
                                 </div>
                                 <div className="tech__item">
                                     <div className="item__icon">
@@ -83,10 +83,10 @@ const TechMarquee = () => {
                                 </div>
                                 <div className="tech__item">
                                     <div className="item__icon">
-                                        <img src={assets.firebase}
+                                        <img src={assets.tailwind}
                                             alt="firebase" />
                                     </div>
-                                    <div className="content">Firebase</div>
+                                    <div className="content">TailwindCSS</div>
                                 </div>
                                 <div className="tech__item">
                                     <div className="item__icon">

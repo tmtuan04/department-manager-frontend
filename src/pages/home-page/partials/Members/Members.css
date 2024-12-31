@@ -1,3 +1,8 @@
+.container-tdn {
+    max-height: 100vh;
+    max-width: 100vh;
+}
+
 .slick-dots {
     bottom: -60px;
 }
@@ -26,8 +31,6 @@
     left: -100px;
 }
 
-
-
 /* abc */
 .our-team__members .member {
     display: flex!important;
@@ -46,7 +49,7 @@
     margin-bottom: 50px;
 }
 
-.our-team__members .member .member__img img {
+img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -63,11 +66,15 @@
 }
 
 .our-team__members .member .member__info .sid {
-    font-size: 18px;
-    font-weight: 300;
+    font-size: 16px;
+    /* font-weight: 400; */
 }
 
 .our-team__members .member .member__quote {
     font-size: 15px;
     font-weight: 300;
+}
+
+.member__role {
+    font-weight: 500;
 }

@@ -1,18 +1,16 @@
 .home-page .footer {
-    background-color: #000;
+    background-color: #021526;
     color: #fff;
     display: flex;
     padding: 20px 0;
-}
-
-.home-page .footer .container {
-    width: 100%;
+    justify-content: center;
+    align-items: center;
 }
 
 .home-page .footer .inner-footer {
     display: flex;
     justify-content: space-between;
-    width: 100%;
+    width: 60%;
 }
 
 .home-page .footer .inner-footer .footer__left {

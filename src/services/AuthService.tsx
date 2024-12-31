@@ -9,13 +9,21 @@ export const AuthService = {
    * @returns A promise resolving to the redirect URL.
    */
   authenticate(loginType: "facebook" | "google"): Promise<string> {
+    const params: Record<string, string> = {
+      "login-type": loginType,
+    };
+
+    if (loginType === "google") {
+      params.prompt = "select_account";
+    }
+
     return axios
       .get<{ code: number; message: string; data: string }>(`${apiBaseUrl}/users/auth/social-login`, {
-        params: { "login-type": loginType },
+        params,
       })
       .then((response) => {
         if (response.data.code === 200) {
-          return response.data.data; // Trả về URL từ trường `data`
+          return response.data.data;
         } else {
           throw new Error(response.data.message || "Authentication failed");
         }

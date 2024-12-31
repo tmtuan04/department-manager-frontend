@@ -1,0 +1,203 @@
+# AUTH API
+
+### POST: Register (Successful)
+POST http://localhost:8080/api/v1/users/register
+Content-Type: application/json
+
+{
+    "name": "Tu Minh Tuan",
+    "username": "testtt@gmail.com",
+    "password": "tuan2004"
+}
+
+### GET ALL
+GET http://localhost:8080/api/v1/users
+
+### UPDATE
+PUT http://localhost:8080/api/v1/users
+Content-Type: application/json
+
+{
+    "id": "34",
+    "name": "Test",
+    "email": "tuantest@gmail.com",
+    "password": "tuan2004"
+}
+
+
+### POST: Login (Successful)
+# Lưu trữ refresh token ở cookie, hết hạn sau 1 ngày
+POST http://localhost:8080/api/v1/auth/login
+Content-Type: application/json
+
+{
+    "username": "test@gmail.com",
+    "password": "tuan2004"
+}
+
+#########################################################
+
+# RESIDENT API
+
+### POST: Tạo cư dân (Successful)
+POST  http://localhost:8080/api/v1/residents
+Content-Type: application/json
+
+{
+    "name": "Tran Nguyen",
+    "dob": "2004-11-18",
+    "status": "Resident",
+    "gender": "Male",
+    "cic": "1234567890",
+    "apartmentId": ""
+}
+
+
+### GET: Lấy thông tin các cư dân (Successful)
+GET http://localhost:8080/api/v1/residents?size=100&page=1
+
+
+### DELETE: Xoá cư dân theo id
+DELETE http://localhost:8080/api/v1/residents/2
+
+
+#########################################################
+
+# APARTMENT API
+
+
+### DELETE: Xoá căn hộ
+DELETE http://localhost:8080/api/v1/apartments/424342523
+
+### PUT: Cập nhật thông tin căn hộ
+PUT http://localhost:8080/api/v1/apartments/88
+Content-Type: application/json
+
+{
+    "area":"222",
+    "status":"Residential",
+    "residents":[8]
+}
+
+
+### POST: Tạo căn hộ (Successfull)
+POST http://localhost:8080/api/v1/apartments
+Content-Type: application/json
+
+# Chưa có thêm phương tiện ở đây
+{
+    "addressNumber": 300,
+    "area": "350",
+    "status":"Business",
+    "ownerId": "3",
+    "ownerPhone": "0123456789",
+    "memberIds":[]
+}
+
+### GET: Lấy all thông tin căn hộ (Successfull) 
+GET http://localhost:8080/api/v1/apartments
+
+
+### GET: Lấy thông tin căn hộ theo id (tức số phòng)
+GET http://localhost:8080/api/v1/apartments/100
+
+
+#########################################################
+
+# VEHICLES API
+
+### POST: Thêm phương tiện mới (Successfull, nhưng id đang lưu số chứ kp chuỗi (biển số))
+POST http://localhost:8080/api/v1/vehicles
+Content-Type: application/json
+
+{
+    "id":"29A999",
+    "category":"Motorbike",
+    "apartmentId":"100"
+}
+
+### GET: Get phương tiện theo id của căn hộ (Successfull)
+GET http://localhost:8080/api/v1/vehicles/103
+
+
+### GET: Get tất cả phương tiện (Successfull)
+GET http://localhost:8080/api/v1/vehicles
+
+
+### DELETE: Xoá phương tiện theo id (Successfull)
+DELETE http://localhost:8080/api/v1/vehicles/100
+Content-Type: application/json
+
+{
+    "id": "29A99999"
+}
+
+
+#########################################################
+
+# Fees And Funds API
+
+
+### POST: Tạo fee or fund
+POST http://localhost:8080/api/v1/fees
+Content-Type: application/json
+# Enum: ContributionFund, DepartmentFee
+
+{
+    "name": "Quỹ 1",
+    "description": "Xyzgh",
+    "feeTypeEnum": "ContributionFund",
+    "unitPrice" : 1234
+}
+
+### GET: Lấy thông tin tất cả các loại phí quỹ
+GET http://localhost:8080/api/v1/fees
+
+
+### DELETE: Xoá Fee-Fund theo ID (Successfull)
+DELETE http://localhost:8080/api/v1/fees/5
+
+### PUT: UPDATE thông tin Fee-Fund
+PUT http://localhost:8080/api/v1/fees
+Content-Type: application/json
+# Cái này chắc là cập nhật theo id
+
+{
+    "id": 2,
+    "name": "phí 2",
+    "description": "loại phí 2",
+    "feeTypeEnum": "DepartmentFee",
+    "unitPrice" : 1000.22
+}
+
+
+#########################################################
+
+# Invoices API
+
+### GET ALL: Lấy thông tin tất cả các hoá đơn (Successful)
+
+GET http://localhost:8080/api/v1/invoices
+
+### GET: Lấy thông tin tất cả cả hoá đơn theo căn hộ
+GET http://localhost:8080/api/v1/invoiceapartment/100
+
+
+### Thanh toán invoice
+PUT http://localhost:8080/api/v1/invoiceapartment/update/100/HD02
+Content-Type: application/json
+
+{
+    "4": 50000
+}
+
+
+#########################################################
+
+# Utility API
+
+### GET: Lấy thông tin hoá đơn tiện ích từ từng căn hộ
+GET http://localhost:8080/api/v1/utilitybills/100
+
+### POST: Cập nhật Unpaid -> Paid theo ID
+POST http://localhost:8080/api/v1/utilitybills/update/36
