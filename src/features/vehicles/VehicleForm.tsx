@@ -71,7 +71,7 @@ export default function VehicleForm({ vehicle }: any) {
   };
 
   return (
-    <Form width="400px" onSubmit={handleSubmit}>
+    <Form width="400px">
       <Form.Fields>
         <FormField>
           <FormField.Label label={"Room"} />
@@ -82,16 +82,6 @@ export default function VehicleForm({ vehicle }: any) {
             onChange={handleChange}
           />
         </FormField>
-
-        {/* <FormField>
-          <FormField.Label label={"Date"} />
-          <FormField.Input
-            id="ownerName"
-            type="text"
-            value={formValues.registerDate}
-            onChange={handleChange}
-          />
-        </FormField> */}
 
         <FormField>
           <FormField.Label label={"Number"} />
@@ -129,7 +119,7 @@ export default function VehicleForm({ vehicle }: any) {
         </Form.Buttons>
       ) : (
         <Form.Buttons>
-          <Button size="medium" variation="primary">
+          <Button onClick={handleSubmit} type="button" size="medium" variation="primary">
             Add
             <span>
               <HiOutlinePlusCircle />
