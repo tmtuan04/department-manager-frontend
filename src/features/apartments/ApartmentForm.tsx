@@ -151,7 +151,7 @@ export default function ApartmentForm({
     }
   };
 
-  const statusOptions = ["Business", "Residential"];
+  const statusOptions = ["Business", "Residential", "Moved", "Vacant"];
 
   // API xoá căn hộ (delete)
 

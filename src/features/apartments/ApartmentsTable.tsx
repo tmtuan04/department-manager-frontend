@@ -4,14 +4,13 @@ import Table from "../../components/Table";
 import Pagination from "../../components/Pagination";
 import ApartmentRow from "./ApartmentRow";
 
-const PAGE_SIZE = 5;
+const PAGE_SIZE = 10;
 
 interface ApartmentsTableProps {
   keyword: string;
 }
 
-
-export default function ApartmentsTable({keyword}: ApartmentsTableProps) {
+export default function ApartmentsTable({ keyword }: ApartmentsTableProps) {
   const [apartments, setApartments] = useState<any[]>([]);
   const [totalPages, setTotalPages] = useState<number>(0);
   const [totalElements, setTotalElements] = useState<number>(0);
@@ -20,27 +19,22 @@ export default function ApartmentsTable({keyword}: ApartmentsTableProps) {
   const apiApartments = async (page: number = 1) => {
     try {
       let url: string;
-      if(keyword) {
-        url= `http://localhost:8080/api/v1/apartments/${keyword}`
-      }
-      else {
-        url= `http://localhost:8080/api/v1/apartments?page=${page}&size=${PAGE_SIZE}`
+      if (keyword) {
+        url = `http://localhost:8080/api/v1/apartments/${keyword}`;
+      } else {
+        url = `http://localhost:8080/api/v1/apartments?page=${page}&size=${PAGE_SIZE}`;
       }
       const response = await axios.get(url);
 
-      if(keyword) {
-        
+      if (keyword) {
         setApartments([response.data.data]);
         setTotalPages(1);
         setTotalElements(1);
-      }
-      else {
-        
+      } else {
         setApartments(response.data.data.result);
         setTotalPages(response.data.data.totalPages);
         setTotalElements(response.data.data.totalElements);
       }
-      
     } catch (error) {
       console.error("Error fetching apartments:", error);
     }
@@ -49,7 +43,6 @@ export default function ApartmentsTable({keyword}: ApartmentsTableProps) {
   useEffect(() => {
     apiApartments(curPage);
     console.log(keyword);
-    
   }, [curPage, keyword]);
 
   const handlePageChange = (page: number) => {
