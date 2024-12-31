@@ -85,6 +85,7 @@ export default function Cards() {
     totalResidents();
     totalVehicles();
     fetchTotalAmountLast30Days();
+    console.log("Test");
   }, []);
 
   return (

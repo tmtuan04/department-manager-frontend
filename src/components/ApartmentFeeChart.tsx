@@ -58,6 +58,7 @@ export default function ApartmentFeeChart() {
     };
 
     fetchData();
+    console.log("Test");
   }, []);
 
   //Tính toán max value và chia cho 1 triệu

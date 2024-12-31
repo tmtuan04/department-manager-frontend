@@ -99,6 +99,7 @@ export default function ApartmentChart() {
       const result = await prepareData();
       setData(result);
     };
+    console.log("Test");
     fetchData();
   }, []);
 
