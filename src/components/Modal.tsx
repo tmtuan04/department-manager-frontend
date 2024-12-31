@@ -18,6 +18,8 @@ const StyledModal = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  overflow-y: scroll;
+  max-height: 650px;
   border: 1px solid black;
   background-color: var(--color-grey-0);
   border-radius: 15px;

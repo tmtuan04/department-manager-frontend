@@ -5,6 +5,7 @@ import Selector from "../../components/Selector";
 import Button from "../../components/Button";
 import { HiOutlinePlusCircle, HiPencil, HiTrash } from "react-icons/hi2";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 export default function VehicleForm({ vehicle }: any) {
   const [formValues, setFormValues] = useState({
@@ -32,9 +33,15 @@ export default function VehicleForm({ vehicle }: any) {
         data: { id: formValues.id }, // Payload gửi kèm
         headers: { "Content-Type": "application/json" }, // Đảm bảo header đúng
       });
-      console.log(response.data);
+      
+      // console.log(response.data);
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+      toast.success("Delete vehicle successfull!");
     } catch (error) {
-      console.log(error);
+      toast.error("Có lỗi xảy ra");
+      // console.log(error);
     }
   };
 
@@ -53,10 +60,12 @@ export default function VehicleForm({ vehicle }: any) {
       const response = await axios.post(
         "http://localhost:8080/api/v1/vehicles", vehicleData
       );
-      
-      const data = await response.data;
-      console.log("Apartment created successfully", data);
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+      toast.success("Add vehicle successfull");
     } catch (error) {
+      toast.error("Có lỗi xảy ra");
       console.log(error);
     }
   };
@@ -74,7 +83,7 @@ export default function VehicleForm({ vehicle }: any) {
           />
         </FormField>
 
-        <FormField>
+        {/* <FormField>
           <FormField.Label label={"Date"} />
           <FormField.Input
             id="ownerName"
@@ -82,7 +91,7 @@ export default function VehicleForm({ vehicle }: any) {
             value={formValues.registerDate}
             onChange={handleChange}
           />
-        </FormField>
+        </FormField> */}
 
         <FormField>
           <FormField.Label label={"Number"} />
@@ -111,12 +120,12 @@ export default function VehicleForm({ vehicle }: any) {
               <HiTrash />
             </span>
           </Button>
-          <Button variation="secondary" size="medium">
+          {/* <Button variation="secondary" size="medium">
             Update
             <span>
               <HiPencil />
             </span>
-          </Button>
+          </Button> */}
         </Form.Buttons>
       ) : (
         <Form.Buttons>

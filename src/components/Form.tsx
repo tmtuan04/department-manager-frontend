@@ -73,7 +73,6 @@ const TextArea = styled.textarea`
 interface FormProps {
   children: ReactNode;
   width?: string;
-  onSubmit: any;
 }
 
 // Extending React.FC to allow additional properties (Buttons, Fields, TextArea)
@@ -83,9 +82,9 @@ interface FormComponent extends React.FC<FormProps> {
   TextArea: React.ElementType;
 }
 
-const Form: FormComponent = ({ children, width, onSubmit }) => {
+const Form: FormComponent = ({ children, width }) => {
   return (
-    <StyledForm width={width} onSubmit={onSubmit}>
+    <StyledForm width={width} >
       {children}
     </StyledForm>
   );

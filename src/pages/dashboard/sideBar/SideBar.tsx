@@ -37,43 +37,36 @@ const SideBar = () => {
       </div>
       <ul className="nav_list">
         <li>
-          <a href="#">
-            <i className="bx bx-search"></i>
-            <input type="text" placeholder="Search..." />
-          </a>
-          <span className="tooltip">Search</span>
-        </li>
-        <li>
-          <a href="#">
+          <Link to="/dashboard/">
             <i className="bx bxs-grid-alt"></i>
             <span className="links_name">Dashboard</span>
-          </a>
+          </Link>
           <span className="tooltip">Dashboard</span>
         </li>
         <li>
           <Link to="/dashboard/residents">
-            <i className="bx bxs-grid-alt"></i>
+            <i className="bx bx-user"></i>
             <span className="links_name">Resident Management</span>
           </Link>
           <span className="tooltip">Resident Management</span>
         </li>
         <li>
           <Link to="/dashboard/apartments">
-            <i className="bx bxs-grid-alt"></i>
+            <i className='bx bxs-home'></i>
             <span className="links_name">Apartment Management</span>
           </Link>
           <span className="tooltip">Apartment Management</span>
         </li>
         <li>
           <Link to="/dashboard/vehicles">
-            <i className="bx bx-user"></i>
+            <i className='bx bxs-car'></i>
             <span className="links_name">Vehicle Management</span>
           </Link>
           <span className="tooltip">Vehicle Management</span>
         </li>
         <li>
           <Link to="/dashboard/fee-and-fund">
-            <i className="bx bx-chat"></i>
+            <i className='bx bx-money-withdraw'></i>
             <span className="links_name">Fee and Fund</span>
           </Link>
           <span className="tooltip">Fee and Fund</span>
@@ -87,7 +80,7 @@ const SideBar = () => {
         </li>
         <li>
           <Link to="/dashboard/invoices">
-            <i className="bx bxs-cog"></i>
+            <i className='bx bxs-file-plus'></i>
             <span className="links_name">Invoices</span>
           </Link>
           <span className="tooltip">Invoices</span>

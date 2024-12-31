@@ -1,91 +1,51 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-  }
-  
-  .billing-container {
-    width: 400px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-  }
-  
-  h2 {
-    text-align: center;
-    font-size: 18px;
-    margin-bottom: 20px;
-  }
-  
-  .apartment-code {
-    color: #d9534f;
-    font-weight: bold;
-  }
-  
-  .billing-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 15px;
-    margin-bottom: 5px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .billing-header.incomplete {
-    background-color: #f8d7da;
-    color: #721c24;
-  }
-  
-  .billing-header.complete {
-    background-color: #d4edda;
-    color: #155724;
-  }
-  
-  .billing-header:hover {
-    background-color: #e2e3e5;
-  }
-  
-  .billing-details {
-    display: none; /* Hidden by default */
-    padding: 15px;
-    background-color: #f9f9f9;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    margin-bottom: 10px;
-  }
-  
-  .billing-details table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 10px;
-  }
-  
-  .billing-details table th,
-  .billing-details table td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
-  }
-  
-  .total-due {
-    font-weight: bold;
-    text-align: right;
-    color: #d9534f;
-  }
-  
-  .arrow {
-    font-size: 14px;
-    transition: transform 0.3s ease;
-  }
-  
-  .arrow.open {
-    transform: rotate(180deg);
-  }
-  
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #f0f0f0;
+}
+
+.search-container {
+  position: relative;
+  width: 300px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 0 0 4px 4px;
+  max-height: 150px;
+  overflow-y: auto;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.suggestions li {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.suggestions li:hover {
+  background-color: #f0f0f0;
+}
+
+.hidden {
+  display: none;
+}

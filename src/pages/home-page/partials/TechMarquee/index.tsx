@@ -32,10 +32,10 @@ const TechMarquee = () => {
                                 </div>
                                 <div className="tech__item">
                                     <div className="item__icon">
-                                        <img src={assets.firebase}
+                                        <img src={assets.docker}
                                             alt="firebase" />
                                     </div>
-                                    <div className="content">Firebase</div>
+                                    <div className="content">Docker</div>
                                 </div>
                                 <div className="tech__item">
                                     <div className="item__icon">
@@ -83,10 +83,10 @@ const TechMarquee = () => {
                                 </div>
                                 <div className="tech__item">
                                     <div className="item__icon">
-                                        <img src={assets.firebase}
+                                        <img src={assets.tailwind}
                                             alt="firebase" />
                                     </div>
-                                    <div className="content">Firebase</div>
+                                    <div className="content">TailwindCSS</div>
                                 </div>
                                 <div className="tech__item">
                                     <div className="item__icon">
