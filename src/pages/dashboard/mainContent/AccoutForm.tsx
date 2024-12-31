@@ -73,7 +73,7 @@ const AccoutForm = () => {
           <div style={{ position: "relative" }}>
             <FormField.Input
               id="password"
-              type={showPassword ? "text" : "password"}
+              type={showPassword ? "password" : "text"}
               value={data.password}
               onChange={handleChange}
             />
@@ -81,10 +81,10 @@ const AccoutForm = () => {
               type="button"
               onClick={togglePasswordVisibility}
               style={{
-                fontSize: "20px",
-                position: "absolute",
-                right: "25px",
-                top: "50%",
+                fontSize: "18px",
+                position: "relative",
+                left: "80%",
+                bottom: "25%",
                 transform: "translateY(-50%)",
                 background: "none",
                 border: "none",

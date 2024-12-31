@@ -34,9 +34,9 @@ const LoginSignUp = () => {
       });
 
       if (response.status === 201) {
-        localStorage.setItem("name", response.data.data.name);
+        // localStorage.setItem("name", response.data.data.name);
 
-        navigate("/dashboard");
+        // navigate("/dashboard");
       }
     } catch (error) {
       console.error(error);
@@ -44,7 +44,6 @@ const LoginSignUp = () => {
   };
 
   const handleLogin = async (e: any) => {
-    
     e.preventDefault();
 
 
