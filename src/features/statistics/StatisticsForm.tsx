@@ -86,6 +86,7 @@ const StatisticsForm = ({ statistic }: StatisticsFormProps) => {
         `http://localhost:8080/api/v1/utilitybills/update/${utilityId}`
       );
       toast.success("Pay Successfull");
+      apiUtility();
     } catch (err) {
       console.error(err);
     }
