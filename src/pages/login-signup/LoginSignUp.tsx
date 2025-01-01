@@ -47,9 +47,14 @@ const LoginSignUp = () => {
       if (response.status === 201) {
         // localStorage.setItem("name", response.data.data.name);
 
-        navigate("/dashboard");
+        // navigate("/dashboard");
+        setTimeout(() => {
+          window.location.reload()
+        }, 1000);
+        toast.success("Sign Up Successfull");
       }
     } catch (error) {
+      toast.error("Có lỗi xảy ra khi đăng ký");
       console.error(error);
     }
   };
