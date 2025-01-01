@@ -2,6 +2,7 @@ import { NotFound } from "./pages/not-found/NotFound";
 import HomePage from "./pages/home-page/HomePage";
 import LoginSignUp from "./pages/login-signup/LoginSignUp";
 import DashBoard from "./pages/dashboard/DashBoard";
+import { AuthCallbackComponent } from "./services/AuthCallback";
 import { GlobalStyles } from "./GlobalStyles";
 import Notification from "./components/Notification";
 
@@ -14,6 +15,7 @@ const App = () => {
       <Router>
         <GlobalStyles />
         <Routes>
+          <Route path="/auth/google/callback" element={<AuthCallbackComponent />} />
           <Route path="/" element={<HomePage />}></Route>
           <Route path="/signin" element={<LoginSignUp />}></Route>
           <Route element={<ProtectedRoute />}>

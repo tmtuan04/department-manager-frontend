@@ -30,7 +30,7 @@ export default function ResidentRow({ resident, index }:{ resident: any; index: 
       <div>{index + 1}</div>
       <div>{apartmentId}</div>
       <div>{name}</div>
-      <div>0{id}</div>
+      <div>{id}</div>
       <div>{gender}</div>
       <div>{formatDate(dob)}</div>
       <Tag

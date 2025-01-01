@@ -12,6 +12,7 @@ const LoginSignUp = () => {
   const [loginData, setLoginData] = useState({ username: "", password: "" });
   const [registerData, setRegisterData] = useState({ name: "", username: "", password: "", confirm: "" });
   const [remember, setRemember] = useState(false);
+  const [isGoogleLogin, setIsGoogleLogin] = useState(false);
 
   const navigate = useNavigate();
 
@@ -22,6 +23,16 @@ const LoginSignUp = () => {
   const handleRememberChange = (e: any) => {
     setRemember(e.target.checked);
   };
+
+  useEffect(() => {
+    if (!isGoogleLogin) {
+      const rememberedData = JSON.parse(localStorage.getItem("remember"));
+      if (rememberedData) {
+        setLoginData(rememberedData);
+        setRemember(true);
+      }
+    }
+  }, [isGoogleLogin]);
 
   const handleSignUp = async (e: any) => {
     e.preventDefault();
@@ -46,15 +57,14 @@ const LoginSignUp = () => {
   const handleLogin = async (e: any) => {
     e.preventDefault();
 
-
     try {
       const response = await axios.post("http://localhost:8080/api/v1/auth/login", {
         username: loginData.username,
         password: loginData.password,
       });
-  
+
       const { accessToken, user } = response.data.data;
-  
+
       // Lưu thông tin đăng nhập vào localStorage nếu chọn "Remember for 3 days"
       if (remember) {
         localStorage.setItem("accessToken", accessToken);
@@ -69,22 +79,23 @@ const LoginSignUp = () => {
         localStorage.setItem("accessToken", accessToken);
         localStorage.setItem("name", user.name);
       }
-  
+
       navigate("/dashboard");
       toast.success("Login successful!");
     } catch (error) {
-      toast.error("Có lỗi xảy ra!!")
+      toast.error("Có lỗi xảy ra!!");
       // console.error("Login Failed!", error);
     }
   };
-  
 
   const loginWithGoogle = async () => {
+    setIsGoogleLogin(true);
     try {
       const url = await AuthService.authenticate("google");
       window.location.href = url;
     } catch (error: any) {
       console.error("Lỗi xác thực với Google: ", error?.response?.data?.message || "");
+      setIsGoogleLogin(false);
     }
   };
 
@@ -92,15 +103,6 @@ const LoginSignUp = () => {
     const { name, value } = e.target;
     setLoginData((prev) => ({ ...prev, [name]: value }));
   };
-
-  useEffect(() => {
-    const rememberedData = JSON.parse(localStorage.getItem("remember"));
-    if (rememberedData) {
-      setLoginData(rememberedData);
-      setRemember(true); // Checkbox được tick nếu đã lưu trước đó
-    }
-  }, []);
-  
 
   return (
     <div className="main-sign-in-up">
@@ -191,7 +193,13 @@ const LoginSignUp = () => {
               </div>
             </div>
             <div className="mt-4 mr-20 remember-container">
-              <input className="scale-110" type="checkbox" id="remember" checked={remember} onChange={handleRememberChange} />
+              <input
+                className="scale-110"
+                type="checkbox"
+                id="remember"
+                checked={remember}
+                onChange={handleRememberChange}
+              />
               <label className="ml-2 text-base remember" htmlFor="remember">
                 Remember me
               </label>
