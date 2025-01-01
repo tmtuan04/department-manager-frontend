@@ -14,6 +14,7 @@ interface Resident {
   id: number;
   name: string;
   dob: string;
+  status: string;
 }
 
 interface Vehicle {
@@ -151,7 +152,7 @@ export default function ApartmentForm({
     }
   };
 
-  const statusOptions = ["Business", "Residential", "Moved", "Vacant"];
+  const statusOptions = ["Business", "Residential", "Vacant"];
 
   // API xoá căn hộ (delete)
 
@@ -222,15 +223,17 @@ export default function ApartmentForm({
       </Form.Fields>
 
       <label>Resident:</label>
-      <Table columns="1fr 1fr">
+      <Table columns="1fr 1fr 1fr">
         <Table.Header size="small">
           <div>Name</div>
           <div>DOB</div>
+          <div>Status</div>
         </Table.Header>
         {selectedResidents.map((resident) => (
           <Table.Row size="small" key={resident.id}>
             <div>{resident.name}</div>
             <div>{resident.dob}</div>
+            <div>{resident.status}</div>
           </Table.Row>
         ))}
       </Table>

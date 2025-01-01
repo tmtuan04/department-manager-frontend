@@ -59,6 +59,27 @@ export default function ResidentForm({ resident, onCloseModal }: any) {
     }
   };
 
+  const handleUpdate = async (e: any) => {
+    e.preventDefault();
+
+    try {
+      const data = {
+        id: formValues.id,
+        name: formValues.name,
+        dob: formValues.dob,
+        status: formValues.status,
+        gender: formValues.gender
+      }
+      const response = await axios.put('http://localhost:8080/api/v1/residents', data);
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+      toast.success("Update Successfull");
+    } catch (err) {
+      toast.error("Có lỗi xảy ra");
+    }
+  }
+
   const handleDelete = async () => {
     try {
       console.log(formValues.id);
@@ -104,6 +125,7 @@ export default function ResidentForm({ resident, onCloseModal }: any) {
               type="text"
               value={formValues.id}
               onChange={handleChange}
+              readOnly
             />
           </FormField>
           <Selector
@@ -148,12 +170,12 @@ export default function ResidentForm({ resident, onCloseModal }: any) {
               <HiTrash />
             </span>
           </Button>
-          {/* <Button type="button" variation="secondary" size="medium">
+          <Button onClick={handleUpdate} type="button" variation="secondary" size="medium">
             Update
             <span>
               <HiPencil />
             </span>
-          </Button> */}
+          </Button>
         </Form.Buttons>
       ) : (
         <Form.Buttons>
