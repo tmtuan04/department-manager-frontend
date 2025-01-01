@@ -36,7 +36,7 @@ const LoginSignUp = () => {
       if (response.status === 201) {
         // localStorage.setItem("name", response.data.data.name);
 
-        // navigate("/dashboard");
+        navigate("/dashboard");
       }
     } catch (error) {
       console.error(error);
