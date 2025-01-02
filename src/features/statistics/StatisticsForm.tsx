@@ -15,7 +15,7 @@ const StatisticsForm = ({ statistic }: StatisticsFormProps) => {
   const [dataInvoice, setDataInvoice] = useState<any[]>([]);
   const [dataUtility, setDataUtility] = useState<any[]>([]);
   const [openDropdowns, setOpenDropdowns] = useState<any>({});
-  const [voluntaryFund, setVoluntaryFund] = useState<any>({}); // Lưu số tiền tự nguyện cho từng `Fund 2`
+  const [voluntaryFund, setVoluntaryFund] = useState<any>({});
 
   const toggleDropdown = (key: any) => {
     setOpenDropdowns((prevState) => ({
@@ -24,10 +24,14 @@ const StatisticsForm = ({ statistic }: StatisticsFormProps) => {
     }));
   };
 
-  const handleVoluntaryFundChange = (invoiceId: string, value: string) => {
+  const handleVoluntaryFundChange = (
+    invoiceId: string,
+    feeName: string,
+    value: string
+  ) => {
     setVoluntaryFund((prevState: any) => ({
       ...prevState,
-      [invoiceId]: parseFloat(value) || 0, // Chuyển giá trị nhập sang số
+      [`${invoiceId}_${feeName}`]: parseFloat(value) || 0,
     }));
   };
 
@@ -47,18 +51,20 @@ const StatisticsForm = ({ statistic }: StatisticsFormProps) => {
       // Tạo payload chứa fund ID và số tiền tự nguyện
       const payload = feeList.reduce((acc: any, fee: any) => {
         if (fee.feeType === "ContributionFund") {
-          acc[fee.id] = voluntaryFund[invoiceId] || 0; // Lấy số tiền tự nguyện từ `voluntaryFund`
+          const key = `${invoiceId}_${fee.name}`; // Tạo key duy nhất cho mỗi quỹ
+          acc[fee.id] = voluntaryFund[key] || 0; // Lấy số tiền tự nguyện từ `voluntaryFund` dựa trên key duy nhất
         }
         return acc;
       }, {});
-
+  
       // Gửi request API
       const response = await axios.put(
         `http://localhost:8080/api/v1/invoiceapartment/update/${addressNumber}/${invoiceId}`,
         payload,
         { headers: { "Content-Type": "application/json" } }
       );
-
+  
+      console.log(response.data); // Kiểm tra payload gửi đi và phản hồi API
       toast.success("Invoice paid successfully!");
       apiInvoice(); // Reload dữ liệu sau khi thanh toán
     } catch (err) {
@@ -66,6 +72,7 @@ const StatisticsForm = ({ statistic }: StatisticsFormProps) => {
       toast.error("Failed to pay the invoice.");
     }
   };
+  
 
   const apiUtility = async () => {
     try {
@@ -85,9 +92,16 @@ const StatisticsForm = ({ statistic }: StatisticsFormProps) => {
       const response = await axios.post(
         `http://localhost:8080/api/v1/utilitybills/update/${utilityId}`
       );
+
+      console.log(response.data);
+
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
       toast.success("Pay Successfull");
       apiUtility();
     } catch (err) {
+      toast.error("Có lỗi xảy ra");
       console.error(err);
     }
   };
@@ -135,9 +149,11 @@ const StatisticsForm = ({ statistic }: StatisticsFormProps) => {
                         <td>{fee.name}</td>
                         <td>{fee.feeType}</td>
                         <td>
-                          {fee.name === "Fund 2"
+                          {fee.feeType === "ContributionFund"
                             ? (
-                                fee.amount + (voluntaryFund[invoice.id] || 0)
+                                fee.amount +
+                                (voluntaryFund[`${invoice.id}_${fee.name}`] ||
+                                  0)
                               ).toLocaleString()
                             : fee.amount.toLocaleString()}{" "}
                           VND
@@ -146,6 +162,7 @@ const StatisticsForm = ({ statistic }: StatisticsFormProps) => {
                     ))}
                   </tbody>
                 </table>
+
                 {/* Nhập số tiền tự nguyện */}
                 {invoice.paymentStatus === "Unpaid" &&
                   invoice.feeList.map(
@@ -158,10 +175,13 @@ const StatisticsForm = ({ statistic }: StatisticsFormProps) => {
                             <input
                               className="inputFund"
                               type="text"
-                              value={voluntaryFund[invoice.id] || ""}
+                              value={
+                                voluntaryFund[`${invoice.id}_${fee.name}`] || ""
+                              }
                               onChange={(e) =>
                                 handleVoluntaryFundChange(
                                   invoice.id,
+                                  fee.name,
                                   e.target.value
                                 )
                               }
@@ -174,9 +194,11 @@ const StatisticsForm = ({ statistic }: StatisticsFormProps) => {
                   Total amount:{" "}
                   {invoice.feeList
                     .reduce((sum: number, fee: any) => {
-                      if (fee.feeType === "DepartmentFee") {
+                      if (fee.feeType === "ContributionFund") {
                         return (
-                          sum + fee.amount + (voluntaryFund[invoice.id] || 0)
+                          sum +
+                          fee.amount +
+                          (voluntaryFund[`${invoice.id}_${fee.name}`] || 0)
                         );
                       }
                       return sum + fee.amount;
@@ -184,6 +206,7 @@ const StatisticsForm = ({ statistic }: StatisticsFormProps) => {
                     .toLocaleString()}{" "}
                   VND
                 </div>
+
                 {/* Chỉ hiển thị nút "Pay" nếu trạng thái là "Unpaid" */}
                 {invoice.paymentStatus === "Unpaid" && (
                   <div className="divPay">

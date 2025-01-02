@@ -167,7 +167,9 @@ function InvoiceTDN() {
 
       // Lưu phản hồi từ server (nếu cần)
       // setSavedData((prevData) => [...prevData, payload]);
-
+      setTimeout(() => {
+        window.location.reload()
+      }, 1000);
       toast.success("Create Invoice Successfull");
     } catch (error) {
       toast.error("Có lỗi xảy ra");
