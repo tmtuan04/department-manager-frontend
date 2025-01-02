@@ -12,7 +12,7 @@ export default function ResidentForm({ resident, onCloseModal }: any) {
     id: resident?.id || "",
     name: resident?.name || "",
     dob: resident?.dob || "",
-    apartmentId: resident?.apartmentId || "",
+    addressNumber: resident?.addressNumber || "",
     status: resident?.status || "Resident",
     cic: resident?.cic || "",
     gender: resident?.gender || "",
@@ -36,7 +36,7 @@ export default function ResidentForm({ resident, onCloseModal }: any) {
       id: formValues.id,
       name: formValues.name,
       dob: formValues.dob,
-      apartmentId: formValues.apartmentId,
+      addressNumber: formValues.addressNumber,
       status: formValues.status,
       gender: formValues.gender
     }
@@ -68,9 +68,12 @@ export default function ResidentForm({ resident, onCloseModal }: any) {
         name: formValues.name,
         dob: formValues.dob,
         status: formValues.status,
-        gender: formValues.gender
+        gender: formValues.gender,
+        addressNumber: formValues.addressNumber
       }
+      // console.log(response.data);
       const response = await axios.put('http://localhost:8080/api/v1/residents', data);
+      console.log(response.data);
       setTimeout(() => {
         window.location.reload();
       }, 1000);
@@ -125,7 +128,6 @@ export default function ResidentForm({ resident, onCloseModal }: any) {
               type="text"
               value={formValues.id}
               onChange={handleChange}
-              readOnly
             />
           </FormField>
           <Selector
@@ -143,9 +145,9 @@ export default function ResidentForm({ resident, onCloseModal }: any) {
           <FormField>
             <FormField.Label label={"Room"} />
             <FormField.Input
-              id="apartmentId"
+              id="addressNumber"
               type="search"
-              value={formValues.apartmentId}
+              value={formValues.addressNumber}
               onChange={handleChange}
             />
           </FormField>
